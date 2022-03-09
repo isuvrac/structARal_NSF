@@ -12,7 +12,14 @@ public class Liveload : MonoBehaviour
     [SerializeField]
     private Transform startR, endR;
     [SerializeField]
-    private Vector3 start,end,applypoint, initialpointS, initialpointE, initialpointM, mOffset,hOffset;
+    private Vector3 applypoint, initialpointS, initialpointE, initialpointM, mOffset,hOffset;
+    [SerializeField]
+    public Vector3 start, end;
+    [SerializeField]
+    public float liveload =0.0f;
+    [SerializeField]
+    private ReactionForce reactionForce;
+
     private float gap;
     private bool movestart;
      
@@ -25,13 +32,12 @@ public class Liveload : MonoBehaviour
         initialpointE = liveloadend.transform.position;
         initialpointM = liveloadmiddel.transform.position;
         gap = liveloadmiddel.transform.Find("Base").gameObject.transform.position.y - initialpointM.y;
-        
+        reactionForce.updateReactionForce();
     }
 
     private void OnMouseDown()
     {
         mOffset = liveloadbar.transform.position - GetMouseWorldPos();
-        print("down");
         if (GetMouseWorldPos().x <= liveloadmiddel.transform.position.x) { movestart = true; hOffset = Liveloadstart.transform.position - GetMouseWorldPos(); }
         else { movestart = false; hOffset = liveloadend.transform.position - GetMouseWorldPos(); }
     }
@@ -50,19 +56,22 @@ public class Liveload : MonoBehaviour
         Vector3 hdraggingpoint= GetMouseWorldPos() + hOffset;
         if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), start.y, start.z); }
         else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), end.y, end.z); }
+        reactionForce.updateReactionForce();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        liveload = Mathf.Clamp((Mathf.Round((liveloadmiddel.transform.Find("Base").gameObject.transform.localScale.y - 4.4f) / 6 * 10) / 10), 0, 1.5f);
+
         Liveloadstart.transform.position = new Vector3 (start.x, initialpointS.y, start.z);
         liveloadend.transform.position = new Vector3(end.x, initialpointE.y, end.z);
         liveloadmiddel.transform.position = new Vector3((Liveloadstart.transform.position.x+ liveloadend.transform.position.x)/2, initialpointM.y, end.z);
         Liveloadstart.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Mathf.Abs(applypoint.y - initialpointM.y - gap), 10);
         liveloadend.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Mathf.Abs(applypoint.y - initialpointM.y - gap), 10);
         liveloadmiddel.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Mathf.Abs(applypoint.y- initialpointM.y-gap), 10);
-        liveloadLabel.transform.Find("ForceLabel").gameObject.GetComponent<TextMesh>().text = Mathf.Clamp((Mathf.Round((liveloadmiddel.transform.Find("Base").gameObject.transform.localScale.y -4.4f)/6*10)/10),0,1.5f).ToString()+"k/ft";
+        liveloadLabel.transform.Find("ForceLabel").gameObject.GetComponent<TextMesh>().text = liveload.ToString()+"k/ft";
 
         //liveloadbar.transform.LookAt(liveloadend.transform);
         

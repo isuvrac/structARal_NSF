@@ -53,8 +53,10 @@
     <UnityVersion>2020.3.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\Bazier_Curve.cs" />
     <Compile Include="Assets\Script\Liveload.cs" />
+    <Compile Include="Assets\Script\Bazier_Curve.cs" />
+    <Compile Include="Assets\Script\ReactionForce.cs" />
+    <Compile Include="Assets\Script\Deflection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
