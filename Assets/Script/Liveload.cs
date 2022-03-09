@@ -19,6 +19,8 @@ public class Liveload : MonoBehaviour
     public float liveload =0.0f;
     [SerializeField]
     private ReactionForce reactionForce;
+    [SerializeField]
+    private Bazier_Curve bazier_Curve;
 
     private float gap;
     private bool movestart;
@@ -33,6 +35,7 @@ public class Liveload : MonoBehaviour
         initialpointM = liveloadmiddel.transform.position;
         gap = liveloadmiddel.transform.Find("Base").gameObject.transform.position.y - initialpointM.y;
         reactionForce.updateReactionForce();
+        bazier_Curve.Drawlines();
     }
 
     private void OnMouseDown()
@@ -56,7 +59,7 @@ public class Liveload : MonoBehaviour
         Vector3 hdraggingpoint= GetMouseWorldPos() + hOffset;
         if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), start.y, start.z); }
         else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), end.y, end.z); }
-        reactionForce.updateReactionForce();
+        reactionForce.updateReactionForce(); bazier_Curve.Drawlines();
     }
 
     // Update is called once per frame

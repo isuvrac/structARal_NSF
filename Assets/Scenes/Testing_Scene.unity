@@ -1957,6 +1957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 739923253}
+  - component: {fileID: 739923254}
   m_Layer: 0
   m_Name: Deflection
   m_TagString: Untagged
@@ -1978,6 +1979,23 @@ Transform:
   m_Father: {fileID: 1056942023}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739923254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739923252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc2c525013c14674ea25b7b707316027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  liveloadS: {fileID: 1960470514}
+  refP1: {fileID: 1334312118}
+  refP2: {fileID: 6392763}
+  refP3: {fileID: 1473664630}
+  refP4: {fileID: 2090954064}
 --- !u!1 &768695465
 GameObject:
   m_ObjectHideFlags: 0
@@ -7740,6 +7758,7 @@ MonoBehaviour:
   end: {x: 0, y: 0, z: 0}
   liveload: 0
   reactionForce: {fileID: 2033924219}
+  bazier_Curve: {fileID: 739923254}
 --- !u!65 &1960470515
 BoxCollider:
   m_ObjectHideFlags: 0

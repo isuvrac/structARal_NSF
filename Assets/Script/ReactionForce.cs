@@ -15,6 +15,7 @@ public class ReactionForce : MonoBehaviour
     void Start()
     {
         ratrio =200/Mathf.Abs(refP1.position.x - refP4.position.x);
+        updateReactionForce();
     }
 
     public void updateReactionForce() {
