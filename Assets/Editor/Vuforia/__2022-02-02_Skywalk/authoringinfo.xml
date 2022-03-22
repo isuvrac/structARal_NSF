@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.4.4">
+<ModelTarget name="__2022-02-02_Skywalk" targetId="e8c688a1c009409385624fd12c180525" version="14.0" toolVersion="10.4.4" bbox="-10.873203 -0.085742 -0.604943 14.799905 3.665705 2.558684" previewImage="e8c688a1c009409385624fd12c180525_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="__2022-02-02_Skywalks_assembly" assemblyId="7b5b6f5102b4438d8ac7cc84e792cfcb">
+<Part name="__2022-02-02_Skywalk" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.484049 2.34563 20.5298" rotation="AD: -0.986358 0.165624 9.02473 180.228" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0001" translation="-1.53655 0.714375 20.5856" rotation="AD: -0.988021 -0.15576 7.30427 179.673" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0002" translation="-1.53655 0.714375 20.5856" rotation="AD: -0.988021 -0.15576 7.30427 179.673" image="" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

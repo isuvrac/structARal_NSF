@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="SkyWalk2" size="76.930000 57.697498" />
+    <ImageTarget name="SkyWalk" size="0.769300 0.576975" />
+  </Tracking>
+</QCARConfig>

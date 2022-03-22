@@ -58,3 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+[Bb]uild/Frameworks/com.ptc.vuforia.engine/Vuforia/Plugins/iOS/Vuforia.framework/Vuforia
+[Bb]uild/Libraries/libiPhone-lib.a
+[Ll]ibrary/ArtifactDB
+[Ll]ibrary/PackageCache/com.ptc.vuforia.engine@efa13d4486/Vuforia/Plugins/iOS/Vuforia.framework/Vuforia
+Library/ArtifactDB

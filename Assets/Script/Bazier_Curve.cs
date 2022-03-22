@@ -38,6 +38,7 @@ public class Bazier_Curve : MonoBehaviour
 
         //setup line
         Defline1 = new GameObject().AddComponent<LineRenderer>();
+        Defline1.transform.SetParent(this.transform);
         Defline1.startWidth = 1f;
         Defline1.endWidth = 1f;
         Defline1.positionCount = pointsN + 1;
@@ -45,6 +46,7 @@ public class Bazier_Curve : MonoBehaviour
 
         //setup line
         Defline2 = new GameObject().AddComponent<LineRenderer>();
+        Defline2.transform.SetParent(this.transform);
         Defline2.startWidth = 1f;
         Defline2.endWidth = 1f;
         Defline2.positionCount = pointsN + 1;
@@ -53,6 +55,7 @@ public class Bazier_Curve : MonoBehaviour
 
         //setup line
         Defline3 = new GameObject().AddComponent<LineRenderer>();
+        Defline3.transform.SetParent(this.transform);
         Defline3.startWidth = 1f;
         Defline3.endWidth = 1f;
         Defline3.positionCount = pointsN + 1;
@@ -146,7 +149,6 @@ public class Bazier_Curve : MonoBehaviour
 
             vals[i].y = vals[i].y+delta;
 
-            print(delta);
         }
 
         return vals;

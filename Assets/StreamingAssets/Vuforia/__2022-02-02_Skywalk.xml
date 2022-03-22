@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="__2022-02-02_Skywalk" motionHint="static" trackingMode="default"/>
+
+</Tracking>
+
+<Assembly name="__2022-02-02_Skywalks_assembly" assemblyId="7b5b6f5102b4438d8ac7cc84e792cfcb">
+<Part name="__2022-02-02_Skywalk" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.484049 2.34563 20.5298" rotation="AD: -0.986358 0.165624 9.02473 180.228" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0001" translation="-1.53655 0.714375 20.5856" rotation="AD: -0.988021 -0.15576 7.30427 179.673" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0002" translation="-1.53655 0.714375 20.5856" rotation="AD: -0.988021 -0.15576 7.30427 179.673" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>
