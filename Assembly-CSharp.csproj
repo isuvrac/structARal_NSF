@@ -54,10 +54,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Deflection.cs" />
+    <Compile Include="Assets\Script\InterfaceManager.cs" />
     <Compile Include="Assets\Script\ReactionForce.cs" />
     <Compile Include="Assets\Script\Liveload.cs" />
     <Compile Include="Assets\Script\Bazier_Curve.cs" />
-    <Compile Include="Assets\Script\InterfaceManager.cs" />
+    <Compile Include="Assets\Script\ARmanager1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk.xml" />
@@ -688,6 +689,10 @@
     <ProjectReference Include="VuforiaScripts.csproj">
       <Project>{2F894536-C0D6-2286-2E37-9E740E0D7FE4}</Project>
       <Name>VuforiaScripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.DeviceSimulator.Editor.csproj">
+      <Project>{9DDB866F-C5E0-0011-144A-A304308CADAC}</Project>
+      <Name>Unity.DeviceSimulator.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

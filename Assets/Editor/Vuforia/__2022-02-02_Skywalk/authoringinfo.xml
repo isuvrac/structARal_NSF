@@ -10,10 +10,7 @@
 <EntryPoint name="viewpoint_0000" translation="-0.484049 2.34563 20.5298" rotation="AD: -0.986358 0.165624 9.02473 180.228" image="" trained="no">
 
 </EntryPoint>
-<EntryPoint name="viewpoint_0001" translation="-1.53655 0.714375 20.5856" rotation="AD: -0.988021 -0.15576 7.30427 179.673" image="" trained="no">
-
-</EntryPoint>
-<EntryPoint name="viewpoint_0002" translation="-1.53655 0.714375 20.5856" rotation="AD: -0.988021 -0.15576 7.30427 179.673" image="" trained="no">
+<EntryPoint name="viewpoint_0001" translation="-1.87541 0.636821 21.1401" rotation="AD: -0.95737 0.288894 70.1421 180.006" image="" trained="no">
 
 </EntryPoint>
 
