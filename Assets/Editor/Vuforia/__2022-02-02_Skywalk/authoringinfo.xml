@@ -7,10 +7,10 @@
 
 <Assembly name="__2022-02-02_Skywalks_assembly" assemblyId="7b5b6f5102b4438d8ac7cc84e792cfcb">
 <Part name="__2022-02-02_Skywalk" translation="0 0 0" rotation="AD: 0 0 1 0"/>
-<EntryPoint name="viewpoint_0000" translation="-0.484049 2.34563 20.5298" rotation="AD: -0.986358 0.165624 9.02473 180.228" image="" trained="no">
+<EntryPoint name="viewpoint_0001" translation="3.15049 1.44578 15.5705" rotation="AD: 1 -0.000771892 0.0512496 181.724" image="" trained="no">
 
 </EntryPoint>
-<EntryPoint name="viewpoint_0001" translation="-1.87541 0.636821 21.1401" rotation="AD: -0.95737 0.288894 70.1421 180.006" image="" trained="no">
+<EntryPoint name="viewpoint_0002" translation="4.28166 1.64302 16.4515" rotation="AD: 1 -0.000307256 0.050133 180.701" image="" trained="no">
 
 </EntryPoint>
 

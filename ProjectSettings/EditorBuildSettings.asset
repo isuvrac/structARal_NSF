@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Testing_Scene.unity
+    path: Assets/Scenes/MainMenue.unity
+    guid: aa62ea76d63805e46b307e4b8a65de8d
+  - enabled: 1
+    path: Assets/Scenes/Skywalk_Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

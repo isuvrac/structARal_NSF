@@ -59,11 +59,14 @@
     <Compile Include="Assets\Script\Liveload.cs" />
     <Compile Include="Assets\Script\Bazier_Curve.cs" />
     <Compile Include="Assets\Script\ARmanager1.cs" />
+    <Compile Include="Assets\Script\Skywalk_Interface.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\Skywalk_32422.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\structARal.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk_Copy.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -267,6 +270,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.DeviceSimulator.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.DeviceSimulator.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="EditorMigrationScripts">
       <HintPath>Library\ScriptAssemblies\EditorMigrationScripts.dll</HintPath>
     </Reference>
@@ -278,9 +284,6 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.DeviceSimulator.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.DeviceSimulator.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\AOT\Newtonsoft.Json.dll</HintPath>

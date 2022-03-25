@@ -59,10 +59,10 @@ public class ReactionForce : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        refP1.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam1rf * (-1) / 5, 10);
-        refP2.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam2rf * (-1) / 5, 10);
-        refP3.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam3rf * (-1) / 5, 10);
-        refP4.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam4rf * (-1) / 5, 10);
+        refP1.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam1rf * (-1) / 6, 10);
+        refP2.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam2rf * (-1) / 6, 10);
+        refP3.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam3rf * (-1) / 6, 10);
+        refP4.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Beam4rf * (-1) / 6, 10);
         refP1.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Beam1rf).ToString() + "k/ft";
         refP2.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Beam2rf).ToString() + "k/ft";
         refP3.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Beam3rf).ToString() + "k/ft";
