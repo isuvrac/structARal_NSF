@@ -32,7 +32,7 @@ public class ARmanager1 : MonoBehaviour
     public void AlignObject()
     {
         this.transform.position = imagetarget.transform.position;
-        this.transform.localScale = new Vector3(this.transform.localScale.x / 2, this.transform.localScale.y / 2, this.transform.localScale.z / 2);
+        //this.transform.localScale = new Vector3(this.transform.localScale.x / 2, this.transform.localScale.y / 2, this.transform.localScale.z / 2);
         //this.transform.rotation = imagetarget.transform.rotation;
         //this.transform.up = imagetarget.transform.up;
     
