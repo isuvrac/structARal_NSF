@@ -59,32 +59,32 @@ public class Skywalk_Interface : MonoBehaviour
                 ARc.SetActive(false);
                 ARc.transform.transform.SetPositionAndRotation(Mainc.transform.position, Mainc.transform.rotation);
                 ARc.GetComponent<VuforiaBehaviour>().enabled=false;
-                toggleonclick();
                 ImageCanvas.SetActive(true); Skywalk_Normal.SetActive(true);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
+                toggleonclick();
                 break;
             case 1:
                 print("Indoor");
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
                 ARc.GetComponent<VuforiaBehaviour>().enabled = true;
-                toggleonclick();
                 skywalk = Skywalk_Scale_i.transform;
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(true);ImageTarget.SetActive(true);
                 ModelTarget.SetActive(false);
+                toggleonclick();
                 break;
             case 2:
                 print("Outdoor");
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
                 ARc.GetComponent<VuforiaBehaviour>().enabled = true;
-                toggleonclick();
                 skywalk = Skywalk_Scale_m.transform;
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
+                toggleonclick();
                 break;
 
         }
