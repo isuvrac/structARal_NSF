@@ -7,22 +7,8 @@ using UnityEngine.UI;
 public class InterfaceManager : MonoBehaviour
 {
 
-    [SerializeField]
-    Button skywalk, Campanile, TownBuilding, Catthall;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        skywalk.onClick.AddListener(skywalkonlick);
+    public void sceneChange(string scenename) { 
+    SceneManager.LoadScene(scenename);
     }
 
-    void skywalkonlick() {
-        SceneManager.LoadScene("Skywalk_Scene");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

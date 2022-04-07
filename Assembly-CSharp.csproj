@@ -53,13 +53,14 @@
     <UnityVersion>2020.3.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\Deflection.cs" />
+    <Compile Include="Assets\Script\Skywalk\Deflection.cs" />
     <Compile Include="Assets\Script\InterfaceManager.cs" />
-    <Compile Include="Assets\Script\ReactionForce.cs" />
-    <Compile Include="Assets\Script\Skywalk_Interface.cs" />
-    <Compile Include="Assets\Script\Liveload.cs" />
-    <Compile Include="Assets\Script\Bazier_Curve.cs" />
+    <Compile Include="Assets\Script\Skywalk\ReactionForce.cs" />
+    <Compile Include="Assets\Script\Skywalk\Skywalk_Interface.cs" />
+    <Compile Include="Assets\Script\Skywalk\Liveload.cs" />
+    <Compile Include="Assets\Script\Skywalk\Bazier_Curve.cs" />
     <Compile Include="Assets\Script\ARmanager1.cs" />
+    <Compile Include="Assets\Script\Campanile\WindLoad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />
@@ -282,10 +283,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.16f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="Vuforia.Unity.Engine">
-      <HintPath>Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1644838625000\Vuforia\Plugins\Managed\Runtime\Vuforia.Unity.Engine.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1649290201382\Vuforia\Plugins\Managed\Runtime\Vuforia.Unity.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Vuforia.Unity.Wrapper">
-      <HintPath>Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1644838625000\Vuforia\Plugins\Managed\Runtime\Vuforia.Unity.Wrapper.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1649290201382\Vuforia\Plugins\Managed\Runtime\Vuforia.Unity.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>

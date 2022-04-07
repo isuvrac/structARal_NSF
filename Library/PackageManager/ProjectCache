@@ -25,7 +25,7 @@ m_PackageAssets:
       isDirectDependency: 1
       version: 10.5.5
       source: 6
-      resolvedPath: C:\Users\kexin wang\Documents\structARal_NSF\Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1644838625000
+      resolvedPath: C:\Users\kexin wang\Documents\structARal_NSF\Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1649290201382
       assetPath: Packages/com.ptc.vuforia.engine
       name: com.ptc.vuforia.engine
       displayName: Vuforia Engine AR
@@ -2920,7 +2920,7 @@ m_PackageAssets:
       m_ContentTrackingEnabled: 1
       m_ModificationDate:
         serializedVersion: 2
-        ticks: 637804354250000000
+        ticks: 637848870013822082
       m_Hash: 1060072451
 m_ProjectPath: C:/Users/kexin wang/Documents/structARal_NSF/Packages
 m_EditorVersion: 2020.3.16f1 (049d6eca3c44)
