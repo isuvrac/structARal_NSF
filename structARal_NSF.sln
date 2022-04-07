@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.CollabProxy.Editor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Rider.Editor", "Unity.Rider.Editor.csproj", "{670FEBBB-E917-988A-3266-8BE6078CD279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.DeviceSimulator.Editor", "Unity.DeviceSimulator.Editor.csproj", "{9DDB866F-C5E0-0011-144A-A304308CADAC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VSCode.Editor", "Unity.VSCode.Editor.csproj", "{0F367E50-E78A-76F8-2ED6-C6F1954AEC7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorMigrationScripts", "EditorMigrationScripts.csproj", "{1A8738F9-A611-16A6-556C-9E2CCC05F01D}"
@@ -111,10 +109,6 @@ Global
 		{670FEBBB-E917-988A-3266-8BE6078CD279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{670FEBBB-E917-988A-3266-8BE6078CD279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{670FEBBB-E917-988A-3266-8BE6078CD279}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DDB866F-C5E0-0011-144A-A304308CADAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DDB866F-C5E0-0011-144A-A304308CADAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DDB866F-C5E0-0011-144A-A304308CADAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DDB866F-C5E0-0011-144A-A304308CADAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F367E50-E78A-76F8-2ED6-C6F1954AEC7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F367E50-E78A-76F8-2ED6-C6F1954AEC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F367E50-E78A-76F8-2ED6-C6F1954AEC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU

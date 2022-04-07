@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Liveload : MonoBehaviour
 {
     // Start is called before the first frame update
 
-
     [SerializeField]
     private GameObject Liveloadstart, liveloadend, liveloadmiddel, liveloadbar, liveloadLabel, cube, cube1;
     [SerializeField]
-    private Transform startR, endR,Min,Max;
+    public Transform startR, endR,Min,Max, secondR, thirdR;
     [SerializeField]
-    private Vector3 applypoint, initialpointS, initialpointE, initialpointM, mOffset,hOffset;
+    private Vector3 initialpointS, initialpointE, initialpointM, mOffset,hOffset;
     [SerializeField]
-    public Vector3 start, end;
+    public Vector3 start, end, applypoint;
     [SerializeField]
     public float liveload =0.0f;
     [SerializeField]
     private ReactionForce reactionForce;
+    [SerializeField]
+    private Skywalk_Interface skywalk_Interface;
     [SerializeField]
     private Bazier_Curve bazier_Curve;
 
@@ -35,8 +37,7 @@ public class Liveload : MonoBehaviour
         initialpointM = liveloadmiddel.transform.position;
         gap = liveloadmiddel.transform.Find("Base").gameObject.transform.position.y - initialpointM.y;
         applypoint = Min.position;
-        reactionForce.updateReactionForce();
-        bazier_Curve.Drawlines();
+        updateforce();
     }
 
     private void OnMouseDown()
@@ -44,6 +45,7 @@ public class Liveload : MonoBehaviour
         mOffset = liveloadbar.transform.position - GetMouseWorldPos();
         if (GetMouseWorldPos().x <= liveloadmiddel.transform.position.x) { movestart = true; hOffset = Liveloadstart.transform.position - GetMouseWorldPos(); }
         else { movestart = false; hOffset = liveloadend.transform.position - GetMouseWorldPos(); }
+        skywalk_Interface.LiveloadDD.value = 4;
     }
 
     Vector3 GetMouseWorldPos() {
@@ -52,7 +54,7 @@ public class Liveload : MonoBehaviour
         v3 = Camera.main.ScreenToWorldPoint(v3);
         return v3;
     }
-
+    
     private void OnMouseDrag()
     {
         Vector3 draggingpoint = GetMouseWorldPos() + mOffset;
@@ -60,8 +62,10 @@ public class Liveload : MonoBehaviour
         Vector3 hdraggingpoint= GetMouseWorldPos() + hOffset;
         if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), start.y, start.z); }
         else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), end.y, end.z); }
-        reactionForce.updateReactionForce(); bazier_Curve.Drawlines();
+        updateforce();
     }
+
+    public void updateforce() {reactionForce.updateReactionForce(); bazier_Curve.Drawlines(); }
 
     // Update is called once per frame
     void Update()

@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 22
-  productGUID: 8c53aae85de087349b14eb7589aaa7eb
+  productGUID: 7a778aea6c35b1c4498cf7be2133b21a
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: structARal
-  productName: structARal_NSF
+  companyName: structARal_NSF
+  productName: structARal
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -146,7 +146,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    iPhone: com.structARal.structARalNSF
+    iPhone: com.structARalNSF.structARal
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -168,7 +168,7 @@ PlayerSettings:
   StripUnusedMeshComponents: 1
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
-  iOSTargetOSVersionString: 11.0
+  iOSTargetOSVersionString: 12.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 11.0
@@ -262,29 +262,24 @@ PlayerSettings:
   - m_BuildTarget: iPhone
     m_Icons:
     - m_Textures: []
-      m_Width: 87
-      m_Height: 87
-      m_Kind: 1
+      m_Width: 120
+      m_Height: 120
+      m_Kind: 3
       m_SubKind: iPhone
     - m_Textures: []
-      m_Width: 58
-      m_Height: 58
-      m_Kind: 1
+      m_Width: 80
+      m_Height: 80
+      m_Kind: 3
       m_SubKind: iPhone
     - m_Textures: []
-      m_Width: 29
-      m_Height: 29
-      m_Kind: 1
-      m_SubKind: iPhone
-    - m_Textures: []
-      m_Width: 58
-      m_Height: 58
-      m_Kind: 1
+      m_Width: 80
+      m_Height: 80
+      m_Kind: 3
       m_SubKind: iPad
     - m_Textures: []
-      m_Width: 29
-      m_Height: 29
-      m_Kind: 1
+      m_Width: 40
+      m_Height: 40
+      m_Kind: 3
       m_SubKind: iPad
     - m_Textures: []
       m_Width: 60
@@ -337,24 +332,29 @@ PlayerSettings:
       m_Kind: 0
       m_SubKind: iPad
     - m_Textures: []
-      m_Width: 120
-      m_Height: 120
-      m_Kind: 3
+      m_Width: 87
+      m_Height: 87
+      m_Kind: 1
       m_SubKind: iPhone
     - m_Textures: []
-      m_Width: 80
-      m_Height: 80
-      m_Kind: 3
+      m_Width: 58
+      m_Height: 58
+      m_Kind: 1
       m_SubKind: iPhone
     - m_Textures: []
-      m_Width: 80
-      m_Height: 80
-      m_Kind: 3
+      m_Width: 29
+      m_Height: 29
+      m_Kind: 1
+      m_SubKind: iPhone
+    - m_Textures: []
+      m_Width: 58
+      m_Height: 58
+      m_Kind: 1
       m_SubKind: iPad
     - m_Textures: []
-      m_Width: 40
-      m_Height: 40
-      m_Kind: 3
+      m_Width: 29
+      m_Height: 29
+      m_Kind: 1
       m_SubKind: iPad
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
@@ -706,7 +706,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Template_3D
   wsaImages: {}
-  metroTileShortName: structARal_NSF
+  metroTileShortName: New Unity Projecttesting
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

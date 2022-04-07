@@ -62,7 +62,6 @@
     <Compile Include="Assets\Script\ARmanager1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\StreamingAssets\Vuforia\Skywalk_32422.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\structARal.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk_Copy.xml" />
@@ -282,8 +281,11 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.16f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="Vuforia.UnityExtensions">
-      <HintPath>Library\PackageCache\com.ptc.vuforia.engine@efa13d4486\Vuforia\Plugins\Managed\Runtime\Vuforia.UnityExtensions.dll</HintPath>
+    <Reference Include="Vuforia.Unity.Engine">
+      <HintPath>Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1644838625000\Vuforia\Plugins\Managed\Runtime\Vuforia.Unity.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Vuforia.Unity.Wrapper">
+      <HintPath>Library\PackageCache\com.ptc.vuforia.engine@c7ca9c81bb33-1644838625000\Vuforia\Plugins\Managed\Runtime\Vuforia.Unity.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
@@ -668,10 +670,6 @@
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{06E7B106-2743-8143-B6E1-F3B6DDA83538}</Project>
       <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.DeviceSimulator.Editor.csproj">
-      <Project>{9DDB866F-C5E0-0011-144A-A304308CADAC}</Project>
-      <Name>Unity.DeviceSimulator.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="EditorMigrationScripts.csproj">
       <Project>{1A8738F9-A611-16A6-556C-9E2CCC05F01D}</Project>
