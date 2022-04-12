@@ -61,6 +61,7 @@
     <Compile Include="Assets\Script\Skywalk\Bazier_Curve.cs" />
     <Compile Include="Assets\Script\ARmanager1.cs" />
     <Compile Include="Assets\Script\Campanile\WindLoad.cs" />
+    <Compile Include="Assets\Script\Campanile\ForceUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />

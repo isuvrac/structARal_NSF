@@ -5,10 +5,16 @@ using UnityEngine;
 public class WindLoad : MonoBehaviour
 {
     [SerializeField]
-    public Transform Min, Max, WindLoadBar, arrowbase, cube;
+    public Transform Min, Max, WindLoadBar, arrowbase, ShearArrow, MomentArrow;//,cube
     [SerializeField]
     public Vector3 applypoint, mOffset;
+    [SerializeField]
+    private ForceUpdate forceUpdate;
     private List<Transform> Arrows = new List<Transform>();
+    float WindForceScale =12.5f, WindForce;
+    bool rotating = true;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +27,6 @@ public class WindLoad : MonoBehaviour
                 Arrows.Add(a);
             }
         }
-        print(Arrows.Count);
     }
     private void OnMouseDown()
     {
@@ -39,17 +44,30 @@ public class WindLoad : MonoBehaviour
     private void OnMouseDrag()
     {
         Vector3 draggingpoint = GetMouseWorldPos() + mOffset;
-        applypoint = new Vector3(Mathf.Clamp(draggingpoint.x, Min.position.x, Max.position.x),0, 0);
+        applypoint = new Vector3(Mathf.Clamp(draggingpoint.x, Min.position.x, Max.position.x), 0, 0);
+        
+        forceUpdate.Drawlines(WindForce);
+        ShearArrow.transform.Find("Base").gameObject.transform.localScale = new Vector3(1, forceUpdate.shear / 10, 1);
+        float rotate =  Mathf.Clamp((360-Mathf.Abs(forceUpdate.moment / 34)),271,359);
+        Vector3 to = new Vector3(rotate, MomentArrow.rotation.eulerAngles.y, MomentArrow.rotation.eulerAngles.z);
+        MomentArrow.eulerAngles = to;print(MomentArrow.eulerAngles.x);
+       
+    }
+
+    private void OnMouseUp()
+    {
+        
     }
     // Update is called once per frame
     void Update()
     {
-        cube.transform.position= new Vector3(applypoint.x, 0, 0);
+        //cube.transform.position= new Vector3(applypoint.x, 0, 0);
         WindLoadBar.transform.position = new Vector3(applypoint.x, WindLoadBar.transform.position.y, WindLoadBar.transform.position.z);
         float height = Mathf.Abs(WindLoadBar.transform.localPosition.x- arrowbase.localPosition.x);
         foreach (Transform t in Arrows)
         {
             t.transform.Find("Base").gameObject.transform.localScale = new Vector3(5, height, 5);
         }
+        WindForce = (height-1.01f) * WindForceScale;
     }
 }
