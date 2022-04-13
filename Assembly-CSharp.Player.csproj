@@ -53,15 +53,17 @@
     <UnityVersion>2020.3.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Campanile\ForceUpdate.cs" />
     <Compile Include="Assets\Script\Skywalk\Deflection.cs" />
-    <Compile Include="Assets\Script\InterfaceManager.cs" />
+    <Compile Include="Assets\Script\Campanile\InterfaceManager.cs" />
     <Compile Include="Assets\Script\Skywalk\ReactionForce.cs" />
     <Compile Include="Assets\Script\Skywalk\Skywalk_Interface.cs" />
     <Compile Include="Assets\Script\Skywalk\Liveload.cs" />
     <Compile Include="Assets\Script\Skywalk\Bazier_Curve.cs" />
     <Compile Include="Assets\Script\ARmanager1.cs" />
     <Compile Include="Assets\Script\Campanile\WindLoad.cs" />
-    <Compile Include="Assets\Script\Campanile\ForceUpdate.cs" />
+    <Compile Include="Assets\Script\Campanile\SeismicLoad.cs" />
+    <Compile Include="Assets\Script\Campanile\CamInterfaceManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />

@@ -19,8 +19,6 @@ public class Skywalk_Interface : MonoBehaviour
     GameObject ARc,Mainc, Skywalk_Normal, Skywalk_Scale_m, Skywalk_Scale_i, ImageTarget, ModelTarget,ImageCanvas, definition_o;
     [SerializeField]
     Liveload liveload;
-
-
     Transform skywalk;
 
     // Start is called before the first frame update

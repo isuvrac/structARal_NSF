@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WindLoad : MonoBehaviour
 {
@@ -10,16 +11,20 @@ public class WindLoad : MonoBehaviour
     public Vector3 applypoint, mOffset;
     [SerializeField]
     private ForceUpdate forceUpdate;
+    public float WindForce =0;
     private List<Transform> Arrows = new List<Transform>();
-    float WindForceScale =12.5f, WindForce;
-    bool rotating = true;
-
+    float WindForceScale =12.5f;
+    [SerializeField]
+    GameObject DefLable, Min_P, Max_P, MomentL, ShearL, seismicSlider;
+    public float targetdis;
 
     // Start is called before the first frame update
     void Start()
     {
         applypoint = Max.position;
-       
+        targetdis = Max.position.x;
+
+
         foreach (Transform a in this.transform) {
             print(a.tag);
             if (a.tag == "WindForceArrow") {
@@ -27,6 +32,7 @@ public class WindLoad : MonoBehaviour
                 Arrows.Add(a);
             }
         }
+        //TextandForceUpdate(0);
     }
     private void OnMouseDown()
     {
@@ -45,24 +51,29 @@ public class WindLoad : MonoBehaviour
     {
         Vector3 draggingpoint = GetMouseWorldPos() + mOffset;
         applypoint = new Vector3(Mathf.Clamp(draggingpoint.x, Min.position.x, Max.position.x), 0, 0);
-        
-        forceUpdate.Drawlines(WindForce);
+        targetdis = applypoint.x;
+        TextandForceUpdate(WindForce); seismicSlider.GetComponent<Slider>().value =-(targetdis + 4.6f)/12;
+    }
+
+    public void TextandForceUpdate(float windForce) {
+        forceUpdate.Drawlines(windForce);
+        //Change label and rotation 
+        MomentL.GetComponent<TextMesh>().text = forceUpdate.moment.ToString() + " k-ft";
+        ShearL.GetComponent<TextMesh>().text = forceUpdate.shear.ToString() + " k";
+        DefLable.GetComponent<TextMesh>().text = forceUpdate.DefLabel.ToString() + " in";
+        Max_P.GetComponent<TextMesh>().text = forceUpdate.Max_P.ToString() + " psf";
+        Min_P.GetComponent<TextMesh>().text = forceUpdate.Min_P.ToString() + " psf";
         ShearArrow.transform.Find("Base").gameObject.transform.localScale = new Vector3(1, forceUpdate.shear / 10, 1);
         float rotate =  Mathf.Clamp((360-Mathf.Abs(forceUpdate.moment / 34)),271,359);
         Vector3 to = new Vector3(rotate, MomentArrow.rotation.eulerAngles.y, MomentArrow.rotation.eulerAngles.z);
-        MomentArrow.eulerAngles = to;print(MomentArrow.eulerAngles.x);
-       
-    }
-
-    private void OnMouseUp()
-    {
+        MomentArrow.eulerAngles = to;
         
     }
+
     // Update is called once per frame
     void Update()
     {
-        //cube.transform.position= new Vector3(applypoint.x, 0, 0);
-        WindLoadBar.transform.position = new Vector3(applypoint.x, WindLoadBar.transform.position.y, WindLoadBar.transform.position.z);
+        WindLoadBar.transform.position = new Vector3(targetdis, WindLoadBar.transform.position.y, WindLoadBar.transform.position.z);
         float height = Mathf.Abs(WindLoadBar.transform.localPosition.x- arrowbase.localPosition.x);
         foreach (Transform t in Arrows)
         {

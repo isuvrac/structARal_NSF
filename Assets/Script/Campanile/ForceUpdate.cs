@@ -25,22 +25,29 @@ public class ForceUpdate : MonoBehaviour
     private Vector3[] startendL, startendR;
     [SerializeField]
     Transform refL1, refL2, refR3, refR4;
-    float WindVelocity;
+    float f1_h = 17.75f;
+    float f2_h = 57.5f;
+    float f3_h = 71.5f;
+    float f4_h = 89 + 2f / 12;
+    public bool WindMode, animate;
+
     [SerializeField]
-    GameObject DefLable, Min_P, Max_P, MomentL,ShearL;
-    public float shear;
-    public float moment;
-
-
-
+    public float seismicSs, seismicS1, shear, moment, DefLabel, Max_P, Min_P;
+    public float[] WindSeismic = new float[4];
+    private float[] def;
+    static float t = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        WindVelocity = 75;
         pressures_s = new Pressures[5];
-        pointsPL= new Vector3[pointsN];
-        pointsPR= new Vector3[pointsN];
+        def = new float[pointsN];
+        // Drawlines(WindVelocity);
+    }
+    private void Awake()
+    {
+        pointsPL = new Vector3[pointsN];
+        pointsPR = new Vector3[pointsN];
         startendL = new Vector3[2];
         startendL[0] = refL1.position;
         startendL[1] = refL2.position;
@@ -55,7 +62,7 @@ public class ForceUpdate : MonoBehaviour
         towerL.endWidth = 1f;
         towerL.positionCount = pointsN + 1;
         towerL.material.color = new Color(0f, 0f, 1f);
-       
+
 
         //setup line
         towerR = new GameObject().AddComponent<LineRenderer>();
@@ -65,37 +72,168 @@ public class ForceUpdate : MonoBehaviour
         towerR.positionCount = pointsN + 1;
         towerR.material.color = new Color(0f, 0f, 1f);
 
-        Drawlines(WindVelocity);
     }
-    public void Drawlines(float WindVelocity)
+    public void Drawlines(float input)
     {
         //initiate all points on curve
-        //float resx = (startendL[1].x - startendL[0].x) / 24;
         float resy = (startendL[1].y - startendL[0].y) / 24;
-        float[] def = calculateWindForce(WindVelocity);
+        if (WindMode) { def = calculateWindForce(input); }
+        else { def = calculateSeismic(input); }
 
         for (int i = 0; i < pointsN; i++)
         {
-            pointsPL[i] = new Vector3(startendL[0].x - def[pointsN-i-1] *100, startendL[0].y + resy * i, startendL[0].z); 
+            pointsPL[i] = new Vector3(startendL[0].x - def[pointsN - i - 1], startendL[0].y + resy * i, startendL[0].z);
         }
-        //pointsPL = calculateWindForce(WindVelocity, pointsPL);
         towerL.SetPositions(pointsPL);
         towerL.SetPosition(pointsN, startendL[1]);
 
         resy = (startendR[1].y - startendR[0].y) / 24;
         for (int i = 0; i < pointsN; i++)
         {
-            pointsPR[i] = new Vector3(startendR[0].x - def[pointsN - i - 1] * 100, startendR[0].y + resy * i, startendR[0].z);
+            pointsPR[i] = new Vector3(startendR[0].x - def[pointsN - i - 1], startendR[0].y + resy * i, startendR[0].z);
         }
-       // pointsPR = calculateWindForce(WindVelocity, pointsPR);
         towerR.SetPositions(pointsPR);
         towerR.SetPosition(pointsN, startendR[1]);
-
-        MomentL.GetComponent<TextMesh>().text = moment.ToString() +" k-ft";
-        ShearL.GetComponent<TextMesh>().text = shear.ToString() + " k";
-        DefLable.GetComponent<TextMesh>().text = (Mathf.Round(def[pointsN - 1]*12*1000)/1000).ToString() + " in";
+        DefLabel = Mathf.Round((def[pointsN - 1] * 12 / 10) * 1000) / 1000;
     }
 
+    private void Update()
+    {
+        if (animate)
+        {
+            DrawAnimatedLine();
+        }
+    }
+
+    public void DrawAnimatedLine()
+    {
+        float resy = (startendL[1].y - startendL[0].y) / 24;
+        float[] lerpdef = new float[pointsN];
+        float[] range = def;
+        for (int i = 0; i < pointsN; i++)
+        {
+            lerpdef[i] = Mathf.Lerp(-range[i], range[i], t);
+        }
+
+        for (int i = 0; i < pointsN; i++)
+        {
+            pointsPL[i] = new Vector3(startendL[0].x - lerpdef[pointsN - i - 1], startendL[0].y + resy * i, startendL[0].z);
+        }
+        towerL.SetPositions(pointsPL);
+        towerL.SetPosition(pointsN, startendL[1]);
+
+        resy = (startendR[1].y - startendR[0].y) / 24;
+        for (int i = 0; i < pointsN; i++)
+        {
+            pointsPR[i] = new Vector3(startendR[0].x - lerpdef[pointsN - i - 1], startendR[0].y + resy * i, startendR[0].z);
+        }
+        towerR.SetPositions(pointsPR);
+        towerR.SetPosition(pointsN, startendR[1]);
+        DefLabel = Mathf.Round((def[pointsN - 1] * 12 / 10) * 1000) / 1000;
+        t += 3 * Time.deltaTime;
+        if (t > 1.0f)
+        {
+            for (int i = 0; i < pointsN; i++)
+            {
+                range[i] = -def[i];
+            }t = 0.0f;
+        }
+        
+    }
+
+
+
+
+    float[] calculateSeismic(float input)
+    {
+
+        int Index = (int)input;
+        float[] def = new float[pointsN];
+        for (int i = 0; i < pointsN; i++)
+        {
+            def[i] = (base_height / (pointsN - 1)) * i;
+        }
+
+        float[] Ss_vals = new float[] { 0.05f, 0.25f, 0.5f, 0.75f, 1, 1.25f, 2, 3 };
+        float[] S1_vals = new float[] { 0.05f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.8f, 1.2f };
+        float[] V_vals = new float[] { 44.76f, 223.8f, 373f, 503.55f, 596.8f, 699.37f, 1118.99f, 1678.49f };
+        float[] F1_vals = new float[] { 0.74f, 3.72f, 6.19f, 8.36f, 9.91f, 11.61f, 18.58f, 27.87f };
+        float[] F2_vals = new float[] { 8.69f, 43.43f, 72.39f, 97.73f, 115.82f, 135.73f, 217.17f, 325.76f };
+        float[] F3_vals = new float[] { 13.66f, 68.29f, 113.81f, 153.64f, 182.1f, 213.39f, 341.43f, 512.14f };
+        float[] F4_vals = new float[] { 21.67f, 108.36f, 180.6f, 243.81f, 288.96f, 338.63f, 541.81f, 812.71f };
+
+        float F1 = F1_vals[Index];
+        float F2 = F2_vals[Index];
+        float F3 = F3_vals[Index];
+        float F4 = F4_vals[Index];
+        float V = V_vals[Index];
+        seismicSs = Ss_vals[Index];
+        seismicS1 = S1_vals[Index];
+
+        shear = Mathf.Round(V);
+        WindSeismic[0] = Mathf.Round(F1 * 100) / 100;
+        WindSeismic[1] = Mathf.Round(F2 * 100) / 100;
+        WindSeismic[2] = Mathf.Round(F3 * 100) / 100;
+        WindSeismic[3] = Mathf.Round(F4 * 100) / 100;
+
+        float Tmoment = f1_h * F1 + f2_h * F2 + f3_h * F3 + f4_h * F4;
+
+        moment = Mathf.Round(Tmoment * 10) / 10;
+
+
+        int resolution = def.Length;
+
+        for (int i = 0; i < resolution; ++i)
+        {
+            float x = def[i] - def[0];
+            float x2 = x * x;
+            float defl_sum = 0;
+            if (x < f1_h)
+            {
+                defl_sum += (53.25f - x) * F1 * x2 / 6;
+            }
+            else
+            {
+                defl_sum += (3 * x - f1_h) * 52.5f * F1;
+            }
+            if (x < f2_h)
+            {
+                defl_sum += (172.5f - x) * F2 * x2 / 6;
+            }
+            else
+            {
+                defl_sum += (3 * x - f2_h) * 551.04f * F2;
+            }
+            if (x < f3_h)
+            {
+                defl_sum += (214.5f - x) * F3 * x2 / 6;
+            }
+            else
+            {
+                defl_sum += (3 * x - f3_h) * 852.04f * F3;
+            }
+            if (x < f4_h)
+            {
+                defl_sum += (267.6f - x) * F4 * x2 / 6;
+            }
+            else
+            {
+                defl_sum += (3 * x - f4_h) * 1326.11f * F4;
+            }
+            //        if (x < 109.54) {
+            //            defl_sum += (328.62 - x) * F5 * x2 / 6;
+            //        }
+            //        else {
+            //            defl_sum += (3*x - 109.54) * 1999.84 * F5;
+            //        }
+            float defl_ft = 1000 * defl_sum / (MOD_ELASTICITY * MOM_OF_INERTIA);
+            def[i] = defl_ft * 10;
+        }
+
+        return def;
+
+
+    }
 
     float[] calculateWindForce(float velocity)
     {
@@ -105,7 +243,7 @@ public class ForceUpdate : MonoBehaviour
         float[] def = new float[pointsN];
         for (int i = 0; i < pointsN; i++)
         {
-            def[i] = (base_height/(pointsN-1))*i;
+            def[i] = (base_height / (pointsN - 1)) * i;
         }
 
         // convenience
@@ -117,12 +255,12 @@ public class ForceUpdate : MonoBehaviour
 
         float h1_2 = h1 * h1;
         float h1_3 = h1_2 * h1;
-        
-        // Calculate shear, axial, and moment
-         shear =Mathf.Round( 16  * (h1 * (ww1 / 2 + ww2 / 2 + wl))/ 1000);
-         moment =Mathf.Round(10* 16* (h1_2 / 2 * (ww1 + wl) + h1_2 / 3 * (ww2 - ww1))/ 1000)/10;
 
-        
+        // Calculate shear, axial, and moment
+        shear = Mathf.Round(16 * (h1 * (ww1 / 2 + ww2 / 2 + wl)) / 1000);
+        moment = Mathf.Round(10 * 16 * (h1_2 / 2 * (ww1 + wl) + h1_2 / 3 * (ww2 - ww1)) / 1000) / 10;
+
+
         // Calculate deflection
         int resolution = def.Length;
         for (int i = 0; i < resolution; ++i)
@@ -131,7 +269,7 @@ public class ForceUpdate : MonoBehaviour
             float x2 = x * x;
             float x3 = x2 * x;
 
-            float defl1 = 0, defl2 = 0, defl3=0;
+            float defl1 = 0, defl2 = 0, defl3 = 0;
             if (x <= h1)
             {
                 float defl13_common = 4 * h1 * x - x2 - 6 * h1_2;
@@ -148,10 +286,10 @@ public class ForceUpdate : MonoBehaviour
             }
             float sum_defl = defl1 + defl2 + defl3;
             float defl_ft = sum_defl / (MOD_ELASTICITY * MOM_OF_INERTIA);
-            def[i] = defl_ft;
-            
+            def[i] = defl_ft * 100;
+
         }
-        
+
         return def;
     }
 
@@ -164,8 +302,8 @@ public class ForceUpdate : MonoBehaviour
         pressures.leeward_side = -0.00093f * v2;
         pressures.windward_roof = 0.00128f * v2;
         pressures.leeward_roof = -0.00112f * v2;
-        Max_P.GetComponent<TextMesh>().text =(Mathf.Round((pressures.windward_side_top - pressures.leeward_side)*10)/10).ToString() + " psf";
-        Min_P.GetComponent<TextMesh>().text = (Mathf.Round((pressures.windward_base - pressures.leeward_side)*10)/10).ToString() + " psf";
+        Max_P = (Mathf.Round((pressures.windward_side_top - pressures.leeward_side) * 10) / 10);
+        Min_P = (Mathf.Round((pressures.windward_base - pressures.leeward_side) * 10) / 10);
     }
 }
 
