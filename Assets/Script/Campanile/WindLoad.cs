@@ -49,7 +49,7 @@ public class WindLoad : MonoBehaviour
         Vector3 draggingpoint = GetMouseWorldPos() + mOffset;
         applypoint = new Vector3(Mathf.Clamp(draggingpoint.x, Min.position.x, Max.position.x), 0, 0);
         targetdis = applypoint.x;
-        TextandForceUpdate(WindForce); seismicSlider.GetComponent<Slider>().value =-(targetdis + 4.6f)/12;
+        TextandForceUpdate(WindForce); seismicSlider.GetComponent<Slider>().value =-(targetdis - Mathf.Max(Min.position.x, Max.position.x)) / Mathf.Abs(Max.position.x - Min.position.x);
     }
 
     public void TextandForceUpdate(float windForce) {

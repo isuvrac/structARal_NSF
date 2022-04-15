@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.4.4">
+<ModelTarget name="CampanileTower" targetId="3f2df2ecce814e688246ea9af712debb" version="14.0" toolVersion="10.4.4" bbox="-1.414099 -0.000945 -1.826939 1.266403 13.316864 0.853733" previewImage="3f2df2ecce814e688246ea9af712debb_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="CampanileTowers_assembly" assemblyId="de57d58f716e47d5b4946e21735cfb97">
+<Part name="CampanileTower" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0001" translation="-0.128473 5.22366 9.05083" rotation="AD: -0.00620579 1.00891 7.53474 180.013" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0004" translation="-0.373713 4.09489 8.58205" rotation="AD: -0.00634862 1.0085 7.70816 180.012" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0003" translation="-0.0746662 4.2979 9.43154" rotation="AD: -0.130431 0.998893 8.21083 180.22" image="" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

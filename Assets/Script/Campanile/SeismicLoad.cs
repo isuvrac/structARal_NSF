@@ -28,7 +28,7 @@ public class SeismicLoad : MonoBehaviour
 
     private void Update()
     {
-        if (animate)
+        if (animate && this.gameObject.activeSelf)
         {
             forceUpdate.DrawAnimatedLine();
             DefLable.GetComponent<TextMesh>().text = (forceUpdate.DefLabel).ToString() + " in";

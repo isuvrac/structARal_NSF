@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="town_static2" size="76.930000 43.273125" />
+    <ImageTarget name="catt_target" size="76.930000 43.273125" />
+    <ImageTarget name="campanile" size="76.930000 57.705093" />
+    <ImageTarget name="campanile_static2" size="2.970000 2.227793" />
     <ImageTarget name="town_static" size="0.297000 0.167062" />
     <ImageTarget name="catt_target2" size="0.297000 0.167062" />
     <ImageTarget name="campanile_static" size="0.297000 0.222779" />

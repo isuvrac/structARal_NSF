@@ -8,7 +8,9 @@ using Vuforia;
 public class CamInterfaceManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Campanile_Normal, Campanile_Scale_i, Campanile_Scale_m, Mainc, ARc, ImageCanvas, ImageTarget, ModelTarget,
+    public Transform Min, Max;
+   [SerializeField]
+    private GameObject Campanile_Normal, Campanile_Scale_i, Campanile_Scale_m, Mainc, ARc, ImageCanvas, ImageTarget, ModelTarget,InterstructureModel, modelT,WindmodeDD,
         Seismic, Wind,Deflection, Forcescale, sliderLabel, sliderNumberL, animationT, Spectral, plotSec, definition_o, modeDD, uparrow, downarrow, MomentArrow1, MomentArrow2;
     [SerializeField]
     ForceUpdate forceUpdate;
@@ -39,33 +41,58 @@ public class CamInterfaceManager : MonoBehaviour
         //skywalk = Skywalk_Normal.transform;
         modeDD.GetComponent<Dropdown>().value = 0;
         switchMode();
-        animationT.GetComponent<Toggle>().interactable = false; 
+        animationT.GetComponent<Toggle>().interactable = false;
+        animationT.GetComponent<Toggle>().isOn = true;
+        WindmodeDD.GetComponent<Dropdown>().value = 0;
+
+        onSliderChange();
     }
 
     private void changemode()
     {
+
+        if (Seismic.activeSelf) { WindmodeDD.GetComponent<Dropdown>().value = 0; }
         Seismic = Campanile.GetChild(2).gameObject;
         seismicLoad = Seismic.GetComponent<SeismicLoad>();
         Wind = Campanile.GetChild(1).gameObject;
         windLoad = Wind.GetComponentInChildren<WindLoad>();
         Deflection= Campanile.GetChild(3).gameObject;
         forceUpdate = Deflection.GetComponent<ForceUpdate>();
+        forceUpdate.WindMode = Wind.activeSelf;
+        Min = windLoad.transform.Find("min");
+        Max = windLoad.transform.Find("max");
+        InterstructureModel = Campanile.GetChild(0).gameObject;
+
+        Seismic.SetActive(false);
+        Wind.SetActive(true);
+        plotSec.SetActive(false);
+        animationT.GetComponent<Toggle>().interactable = false;
+        animationT.GetComponent<Toggle>().isOn = true;
+        print(Seismic.activeSelf);
+        
+        Forcescale.GetComponent<Text>().text = "Force Scale: 100%";
+        sliderLabel.GetComponent<Text>().text = "Wind Speed";
+        seismicSlider.GetComponent<Slider>().value = 0;
+        print(Seismic.activeSelf);
         onSliderChange();
+        
+        //onSliderChange();
     }
 
     public void switchMode()
     {
+       
 
         switch (modeDD.GetComponent<Dropdown>().value)
         {
             case 0:
                 print("Pre-loaded");
-                Campanile = Campanile_Normal.transform;
+                
                 Mainc.SetActive(true);
                 ARc.SetActive(false);
                 ARc.transform.transform.SetPositionAndRotation(Mainc.transform.position, Mainc.transform.rotation);
                 ARc.GetComponent<VuforiaBehaviour>().enabled = false;
-                ImageCanvas.SetActive(true); Campanile_Normal.SetActive(true);
+                Campanile = Campanile_Normal.transform;ImageCanvas.SetActive(true); Campanile_Normal.SetActive(true);
                 Campanile_Scale_i.SetActive(false); ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
                 changemode();
@@ -74,10 +101,10 @@ public class CamInterfaceManager : MonoBehaviour
                 print("Indoor");
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
-                ARc.GetComponent<VuforiaBehaviour>().enabled = true;
+                ARc.GetComponent<VuforiaBehaviour>().enabled = true; //if (Seismic.activeSelf) { WindmodeDD.GetComponent<Dropdown>().value = 0; }
                 Campanile = Campanile_Scale_i.transform;
                 ImageCanvas.SetActive(false); Campanile_Normal.SetActive(false);
-                Campanile_Scale_i.SetActive(false); ImageTarget.SetActive(true);
+                Campanile_Scale_i.SetActive(true); ImageTarget.SetActive(true);
                 ModelTarget.SetActive(false);
                 changemode();
                 break;
@@ -85,17 +112,14 @@ public class CamInterfaceManager : MonoBehaviour
                 print("Outdoor");
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
-                ARc.GetComponent<VuforiaBehaviour>().enabled = true;
+                ARc.GetComponent<VuforiaBehaviour>().enabled = true; //if (Seismic.activeSelf) { WindmodeDD.GetComponent<Dropdown>().value = 0; }
                 Campanile = Campanile_Scale_m.transform;
                 ImageCanvas.SetActive(false); Campanile_Normal.SetActive(false);
                 Campanile_Scale_i.SetActive(false); ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
                 changemode();
                 break;
-
         }
-
-
     }
 
 
@@ -167,13 +191,20 @@ public class CamInterfaceManager : MonoBehaviour
         }
         else
         {
-            windLoad.targetdis = -seismicSlider.GetComponent<Slider>().value * 12 - 4.6f;
+            
             windLoad.TextandForceUpdate((seismicSlider.GetComponent<Slider>().value * 100 / 100) * 150);
+            windLoad.targetdis = -seismicSlider.GetComponent<Slider>().value * Mathf.Abs(Max.position.x-Min.position.x)+Mathf.Max(Min.position.x, Max.position.x);
 
         }
 
 
 
+    }
+
+    public void onModeltoggelchange() { InterstructureModel.SetActive(modelT.GetComponent<Toggle>().isOn); }
+
+    public void onanimationchange() {
+        if (!animationT.GetComponent<Toggle>().isOn) { onSliderChange(); }
     }
 
     // Update is called once per frame

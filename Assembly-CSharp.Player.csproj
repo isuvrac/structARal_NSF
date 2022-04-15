@@ -66,8 +66,9 @@
     <Compile Include="Assets\Script\Campanile\WindLoad.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\structARal.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\CampanileTower.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk_Copy.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk.xml" />
   </ItemGroup>
