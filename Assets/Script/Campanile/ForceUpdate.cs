@@ -29,7 +29,7 @@ public class ForceUpdate : MonoBehaviour
     float f2_h = 57.5f;
     float f3_h = 71.5f;
     float f4_h = 89 + 2f / 12;
-    public bool WindMode, animate;
+    public bool WindMode=true;
 
     [SerializeField]
     public float seismicSs, seismicS1, shear, moment, DefLabel, Max_P, Min_P;
@@ -79,7 +79,6 @@ public class ForceUpdate : MonoBehaviour
         float resy = (startendL[1].y - startendL[0].y) / 24;
         if (WindMode) { def = calculateWindForce(input); }
         else { def = calculateSeismic(input); }
-
         for (int i = 0; i < pointsN; i++)
         {
             pointsPL[i] = new Vector3(startendL[0].x - def[pointsN - i - 1], startendL[0].y + resy * i, startendL[0].z);
@@ -94,16 +93,10 @@ public class ForceUpdate : MonoBehaviour
         }
         towerR.SetPositions(pointsPR);
         towerR.SetPosition(pointsN, startendR[1]);
-        DefLabel = Mathf.Round((def[pointsN - 1] * 12 / 10) * 1000) / 1000;
+        DefLabel = Mathf.Round((def[pointsN - 1] * 12 / 10) * 100) / 1000;
     }
 
-    private void Update()
-    {
-        if (animate)
-        {
-            DrawAnimatedLine();
-        }
-    }
+   
 
     public void DrawAnimatedLine()
     {
@@ -129,7 +122,8 @@ public class ForceUpdate : MonoBehaviour
         }
         towerR.SetPositions(pointsPR);
         towerR.SetPosition(pointsN, startendR[1]);
-        DefLabel = Mathf.Round((def[pointsN - 1] * 12 / 10) * 1000) / 1000;
+        DefLabel = Mathf.Round((lerpdef[pointsN - 1] * 12 / 10) * 1000) / 1000;
+
         t += 3 * Time.deltaTime;
         if (t > 1.0f)
         {

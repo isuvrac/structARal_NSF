@@ -11,7 +11,7 @@ public class WindLoad : MonoBehaviour
     public Vector3 applypoint, mOffset;
     [SerializeField]
     private ForceUpdate forceUpdate;
-    public float WindForce =0;
+    public float WindForce;
     private List<Transform> Arrows = new List<Transform>();
     float WindForceScale =12.5f;
     [SerializeField]
@@ -19,20 +19,17 @@ public class WindLoad : MonoBehaviour
     public float targetdis;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        applypoint = Max.position;
-        targetdis = Max.position.x;
-
-
+        //applypoint = Max.position;
+        //targetdis = Max.position.x;
         foreach (Transform a in this.transform) {
-            print(a.tag);
             if (a.tag == "WindForceArrow") {
 
                 Arrows.Add(a);
             }
         }
-        //TextandForceUpdate(0);
+
     }
     private void OnMouseDown()
     {
@@ -56,6 +53,7 @@ public class WindLoad : MonoBehaviour
     }
 
     public void TextandForceUpdate(float windForce) {
+        
         forceUpdate.Drawlines(windForce);
         //Change label and rotation 
         MomentL.GetComponent<TextMesh>().text = forceUpdate.moment.ToString() + " k-ft";

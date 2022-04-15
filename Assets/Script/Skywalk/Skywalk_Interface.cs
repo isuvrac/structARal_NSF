@@ -16,7 +16,7 @@ public class Skywalk_Interface : MonoBehaviour
     [SerializeField]
     Toggle LiveLoad, DeadLoad, ReactionForce, Ruler;
     [SerializeField]
-    GameObject ARc,Mainc, Skywalk_Normal, Skywalk_Scale_m, Skywalk_Scale_i, ImageTarget, ModelTarget,ImageCanvas, definition_o;
+    GameObject ARc,Mainc, Skywalk_Normal, Skywalk_Scale_m, Skywalk_Scale_i, ImageTarget, ModelTarget,ImageCanvas, definition_o, uparrow, downarrow;
     [SerializeField]
     Liveload liveload;
     Transform skywalk;
@@ -40,6 +40,8 @@ public class Skywalk_Interface : MonoBehaviour
     {
         definition_o.GetComponentInParent<VerticalLayoutGroup>().childControlHeight = !definition_o.activeSelf;
         definition_o.SetActive(!definition_o.activeSelf);
+        uparrow.SetActive(!definition_o.activeSelf);
+        downarrow.SetActive(definition_o.activeSelf);
     }
 
     public void toggleonclick() {
