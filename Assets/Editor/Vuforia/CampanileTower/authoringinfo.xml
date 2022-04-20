@@ -7,13 +7,19 @@
 
 <Assembly name="CampanileTowers_assembly" assemblyId="de57d58f716e47d5b4946e21735cfb97">
 <Part name="CampanileTower" translation="0 0 0" rotation="AD: 0 0 1 0"/>
-<EntryPoint name="viewpoint_0001" translation="-0.128473 5.22366 9.05083" rotation="AD: -0.00620579 1.00891 7.53474 180.013" image="" trained="no">
-
-</EntryPoint>
 <EntryPoint name="viewpoint_0004" translation="-0.373713 4.09489 8.58205" rotation="AD: -0.00634862 1.0085 7.70816 180.012" image="" trained="no">
 
 </EntryPoint>
 <EntryPoint name="viewpoint_0003" translation="-0.0746662 4.2979 9.43154" rotation="AD: -0.130431 0.998893 8.21083 180.22" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0005" translation="-7.89964e-16 4.84597 5.28508" rotation="AD: -2.29396e-16 1.03528 3.8637 180" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0007" translation="-9.21445e-16 4.19663 6.98598" rotation="AD: -3.45573e-16 1.01543 5.75877 180" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0008" translation="0.495793 2.90058 7.23595" rotation="AD: -0.899133 0.446125 5.09924 181.734" image="" trained="no">
 
 </EntryPoint>
 

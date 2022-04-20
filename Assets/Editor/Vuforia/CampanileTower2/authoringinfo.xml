@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.4.4">
+<ModelTarget name="CampanileTower2" targetId="f42fbf497b6544c0add700ff07823cbe" version="14.0" toolVersion="10.4.4" bbox="-1.414099 -0.000945 -1.826939 1.266403 13.316864 0.853733" previewImage="f42fbf497b6544c0add700ff07823cbe_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="CampanileTower2s_assembly" assemblyId="bcd7fedaf1c141f5983313e66574acbf">
+<Part name="CampanileTower2" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-2.04869 6.17661 4.19671" rotation="AD: 0.171228 1.06875 2.5802 177.096" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0001" translation="-1.91655 6.42449 5.47839" rotation="AD: 0.190882 1.04691 2.87636 177.405" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0008" translation="0.376261 3.99358 9.28269" rotation="AD: -4.25648e-15 1.00863 7.6613 180" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0004" translation="0.827556 5.00139 6.39998" rotation="AD: 0.753121 0.704341 2.74356 172.452" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0006" translation="0.527495 4.91309 8.69001" rotation="AD: 0.736287 0.703456 3.61897 175.64" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0005" translation="1.38813 2.98445 9.43923" rotation="AD: 0.947009 0.332303 3.79825 177.584" image="" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

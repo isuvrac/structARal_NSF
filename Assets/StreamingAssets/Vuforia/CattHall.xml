@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="CattHall" motionHint="static" trackingMode="car"/>
+
+</Tracking>
+
+<Assembly name="CattHalls_assembly" assemblyId="d173da3cde184293a587d82697776a44">
+<Part name="CattHall" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="7.42138 6.23134 7.59299" rotation="AD: 1 -0.00573389 -0.0213992 150.007" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0001" translation="5.55155 7.77274 10.2628" rotation="AD: 1 -0.00573389 -0.0213992 150.007" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0002" translation="5.55155 6.8487 10.9012" rotation="AD: 1 -0.00474409 -0.0213992 155.006" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0003" translation="5.55155 5.87254 11.4566" rotation="AD: 1 -0.00377325 -0.0213992 160.005" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0004" translation="7.46416 5.96808 9.01268" rotation="AD: 1 -0.00474409 -0.0213992 155.006" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0005" translation="6.51353 6.22351 9.56044" rotation="AD: 1 0.00483739 0.0218201 155.006" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>

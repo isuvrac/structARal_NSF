@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.4.4">
+<ModelTarget name="TownHall" targetId="fd7ab4ee957c41b5821af6caa7c52002" version="14.0" toolVersion="10.4.4" bbox="-22.470636 -0.013477 -17.451241 16.165239 8.230327 17.462839" previewImage="fd7ab4ee957c41b5821af6caa7c52002_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="TownHalls_assembly" assemblyId="24a75ea496f8473c8ce01197f3c9bae6">
+<Part name="TownHall" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0004" translation="11 7.31785 15.4275" rotation="AD: -2.30456e-16 1.01543 5.75877 180" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0001" translation="11 7.7245 14.1029" rotation="AD: -1.84357e-16 1.02049 5.01585 180" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0002" translation="12.1843 8.13023 15.0587" rotation="AD: -0.214121 0.997768 4.90419 180.997" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0003" translation="11.7485 5.39938 21.4074" rotation="AD: -0.448236 0.898185 10.2663 180.436" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0005" translation="11 5.17918 18.2592" rotation="AD: -5.11893e-16 1.00463 10.4334 180" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0006" translation="11 6.02183 18.9707" rotation="AD: 5.37444e-16 1.00647 8.83367 180" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0007" translation="12.0894 8.55388 16.0568" rotation="AD: -0.214121 0.997768 4.90419 180.997" image="" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0008" translation="12.0023 8.94312 16.9738" rotation="AD: -0.214121 0.997768 4.90419 180.997" image="" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

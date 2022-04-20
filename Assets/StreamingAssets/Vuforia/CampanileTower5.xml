@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="CampanileTower5" motionHint="static" trackingMode="car"/>
+
+</Tracking>
+
+<Assembly name="CampanileTower5s_assembly" assemblyId="582632a3fa78407da52e9b9b0ecdbd6b">
+<Part name="CampanileTower5" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0001" translation="0.598092 2.64009 9.32413" rotation="AD: 0.786038 0.622729 8.26335 179.185" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0002" translation="0.598092 2.72624 9.31107" rotation="AD: 0.786038 0.622729 8.26335 179.185" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0004" translation="0.493486 4.32359 8.07803" rotation="AD: 0.482098 0.893649 5.06813 178.116" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0005" translation="-0.0721362 4.93192 3.85519" rotation="AD: 0.269074 1.02956 2.82869 176.288" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0006" translation="-0.0721361 5.52644 2.9402" rotation="AD: 0.220531 1.08107 2.31836 175.413" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.4.4">
+<ModelTarget name="CattHall2" targetId="69cb7b5514bc4467a53dbb02a261f375" version="14.0" toolVersion="10.4.4" bbox="-3.827002 -0.339387 -4.005483 9.045562 10.889727 7.236287" previewImage="69cb7b5514bc4467a53dbb02a261f375_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="CattHall2s_assembly" assemblyId="69d242c13e47463fb3ec72ed7b92399f">
+<Part name="CattHall2" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="6.51353 6.22351 9.56044" rotation="AD: 1 0.00483739 0.0218201 155.006" image="" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>
