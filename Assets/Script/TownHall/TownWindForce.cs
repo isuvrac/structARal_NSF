@@ -17,6 +17,8 @@ public class TownWindForce : MonoBehaviour
     [SerializeField]
     GameObject Label;// DefLable, Min_P, Max_P, MomentL, ShearL, seismicSlider;
     public float targetdis;
+    [SerializeField]
+    Town_ReactionForce town_ReactionForce;
 
     // Start is called before the first frame update
 
@@ -42,6 +44,7 @@ public class TownWindForce : MonoBehaviour
         Vector3 draggingpoint = GetMouseWorldPos() + mOffset;
         applypoint = new Vector3(Mathf.Clamp(draggingpoint.x, Max.position.x,Min.position.x ), 0, 0);
         targetdis = applypoint.x; Label.GetComponent<TextMesh>().text =(Mathf.Round(10*WindForce)/10).ToString() + " k";
+        town_ReactionForce.updatereactionforce();
         //TextandForceUpdate(WindForce); seismicSlider.GetComponent<Slider>().value = -(targetdis - Mathf.Max(Min.position.x, Max.position.x)) / Mathf.Abs(Max.position.x - Min.position.x);
     }
 
@@ -68,6 +71,6 @@ public class TownWindForce : MonoBehaviour
         WindLoadBar.transform.position = new Vector3(targetdis, WindLoadBar.transform.position.y, WindLoadBar.transform.position.z);
         float height = Mathf.Abs(WindLoadBar.transform.localPosition.x - arrowbase.localPosition.x);
         Arrows.Find("Base").gameObject.transform.localScale = new Vector3(10, height, 10);
-        WindForce = Mathf.Abs(height - Min.position.x) * (8.65f/ Mathf.Abs(Max.position.x-Min.position.x));//
+        WindForce = Mathf.Abs(WindLoadBar.transform.position.x - Min.position.x) * (8.65f/ Mathf.Abs(Max.position.x-Min.position.x));//
     }
 }

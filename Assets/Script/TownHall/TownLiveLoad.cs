@@ -17,6 +17,8 @@ public class TownLiveLoad : MonoBehaviour
     public Vector3 start, end, applypoint;
     [SerializeField]
     public float liveload = 0.0f;
+    [SerializeField]
+    Town_ReactionForce town_ReactionForce;
     //[SerializeField]
     //private ReactionForce reactionForce;
     //[SerializeField]
@@ -63,6 +65,7 @@ public class TownLiveLoad : MonoBehaviour
         Vector3 hdraggingpoint = GetMouseWorldPos() + hOffset;
         if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), start.y, start.z); }
         else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), end.y, end.z); }
+        town_ReactionForce.updatereactionforce();
        // updateforce();
     }
 

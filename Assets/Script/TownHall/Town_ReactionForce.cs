@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Town_ReactionForce : MonoBehaviour
-{
+{  
+   
     struct ReactionForce
     {
         public float theta_B;
@@ -61,12 +62,18 @@ public class Town_ReactionForce : MonoBehaviour
     float inputL;
     float inputx1;
     float inputx2;
+    public float reactionforce1, reactionshear1, reactionmoment1, reactionforce2, reactionshear2, reactionmoment2, reactionforce3, reactionshear3, reactionmoment3;
     [SerializeField]
     TownWindForce townWindForce;
     [SerializeField]
     TownLiveLoad townLiveLoad;
-
-
+    [SerializeField]
+    private Transform ReactionF1, ReactionF2, ReactionF3, ReactionS1, ReactionS2, ReactionS3, ReactionM1, ReactionM2, ReactionM3,Left,Right;
+    
+    private LineRenderer Moment1, Moment2, Moment3;
+    private Vector3[] pointsP1, pointsP2, pointsP3;
+    private Vector3[] startend1, startend2, startend3;
+    private int pointsN = 25;
     private void OnGUI()
     {
         GUI.color = Color.white;
@@ -77,7 +84,47 @@ public class Town_ReactionForce : MonoBehaviour
     void Start()
     {
         reactionForces_s = new ReactionForce[34];
-        calculateForces(0,3,0,0, 30);
+        
+        //set up lines
+        pointsP1 = new Vector3[pointsN];
+        startend1 = new Vector3[2];
+        pointsP2 = new Vector3[pointsN];
+        startend2 = new Vector3[2];
+        pointsP3 = new Vector3[pointsN];
+        startend3 = new Vector3[2];
+        Moment1 = new GameObject().AddComponent<LineRenderer>();
+        Moment2= new GameObject().AddComponent<LineRenderer>();
+        Moment3 = new GameObject().AddComponent<LineRenderer>();
+        initilizeLines(Moment1);
+        initilizeLines(Moment2);
+        initilizeLines(Moment3);
+        updatereactionforce(); 
+        
+        
+    }
+
+    void initilizeLines(LineRenderer Moment) {
+        //setup line
+        Moment.transform.SetParent(this.transform);
+        Moment.startWidth = 2f;
+        Moment.endWidth = 2f;
+        Moment.positionCount = pointsN + 1;
+        Moment.material.color = new Color(0f, 1f, 0f,1f);
+    }
+
+
+    void Drawlines(Vector3[] startend,Transform reactionM, float momentAng,float radius, LineRenderer Moment)
+    {
+        startend[0] = new Vector3(reactionM.position.x + radius, reactionM.position.y, reactionM.position.z);
+        startend[1] = new Vector3(reactionM.position.x + radius*Mathf.Sin(-Mathf.PI/2-momentAng), reactionM.position.y + radius * Mathf.Cos(-Mathf.PI / 2 + -momentAng), reactionM.position.z);
+        //initiate all points on curve
+        Vector3[] pointsP=new Vector3[pointsN];
+        for (int i = 0; i < 25; i++)
+        {
+            pointsP[i] = new Vector3(reactionM.position.x + radius * Mathf.Sin(-Mathf.PI / 2 + i *-momentAng/25), reactionM.position.y + radius * Mathf.Cos(-Mathf.PI / 2 + i *-momentAng/25), reactionM.position.z);
+        }
+        Moment.SetPositions(pointsP);
+        Moment.SetPosition(pointsN, startend[1]);
     }
 
     // Update is called once per frame
@@ -85,13 +132,63 @@ public class Town_ReactionForce : MonoBehaviour
     {
         _statusMsg = "F_AB" + reactionForces.F_AB + " F_DC" + reactionForces.F_DC + " F_FE" + reactionForces.F_FE + " V_AB" + reactionForces.V_AB + " V_DC" + reactionForces.V_DC + " V_FE" + reactionForces.V_FE
             + " M_AB" + reactionForces.M_AB + " M_DC" + reactionForces.M_DC + " M_FE" + reactionForces.M_FE;
-        inputD=3;
-        inputF=townWindForce.WindForce;
-        inputL=townLiveLoad.liveload;
-        inputx1= townLiveLoad.start.x;
-        inputx2 = townLiveLoad.end.x;
+
+        
+
     }
 
+    public void updatereactionforce() {
+        inputD =3;
+        inputF=townWindForce.WindForce*0.985f;
+        inputL=townLiveLoad.liveload;
+        inputx1= (townLiveLoad.start.x - townLiveLoad.startR.position.x) * (30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));
+        inputx2 = (townLiveLoad.end.x - townLiveLoad.startR.position.x)*(30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));
+        calculateForces(inputL, inputD, inputF, inputx1, inputx2);
+        print(inputx1);
+        print(inputx2);
+        //calculateForces(2.5f, 3, 0, 0, 30);
+        reactionforce1 = Mathf.Round(reactionForces.F_AB*10)/10;
+        reactionforce2 = Mathf.Round(reactionForces.F_DC * 10) / 10;
+        reactionforce3 = Mathf.Round(reactionForces.F_FE * 10) / 10;
+        reactionshear1 = Mathf.Round(reactionForces.V_AB * 10) / 10;
+        reactionshear2 = -1*Mathf.Round(reactionForces.V_DC * 10) / 10;
+        reactionshear3 = -1*Mathf.Round(reactionForces.V_FE * 10) / 10;
+        reactionmoment1 = Mathf.Round(reactionForces.M_AB * 10) / 10;
+        reactionmoment2= Mathf.Round(reactionForces.M_DC * 10) / 10;
+        reactionmoment3= Mathf.Round(reactionForces.M_FE * 10) / 10;
+        Drawlines(startend1, ReactionM1, reactionmoment1 / 4, 10, Moment1);
+        Drawlines(startend2, ReactionM2, reactionmoment2 / 4, 10, Moment2);
+        Drawlines(startend3, ReactionM3, reactionmoment3 / 4, 10, Moment3);
+        updatelabel(ReactionS1, reactionshear1, startend1);
+        updatelabel(ReactionS2, reactionshear2, startend2);
+        updatelabel(ReactionS3, reactionshear3, startend3);
+        updatelabel(ReactionF1, reactionforce1, startend1);
+        updatelabel(ReactionF2, reactionforce2, startend2);
+        updatelabel(ReactionF3, reactionforce3, startend3);
+        updatelabel(ReactionM1, reactionmoment1, startend1);
+        updatelabel(ReactionM2, reactionmoment2, startend2);
+        updatelabel(ReactionM3, reactionmoment3, startend3);
+    }
+
+    private void updatelabel(Transform arrow, float force,Vector3[] startend) {
+        if (arrow.name.Contains("shear")) {
+            if (Mathf.Sign(force)<0) { arrow.transform.Find("SupportArrow").transform.LookAt(Left); }
+            else { arrow.transform.Find("SupportArrow").transform.LookAt(Right); }
+            arrow.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, Mathf.Abs(force) *3, 10);
+            arrow.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Mathf.Abs(force)).ToString() + "k";
+        }
+        else if (arrow.name.Contains("moment")) {
+            arrow.transform.Find("Tip").transform.position = startend[1];
+            if (force > 6.6f && force < 18.8f) { arrow.transform.Find("Tip").transform.LookAt(arrow, -Mathf.Sign(force) * arrow.up); }
+            else {arrow.transform.Find("Tip").transform.LookAt(arrow,Mathf.Sign(force)*arrow.up); }
+            arrow.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Mathf.Abs(force)).ToString() + "k-ft";
+        }
+        else
+        {
+            arrow.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, force * (-1) / 6, 10);
+            arrow.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Mathf.Abs(force)).ToString() + "k";
+        }
+    }
 
     private void calculateForces(float L, float D, float F, float x1, float x2)
     { // fixed end moments
@@ -153,6 +250,12 @@ public class Town_ReactionForce : MonoBehaviour
             VF_EC = (L * (x2 - x1) * ((x1 - width) + ((x2 - x1) / 2)) - MF_CE - MF_EC) / width;
         }
 
+        // add dead load contribution
+        VF_BC += 8.335f * D;
+        VF_CB += 8.335f * D;
+        VF_CE += 8.335f * D;
+        VF_EC += 8.335f * D;
+
         float[] A_data= new float [16]{
         4*k_1 + 4*k_4, 2*k_4,             0,           k_1/2,
         2*k_4,         4*k_4+4*k_2+4*k_5, 2*k_5,       k_2/2,
@@ -169,13 +272,7 @@ public class Town_ReactionForce : MonoBehaviour
         b[1, 0] = -MF_CB - MF_CE;
         b[2, 0] = -MF_EC;
         b[3, 0] = F;
-        print(A_data.Length);
-        print(b);
-        print(A);
-        //float[,] b = new float[4, 1];
-        //for (int i = 0; i < b_data.Length; i++) { int k = i / 4; int l = i % 4; b[k, l] = b_data[i]; }
-        Matrix4x4 x = A.inverse * b;
-        print(x);
+        Matrix4x4 x = (A.transpose*A).inverse*A.transpose * b;
          //bool has_solution = cv::solve(A, b, x);
          //assert(has_solution);
          float theta_B = x[0,0];
