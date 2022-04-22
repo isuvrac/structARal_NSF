@@ -61,13 +61,15 @@
     <Compile Include="Assets\Script\Skywalk\ReactionForce.cs" />
     <Compile Include="Assets\Script\Skywalk\Skywalk_Interface.cs" />
     <Compile Include="Assets\Script\Campanile\CamInterfaceManager.cs" />
+    <Compile Include="Assets\Script\TownHall\TownHall_Interface.cs" />
     <Compile Include="Assets\Script\Skywalk\Liveload.cs" />
     <Compile Include="Assets\Script\Skywalk\Bazier_Curve.cs" />
     <Compile Include="Assets\Script\ARmanager1.cs" />
     <Compile Include="Assets\Script\TownHall\TownLiveLoad.cs" />
     <Compile Include="Assets\Script\Campanile\SeismicLoad.cs" />
     <Compile Include="Assets\Script\Campanile\WindLoad.cs" />
-    <Compile Include="Assets\Script\TownHall\TownHall_Interface.cs" />
+    <Compile Include="Assets\Script\TownHall\TownDeflection.cs" />
+    <Compile Include="Assets\Script\TownHall\FixJoinUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Vuforia\CampanileTower.xml" />

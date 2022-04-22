@@ -51,7 +51,7 @@ public class TownHall_Interface : MonoBehaviour
                 ModelTarget.SetActive(false);
                 toggleonclick();
                 break;
-            /*case 1:
+            case 1:
                 print("Indoor");
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
@@ -72,7 +72,7 @@ public class TownHall_Interface : MonoBehaviour
                 Towwn_Scale_i.SetActive(false); ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
                 toggleonclick();
-                break;*/
+                break;
 
         }
 

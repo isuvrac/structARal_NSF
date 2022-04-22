@@ -62,11 +62,16 @@ public class Town_ReactionForce : MonoBehaviour
     float inputL;
     float inputx1;
     float inputx2;
+    float R;
     public float reactionforce1, reactionshear1, reactionmoment1, reactionforce2, reactionshear2, reactionmoment2, reactionforce3, reactionshear3, reactionmoment3;
     [SerializeField]
     TownWindForce townWindForce;
     [SerializeField]
     TownLiveLoad townLiveLoad;
+    [SerializeField]
+    TownDeflection townDeflection;
+    [SerializeField]
+    FixJoinUI fixJoinUI;
     [SerializeField]
     private Transform ReactionF1, ReactionF2, ReactionF3, ReactionS1, ReactionS2, ReactionS3, ReactionM1, ReactionM2, ReactionM3,Left,Right;
     
@@ -84,7 +89,8 @@ public class Town_ReactionForce : MonoBehaviour
     void Start()
     {
         reactionForces_s = new ReactionForce[34];
-        
+        R = Mathf.Abs(ReactionF1.localPosition.x - ReactionF2.localPosition.x)/5;
+        print(R);
         //set up lines
         pointsP1 = new Vector3[pointsN];
         startend1 = new Vector3[2];
@@ -106,8 +112,8 @@ public class Town_ReactionForce : MonoBehaviour
     void initilizeLines(LineRenderer Moment) {
         //setup line
         Moment.transform.SetParent(this.transform);
-        Moment.startWidth = 2f;
-        Moment.endWidth = 2f;
+        Moment.startWidth = R/4;
+        Moment.endWidth = R / 4;
         Moment.positionCount = pointsN + 1;
         Moment.material.color = new Color(0f, 1f, 0f,1f);
     }
@@ -131,7 +137,7 @@ public class Town_ReactionForce : MonoBehaviour
     void Update()
     {
         _statusMsg = "F_AB" + reactionForces.F_AB + " F_DC" + reactionForces.F_DC + " F_FE" + reactionForces.F_FE + " V_AB" + reactionForces.V_AB + " V_DC" + reactionForces.V_DC + " V_FE" + reactionForces.V_FE
-            + " M_AB" + reactionForces.M_AB + " M_DC" + reactionForces.M_DC + " M_FE" + reactionForces.M_FE;
+            + " M_AB" + reactionForces.M_AB + " M_DC" + reactionForces.M_DC + " M_FE" + reactionForces.M_FE +" Delta" + reactionForces.delta;
 
         
 
@@ -144,8 +150,6 @@ public class Town_ReactionForce : MonoBehaviour
         inputx1= (townLiveLoad.start.x - townLiveLoad.startR.position.x) * (30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));
         inputx2 = (townLiveLoad.end.x - townLiveLoad.startR.position.x)*(30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));
         calculateForces(inputL, inputD, inputF, inputx1, inputx2);
-        print(inputx1);
-        print(inputx2);
         //calculateForces(2.5f, 3, 0, 0, 30);
         reactionforce1 = Mathf.Round(reactionForces.F_AB*10)/10;
         reactionforce2 = Mathf.Round(reactionForces.F_DC * 10) / 10;
@@ -156,9 +160,9 @@ public class Town_ReactionForce : MonoBehaviour
         reactionmoment1 = Mathf.Round(reactionForces.M_AB * 10) / 10;
         reactionmoment2= Mathf.Round(reactionForces.M_DC * 10) / 10;
         reactionmoment3= Mathf.Round(reactionForces.M_FE * 10) / 10;
-        Drawlines(startend1, ReactionM1, reactionmoment1 / 4, 10, Moment1);
-        Drawlines(startend2, ReactionM2, reactionmoment2 / 4, 10, Moment2);
-        Drawlines(startend3, ReactionM3, reactionmoment3 / 4, 10, Moment3);
+        Drawlines(startend1, ReactionM1, reactionmoment1 / 4, R, Moment1);
+        Drawlines(startend2, ReactionM2, reactionmoment2 / 4, R, Moment2);
+        Drawlines(startend3, ReactionM3, reactionmoment3 / 4, R, Moment3);
         updatelabel(ReactionS1, reactionshear1, startend1);
         updatelabel(ReactionS2, reactionshear2, startend2);
         updatelabel(ReactionS3, reactionshear3, startend3);
@@ -168,6 +172,10 @@ public class Town_ReactionForce : MonoBehaviour
         updatelabel(ReactionM1, reactionmoment1, startend1);
         updatelabel(ReactionM2, reactionmoment2, startend2);
         updatelabel(ReactionM3, reactionmoment3, startend3);
+        townDeflection.drawLines(inputx1, inputx2, inputL, inputF,reactionForces.delta);
+        fixJoinUI.assignValue (-reactionForces.F_BA, -reactionForces.F_BC, -reactionForces.V_BA, -reactionForces.V_BC, -reactionForces.M_BA, 
+            -reactionForces.M_BC, -Mathf.PI / 2 + reactionForces.theta_B * 400, -reactionForces.F_EC, -reactionForces.F_EF, -reactionForces.V_EC, 
+            -reactionForces.V_EF, -reactionForces.M_EC, -reactionForces.M_EF, Mathf.PI + reactionForces.theta_E * 400);
     }
 
     private void updatelabel(Transform arrow, float force,Vector3[] startend) {
@@ -279,7 +287,6 @@ public class Town_ReactionForce : MonoBehaviour
          float theta_C = x[1,0];
          float theta_E = x[2,0];
          float delta = x[3,0];
-
          // calculate final values
          reactionForces.theta_B = theta_B;
          reactionForces.theta_C = theta_C;
