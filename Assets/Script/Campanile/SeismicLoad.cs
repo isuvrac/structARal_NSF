@@ -39,7 +39,7 @@ public class SeismicLoad : MonoBehaviour
     public void OnIndexChange(int valueIndex)
     {
         
-        forceUpdate.Drawlines(valueIndex);
+        forceUpdate.Drawlines(valueIndex, -30000);
         //Change label and rotation 
         DefLable.GetComponent<TextMesh>().text = (forceUpdate.DefLabel).ToString() + " in";
         MomentL.GetComponent<TextMesh>().text = forceUpdate.moment.ToString() + " k-ft";

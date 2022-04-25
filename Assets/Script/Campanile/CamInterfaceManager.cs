@@ -11,7 +11,7 @@ public class CamInterfaceManager : MonoBehaviour
     public Transform Min, Max;
    [SerializeField]
     private GameObject Campanile_Normal, Campanile_Scale_i, Campanile_Scale_m, Mainc, ARc, ImageCanvas, ImageTarget, ModelTarget,InterstructureModel, modelT,WindmodeDD,
-        Seismic, Wind,Deflection, Forcescale, sliderLabel, sliderNumberL, animationT, Spectral, plotSec, definition_o, modeDD, uparrow, downarrow, MomentArrow1, MomentArrow2;
+        Seismic, Wind,Deflection, Forcescale, sliderLabel, sliderNumberL, animationT, Spectral, plotSec, definition_o, modeDD, uparrow, downarrow;
     [SerializeField]
     ForceUpdate forceUpdate;
     [SerializeField]
@@ -168,26 +168,8 @@ public class CamInterfaceManager : MonoBehaviour
                 }
             }
             Spectral.transform.GetChild(SeisIndex).gameObject.SetActive(true);
-            float rotate1 = 0;
-            rotate1 = Mathf.Clamp(-seismicSlider.GetComponent<Slider>().value * 200, -89.9f, 0.1f);
-            //print(rotate1);
-            Vector3 to1 = new Vector3(rotate1, MomentArrow1.transform.rotation.eulerAngles.y, MomentArrow1.transform.rotation.eulerAngles.z);
-            MomentArrow1.transform.eulerAngles = to1;
+ 
 
-            if (seismicSlider.GetComponent<Slider>().value <= 0.45)
-            {
-                MomentArrow2.SetActive(false); MomentArrow1.SetActive(true);
-
-            }
-            else
-            {
-                MomentArrow1.SetActive(false); MomentArrow2.SetActive(true);
-                //MomentArrow1.SetActive(false); MomentArrow2.SetActive(true);
-                // rotate = Mathf.Clamp(seismicSlider.GetComponent<Slider>().value * 200-360, -270.1f,379.9f);
-                //print(rotate);
-                //Vector3 to = new Vector3(rotate, MomentArrow2.transform.rotation.eulerAngles.y, MomentArrow2.transform.rotation.eulerAngles.z);
-                //MomentArrow2.transform.eulerAngles = to;
-            }
         }
         else
         {

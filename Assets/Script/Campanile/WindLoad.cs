@@ -54,7 +54,7 @@ public class WindLoad : MonoBehaviour
 
     public void TextandForceUpdate(float windForce) {
         
-        forceUpdate.Drawlines(windForce);
+        forceUpdate.Drawlines(windForce, 2000);
         //Change label and rotation 
         MomentL.GetComponent<TextMesh>().text = forceUpdate.moment.ToString() + " k-ft";
         ShearL.GetComponent<TextMesh>().text = forceUpdate.shear.ToString() + " k";
@@ -62,9 +62,9 @@ public class WindLoad : MonoBehaviour
         Max_P.GetComponent<TextMesh>().text = forceUpdate.Max_P.ToString() + " psf";
         Min_P.GetComponent<TextMesh>().text = forceUpdate.Min_P.ToString() + " psf";
         ShearArrow.transform.Find("Base").gameObject.transform.localScale = new Vector3(1, forceUpdate.shear / 10, 1);
-        float rotate =  Mathf.Clamp((360-Mathf.Abs(forceUpdate.moment / 34)),271,359);
-        Vector3 to = new Vector3(rotate, MomentArrow.rotation.eulerAngles.y, MomentArrow.rotation.eulerAngles.z);
-        MomentArrow.eulerAngles = to;
+        //float rotate =  Mathf.Clamp((360-Mathf.Abs(forceUpdate.moment / 34)),271,359);
+        //Vector3 to = new Vector3(rotate, MomentArrow.rotation.eulerAngles.y, MomentArrow.rotation.eulerAngles.z);
+        //MomentArrow.eulerAngles = to;
         
     }
 

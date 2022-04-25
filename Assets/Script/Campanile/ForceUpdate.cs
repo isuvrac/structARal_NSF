@@ -19,12 +19,12 @@ public class ForceUpdate : MonoBehaviour
     float roof_height = 20 + 4.5f / 12;
     float MOD_ELASTICITY = 2.016e8f;
     float MOM_OF_INERTIA = 2334;
-    private LineRenderer towerL, towerR;
+    private LineRenderer towerL, towerR, Moment;
     private Vector3[] pointsPL, pointsPR;
     private int pointsN = 25;
     private Vector3[] startendL, startendR;
     [SerializeField]
-    Transform refL1, refL2, refR3, refR4;
+    Transform refL1, refL2, refR3, refR4, refM;
     float f1_h = 17.75f;
     float f2_h = 57.5f;
     float f3_h = 71.5f;
@@ -36,7 +36,9 @@ public class ForceUpdate : MonoBehaviour
     public float[] WindSeismic = new float[4];
     private float[] def;
     static float t = 0.0f;
-
+    float R;
+    private Vector3[] pointsM;
+    private Vector3[] startendM;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,8 +74,18 @@ public class ForceUpdate : MonoBehaviour
         towerR.positionCount = pointsN + 1;
         towerR.material.color = new Color(0f, 0f, 1f);
 
+        R = Mathf.Abs(refL2.transform.localPosition.x - refR4.transform.localPosition.x) /2;
+        print(R);
+        pointsM = new Vector3[pointsN];
+        startendM = new Vector3[2];
+        Moment = new GameObject().AddComponent<LineRenderer>();
+        Moment.transform.SetParent(this.transform);
+        Moment.startWidth = R / 4;
+        Moment.endWidth = R / 4;
+        Moment.positionCount = pointsN + 1;
+        Moment.material.color = new Color(0f, 1f, 0f, 1f);
     }
-    public void Drawlines(float input)
+    public void Drawlines(float input, float ratio)
     {
         //initiate all points on curve
         float resy = (startendL[1].y - startendL[0].y) / 24;
@@ -94,9 +106,29 @@ public class ForceUpdate : MonoBehaviour
         towerR.SetPositions(pointsPR);
         towerR.SetPosition(pointsN, startendR[1]);
         DefLabel = Mathf.Round((def[pointsN - 1] * 12 / 10) * 100) / 1000;
+        
+        DrawMomentlines(startendM, refM, moment, R, Moment,ratio);
     }
 
-   
+    void DrawMomentlines(Vector3[] startend, Transform reactionM, float moment, float radius, LineRenderer Moment, float ratio)
+    {
+        float momentAng = moment / ratio;
+        startend[0] = new Vector3(reactionM.position.x +Mathf.Sign(ratio)*radius, reactionM.position.y, reactionM.position.z);
+        startend[1] = new Vector3(reactionM.position.x + Mathf.Sign(ratio) * radius * Mathf.Sin(-Mathf.PI / 2 - momentAng), reactionM.position.y+Mathf.Sign(ratio) * radius * Mathf.Cos(-Mathf.PI / 2 + -momentAng), reactionM.position.z);
+        //initiate all points on curve
+        Vector3[] pointsP = new Vector3[pointsN];
+        for (int i = 0; i < 25; i++)
+        {
+            pointsP[i] = new Vector3(reactionM.position.x + Mathf.Sign(ratio) * radius * Mathf.Sin(-Mathf.PI / 2 + i * -momentAng / 25), reactionM.position.y + Mathf.Sign(ratio) * radius * Mathf.Cos(-Mathf.PI / 2 + i * -momentAng / 25), reactionM.position.z);
+        }
+        Moment.SetPositions(pointsP);
+        Moment.SetPosition(pointsN, startend[1]);
+        reactionM.transform.Find("Tip").transform.position = startend[1];
+        print(momentAng);
+        if (momentAng > -1.6f && momentAng < 0f) { reactionM.transform.Find("Tip").transform.LookAt(reactionM, -Mathf.Sign(momentAng) * reactionM.up); }
+        else { reactionM.transform.Find("Tip").transform.LookAt(reactionM, Mathf.Sign(momentAng) * reactionM.up); }
+    }
+
 
     public void DrawAnimatedLine()
     {
@@ -134,10 +166,6 @@ public class ForceUpdate : MonoBehaviour
         }
         
     }
-
-
-
-
     float[] calculateSeismic(float input)
     {
 
