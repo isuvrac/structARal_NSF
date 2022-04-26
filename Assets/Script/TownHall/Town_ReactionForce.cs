@@ -79,12 +79,7 @@ public class Town_ReactionForce : MonoBehaviour
     private Vector3[] pointsP1, pointsP2, pointsP3;
     private Vector3[] startend1, startend2, startend3;
     private int pointsN = 25;
-    private void OnGUI()
-    {
-        GUI.color = Color.white;
-        GUI.skin.label.fontSize = 30;
-        GUI.Label(new Rect(200, 10, 800, 400), _statusMsg);
-    }
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -131,16 +126,6 @@ public class Town_ReactionForce : MonoBehaviour
         }
         Moment.SetPositions(pointsP);
         Moment.SetPosition(pointsN, startend[1]);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _statusMsg = "F_AB" + reactionForces.F_AB + " F_DC" + reactionForces.F_DC + " F_FE" + reactionForces.F_FE + " V_AB" + reactionForces.V_AB + " V_DC" + reactionForces.V_DC + " V_FE" + reactionForces.V_FE
-            + " M_AB" + reactionForces.M_AB + " M_DC" + reactionForces.M_DC + " M_FE" + reactionForces.M_FE +" Delta" + reactionForces.delta;
-
-        
-
     }
 
     public void updatereactionforce() {

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FixJoinUI : MonoBehaviour
 {
-    public GameObject myPrefab;
+    public GameObject Tips, Tip;
     [SerializeField]
     float BF1, BF2, BS1, BS2, BM1, BM2, BR, CF1, CF2, CS1, CS2, CM1, CM2, CR;
     [SerializeField]
@@ -27,13 +27,13 @@ public class FixJoinUI : MonoBehaviour
         Bs2.text = Mathf.Abs(Mathf.Round(BS2 * 10) / 10).ToString() + " k"; Bm1.text = Mathf.Abs(Mathf.Round(BM1 * 10) / 10).ToString()+"k-ft"; Bm2.text = Mathf.Abs(Mathf.Round(BM2 * 10) / 10).ToString()+" k-ft"; 
         Cf1.text = Mathf.Abs(Mathf.Round(CF1 * 10) / 10).ToString()+" k"; Cf2.text = Mathf.Abs(Mathf.Round(CF2 * 10) / 10).ToString()+" k";Cs1.text = Mathf.Abs(Mathf.Round(CS1 * 10) / 10).ToString()+ " k"; 
         Cs2.text = Mathf.Abs(Mathf.Round(CS2 * 10) / 10).ToString()+ " k"; Cm1.text = Mathf.Abs(Mathf.Round(CM1 * 10) / 10).ToString()+ " k-ft"; Cm2.text = Mathf.Abs(Mathf.Round(CM2 * 10) / 10).ToString()+ "k-ft";
+        updateFixedJoin();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    
+    void Awake()
     {
         R = 3;
-        print(R);
         //set up lines
         startendB1 = new Vector3[2];
         startendB2 = new Vector3[2];
@@ -67,46 +67,76 @@ public class FixJoinUI : MonoBehaviour
         ForceC2 = new GameObject().AddComponent<LineRenderer>();// ArrowCF2 = new GameObject().AddComponent<LineRenderer>();
         MomentC1 = new GameObject().AddComponent<LineRenderer>(); //ArrowCM1 = new GameObject().AddComponent<LineRenderer>();
         MomentC2 = new GameObject().AddComponent<LineRenderer>(); //ArrowCM2 = new GameObject().AddComponent<LineRenderer>();
-        initilizeLines(MomentB1); //initilizeArrow(MomentB1.gameObject, ArrowBM1);
-        initilizeLines(MomentB2); //initilizeArrow(MomentB2.gameObject, ArrowBM2);
-        initilizeLines(MomentC1); //initilizeArrow(MomentC1.gameObject, ArrowCM1);
-        initilizeLines(MomentC2); //initilizeArrow(MomentC2.gameObject, ArrowCM2);
-        initilizeLines(ShearC1); //initilizeArrow(ShearC1.gameObject, ArrowCS1);
-        initilizeLines(ShearC2); //initilizeArrow(ShearC2.gameObject, ArrowCS2);
-        initilizeLines(ShearB2); //initilizeArrow(ShearB2.gameObject, ArrowBS1);
-        initilizeLines(ShearB1); //initilizeArrow(ShearB1.gameObject, ArrowBS2);
-        initilizeLines(ForceC1); //initilizeArrow(ForceC1.gameObject, ArrowCF1);
-        initilizeLines(ForceC2); //initilizeArrow(ForceC2.gameObject, ArrowCF2);
-        initilizeLines(ForceB1); //initilizeArrow(ForceB1.gameObject, ArrowBF1);
-        initilizeLines(ForceB2); //initilizeArrow(ForceB2.gameObject, ArrowBF2);
-        initilizeLines(CornerB1);
-        initilizeLines(CornerB2); 
-        initilizeLines(CornerC1); 
-        initilizeLines(CornerC2); 
-        DrawCorner(startendB1, cornerB, BR, Mathf.PI, 10, CornerB1, cornerB1);
-        DrawCorner(startendB2, cornerB, BR, Mathf.PI/2, 10, CornerB2, cornerB2);
-        DrawCorner(startendC1, cornerC, CR, Mathf.PI, 10, CornerC1, cornerC1);
-        DrawCorner(startendC2, cornerC, CR, Mathf.PI*3 / 2, 10, CornerC2, cornerC2);
-        DrawForce(startendBF1, cornerB1, BR, Mathf.PI * 3 / 2,5, ForceB1);
-        DrawForce(startendBF2, cornerB2, BR, Mathf.PI * 3 / 2, -5, ForceB2);
-        DrawForce(startendCF1, cornerC1, CR, Mathf.PI/ 2, 5, ForceC1);
-        DrawForce(startendCF2, cornerC2, CR, Mathf.PI/ 2, -5, ForceC2);
-        DrawForce(startendBS1, cornerB1, BR, Mathf.PI, 5, ShearB1);
-        DrawForce(startendBS2, cornerB2, BR, Mathf.PI, 5, ShearB2);
-        DrawForce(startendCS1, cornerC1, CR, Mathf.PI, 5, ShearC1);
-        DrawForce(startendCS2, cornerC2, CR, Mathf.PI, 5, ShearC2);
-        DrawMoment(startendBM1, cornerB1, 7, BR,5, MomentB1);
-        DrawMoment(startendBM2, cornerB2, 7, BR, -5, MomentB2);
-        DrawMoment(startendCM1, cornerC1, 7, CR, 5, MomentC1);
-        DrawMoment(startendCM2, cornerC2, 7, CR, 5, MomentC2);
+        initilizeCorner(CornerB1);
+        initilizeCorner(CornerB2);
+        initilizeCorner(CornerC1);
+        initilizeCorner(CornerC2);
+        initilizeCurve(MomentB1.gameObject,MomentB1); //initilizeArrow(MomentB1.gameObject, ArrowBM1);
+        initilizeCurve(MomentB2.gameObject,MomentB2); //initilizeArrow(MomentB2.gameObject, ArrowBM2);
+        initilizeCurve(MomentC1.gameObject, MomentC1); //initilizeArrow(MomentC1.gameObject, ArrowCM1);
+        initilizeCurve(MomentC2.gameObject, MomentC2); //initilizeArrow(MomentC2.gameObject, ArrowCM2);
+        initilizeLines(ShearC1.gameObject, ShearC1); //initilizeArrow(ShearC1.gameObject, ArrowCS1);
+        initilizeLines(ShearC2.gameObject, ShearC2); //initilizeArrow(ShearC2.gameObject, ArrowCS2);
+        initilizeLines(ShearB2.gameObject, ShearB2); //initilizeArrow(ShearB2.gameObject, ArrowBS1);
+        initilizeLines(ShearB1.gameObject, ShearB1); //initilizeArrow(ShearB1.gameObject, ArrowBS2);
+        initilizeLines(ForceC1.gameObject, ForceC1); //initilizeArrow(ForceC1.gameObject, ArrowCF1);
+        initilizeLines(ForceC2.gameObject, ForceC2); //initilizeArrow(ForceC2.gameObject, ArrowCF2);
+        initilizeLines(ForceB1.gameObject, ForceB1); //initilizeArrow(ForceB1.gameObject, ArrowBF1);
+        initilizeLines(ForceB2.gameObject, ForceB2); //initilizeArrow(ForceB2.gameObject, ArrowBF2);
+        
+       // updateFixedJoin();
     }
-    void initilizeLines(LineRenderer Moment)
+
+    void updateFixedJoin()
+    {
+
+        DrawCorner(startendB1, cornerB, BR,  Mathf.PI * 3 / 2,      10, CornerB1, cornerB1);
+        DrawCorner(startendB2, cornerB, BR,          Mathf.PI,      10, CornerB2, cornerB2);
+        DrawForce(startendBF1, cornerB1, BR,                0, BF1 / 5, ForceB1);
+        DrawForce(startendBS1, cornerB1, BR,     Mathf.PI / 2,  BS1 *2, ShearB1);
+        DrawForce(startendBF2, cornerB2, BR,     Mathf.PI / 2,  BF2 *2, ForceB2);
+        DrawForce(startendBS2, cornerB2, BR,         Mathf.PI,       5, ShearB2);
+        DrawCorner(startendC1, cornerC, CR,  Mathf.PI * 3 / 2,      10, CornerC1, cornerC1);
+        DrawCorner(startendC2, cornerC, CR,          Mathf.PI,      10, CornerC2, cornerC2);
+        DrawForce(startendCF1, cornerC1, CR,                0, CF1 * 2, ForceC1);
+        DrawForce(startendCS1, cornerC1, CR, Mathf.PI * 3 / 2,       5, ShearC1);
+        DrawForce(startendCF2, cornerC2, CR,     Mathf.PI / 2, CF2 / 5, ForceC2);
+        DrawForce(startendCS2, cornerC2, CR,                0, CS2 * 2, ShearC2);
+        DrawMoment(startendBM1, cornerB1, BR,Mathf.PI * 3 / 2, BM1 / 5, MomentB1, 4);
+        DrawMoment(startendBM2, cornerB2, BR,        Mathf.PI, BM2 / 5, MomentB2, 4);
+        DrawMoment(startendCM1, cornerC1, CR,    Mathf.PI / 2, CM1 / 5, MomentC1, 4);
+        DrawMoment(startendCM2, cornerC2, CR,               0, CM2 / 5, MomentC2, 4);
+
+    }
+
+    void initilizeCorner(LineRenderer Moment)
     {
         //setup line
         Moment.transform.SetParent(this.transform);
         Moment.startWidth = R / 4;
         Moment.endWidth = R / 4;
         Moment.positionCount = pointsN + 1;
+    }
+    void initilizeLines(GameObject parent, LineRenderer Moment)
+    {
+        //setup line
+        Moment.transform.SetParent(this.transform);
+        Moment.startWidth = R / 3;
+        Moment.endWidth = R / 3;
+        Moment.positionCount = pointsN + 1;
+        GameObject arrow= Instantiate(Tips, new Vector3 (0,0,0), Quaternion.identity);
+        arrow.transform.parent = parent.transform;
+    }
+    void initilizeCurve(GameObject parent, LineRenderer Moment)
+    {
+        //setup line
+        Moment.transform.SetParent(this.transform);
+        Moment.startWidth = R / 3;
+        Moment.endWidth = R /3;
+        Moment.positionCount = pointsN + 1;
+        //print(Moment.transform.name);
+        GameObject arrow = Instantiate(Tip, new Vector3(0, 0, 0), Quaternion.identity);
+        arrow.transform.parent = parent.transform;
     }
     void initilizeArrow(GameObject parent, LineRenderer Moment)
     {
@@ -132,6 +162,7 @@ public class FixJoinUI : MonoBehaviour
         float momentAng = initAng + Ang;
         startend[0] = new Vector3(corner.position.x, corner.position.y, corner.position.z);
         startend[1] = new Vector3(corner.position.x + radius * Mathf.Sin(-Mathf.PI / 2 - momentAng), corner.position.y + radius * Mathf.Cos(-Mathf.PI / 2 + -momentAng), corner.position.z);
+        Vector3 endpoint = new Vector3(corner.position.x + (radius + 1) * Mathf.Sin(-Mathf.PI / 2 - momentAng), corner.position.y + (radius + 1) * Mathf.Cos(-Mathf.PI / 2 + -momentAng), corner.position.z);
         //initiate all points on curve
         Vector3[] pointsP = new Vector3[pointsN];
         for (int i = 0; i < 25; i++)
@@ -139,55 +170,45 @@ public class FixJoinUI : MonoBehaviour
             pointsP[i] = new Vector3(corner.position.x + i*(radius/25) * Mathf.Sin(-Mathf.PI / 2 -momentAng ), corner.position.y + i * (radius / 25) * Mathf.Cos(-Mathf.PI / 2 - momentAng), corner.position.z);
         }
         Moment.SetPositions(pointsP);
-        Moment.SetPosition(pointsN, startend[1]);Moment.material.color = new Color(0f, 0f, 0f, 1f);
+        Moment.SetPosition(25, startend[1]);Moment.material.color = new Color(0f, 0f, 0f, 1f);
+        
         cornerend.position = startend[1];
     }
     private void DrawForce(Vector3[] startend, Transform corner, float Ang, float initAng, float force, LineRenderer Moment)
     {
         float momentAng = initAng + Ang;
-        startend[0] = new Vector3(corner.position.x, corner.position.y, corner.position.z);
-        startend[1] = new Vector3(corner.position.x + force * Mathf.Sin(-Mathf.PI / 2 - momentAng), corner.position.y + force * Mathf.Cos(-Mathf.PI / 2 + -momentAng), corner.position.z);
+        startend[0] = new Vector3(corner.position.x + Mathf.Sign(force)* 2* Mathf.Sin(-Mathf.PI / 2 - momentAng), corner.position.y + Mathf.Sign(force) * 2 * Mathf.Cos(-Mathf.PI / 2 + -momentAng), corner.position.z);
+        startend[1] = new Vector3(startend[0].x + force * Mathf.Sin(-Mathf.PI / 2 - momentAng), startend[0].y+ force * Mathf.Cos(-Mathf.PI / 2 + -momentAng), startend[0].z);
         //initiate all points on curve
         Vector3[] pointsP = new Vector3[pointsN];
         for (int i = 0; i < 25; i++)
         {
-            pointsP[i] = new Vector3(corner.position.x + i * (force / 25) * Mathf.Sin(-Mathf.PI / 2 - momentAng), corner.position.y + i * (force / 25) * Mathf.Cos(-Mathf.PI / 2 - momentAng), corner.position.z);
+            pointsP[i] = new Vector3(startend[0].x  + i * (force / 25) * Mathf.Sin(-Mathf.PI / 2 - momentAng), startend[0].y  + i * (force / 25) * Mathf.Cos(-Mathf.PI / 2 - momentAng), startend[0].z);
         }
         Moment.SetPositions(pointsP);
         Moment.SetPosition(pointsN, startend[1]); Moment.material.color = new Color(0f, 1f, 0f, 1f);
         Vector3 newVector = new Vector3(0, 0, 0);
-        if (Mathf.Sign(force) > 0) { newVector = startend[1] - startend[0]; }
-        else { newVector = startend[0] - startend[1]; }
-        print(newVector);
-        GameObject arrow = Instantiate(myPrefab, startend[0], Quaternion.LookRotation(newVector, Vector3.forward));
-        arrow.transform.parent = this.transform; 
+        //if (Mathf.Sign(force) > 0) { newVector = startend[1] - startend[0]; }
+        // else { newVector = startend[0] - startend[1]; }
+        newVector = startend[0] - startend[1];//newVector = new Vector3(0, 0,newVector.z);// newVector = new Vector3(newVector.x, 0, newVector.z);//
+        GameObject arrow = Moment.transform.Find("Tips(Clone)").gameObject; 
+        arrow.transform.SetPositionAndRotation(startend[0], Quaternion.LookRotation(-newVector, Vector3.forward));
     }
-    private void DrawMoment(Vector3[] startend, Transform corner,float radius, float Ang, float force, LineRenderer Moment) {
-        float momentAng = force;
-        startend[0] = new Vector3(corner.position.x + Mathf.Sign(force) * radius* Mathf.Sin(-Mathf.PI / 2 - Ang), corner.position.y+ Mathf.Sign(force) * radius * Mathf.Cos(-Mathf.PI / 2 - Ang), corner.position.z);
-        startend[1] = new Vector3(corner.position.x + Mathf.Sign(force) * radius * Mathf.Sin(-Mathf.PI / 2 - momentAng - Ang), corner.position.y + Mathf.Sign(force) * radius * Mathf.Cos(-Mathf.PI / 2 + -momentAng - Ang), corner.position.z);
+    private void DrawMoment(Vector3[] startend, Transform corner, float initAng, float Ang, float force, LineRenderer Moment,float radius) {
+        float momentAng = -force;
+        startend[0] = new Vector3(corner.position.x +radius* Mathf.Sin((Ang+initAng)), corner.position.y+radius * Mathf.Cos( (Ang + initAng)), corner.position.z);
+        startend[1] = new Vector3(corner.position.x +radius * Mathf.Sin((Ang + initAng)-momentAng), corner.position.y +radius * Mathf.Cos((Ang + initAng)- momentAng  ), corner.position.z);
         //initiate all points on curve
         Vector3[] pointsP = new Vector3[pointsN];
         for (int i = 0; i < 25; i++)
         {
-            pointsP[i] = new Vector3(corner.position.x + Mathf.Sign(force) * radius * Mathf.Sin(-Mathf.PI / 2 + i * -momentAng / 25 - Ang), corner.position.y + Mathf.Sign(force) * radius * Mathf.Cos(-Mathf.PI / 2 + i * -momentAng / 25 - Ang), corner.position.z);
+            pointsP[i] = new Vector3(corner.position.x + radius * Mathf.Sin( (Ang + initAng)- i * momentAng / 25), corner.position.y + radius * Mathf.Cos( (Ang + initAng)- i *momentAng / 25), corner.position.z);
         }
         Moment.SetPositions(pointsP);
         Moment.SetPosition(pointsN, startend[1]); Moment.material.color = new Color(0f, 1f, 0f, 1f);
-        Vector3 newVector = new Vector3(0, 0, 0);newVector = corner.position - startend[1];
-        //if (Mathf.Sign(force) > 0) {  }
-        //else { newVector = startend[0] - startend[1]; }
-        //print(newVector);
-        GameObject arrow = Instantiate(myPrefab, startend[1], Quaternion.LookRotation(newVector, -Mathf.Sign(momentAng) * corner.forward));
-        arrow.transform.parent = this.transform;
-        //GameObject arrow = Instantiate(myPrefab, startend[1], Quaternion.identity);
-        //arrow.transform.LookAt(corner, -Mathf.Sign(momentAng) * corner.up);
-        //arrow.transform.parent = this.transform;
-        //corner.transform.Find("Tip").transform.position = startend[1];
-        //print(momentAng);
-        //if (momentAng > -1.6f && momentAng < 0f) { corner.transform.Find("Tip").transform.LookAt(corner, -Mathf.Sign(momentAng) * corner.up); }
-        //else { corner.transform.Find("Tip").transform.LookAt(corner, Mathf.Sign(momentAng) * corner.up); }
-
+        Vector3 newVector = new Vector3(0, 0, 0);newVector = corner.position - startend[1];//newVector =new Vector3 (1, 1, -(newVector.x + newVector.y) / newVector.z);
+        GameObject arrow = Moment.transform.Find("Tip(Clone)").gameObject;
+        arrow.transform.SetPositionAndRotation(startend[1], Quaternion.LookRotation(-newVector, -Mathf.Sign(momentAng)*corner.forward));
     }
     // Update is called once per frame
     void Update()

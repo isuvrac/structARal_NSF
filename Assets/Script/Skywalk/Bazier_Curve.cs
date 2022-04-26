@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Bazier_Curve : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class Bazier_Curve : MonoBehaviour
     [SerializeField]
     Transform refP1, refP2, refP3, refP4;
     float ratio;
-
+    [SerializeField]
+    GameObject DeflectionLabel1, DeflectionLabel2, DeflectionLabel3;
+    float deflect1, deflect2, deflect3;
 
     // Start is called before the first frame update
     void Start()
@@ -72,9 +75,11 @@ public class Bazier_Curve : MonoBehaviour
         {
             pointsP1[i] = new Vector3(startend1[0].x + resx * i, startend1[0].y + resy * i, startend1[0].z);
         }
-        pointsP1 = GetDeflection(pointsP1,Mathf.Abs(refP1.position.x - refP1.position.x), Mathf.Abs(refP2.position.x - refP1.position.x), Mathf.Abs(liveloadS.start.x - refP1.position.x), Mathf.Abs(liveloadS.end.x - refP1.position.x), liveloadS.liveload);
+        pointsP1 = GetDeflection(pointsP1,Mathf.Abs(refP1.position.x - refP1.position.x), Mathf.Abs(refP2.position.x - refP1.position.x), Mathf.Abs(liveloadS.start.x - refP1.position.x), 
+            Mathf.Abs(liveloadS.end.x - refP1.position.x), liveloadS.liveload, deflect1,DeflectionLabel1);
         Defline1.SetPositions(pointsP1);
         Defline1.SetPosition(pointsN, startend1[1]);
+        print(deflect1 );
 
         resx = (startend2[1].x - startend2[0].x) / 24;
         resy = (startend2[1].y - startend2[0].y) / 24;
@@ -82,7 +87,8 @@ public class Bazier_Curve : MonoBehaviour
         {
             pointsP2[i] = new Vector3(startend2[0].x + resx * i, startend2[0].y + resy * i, startend2[0].z);
         }
-        pointsP2 = GetDeflection(pointsP2, Mathf.Abs(refP2.position.x - refP1.position.x), Mathf.Abs(refP3.position.x - refP1.position.x), Mathf.Abs(liveloadS.start.x - refP1.position.x), Mathf.Abs(liveloadS.end.x - refP1.position.x), liveloadS.liveload);
+        pointsP2 = GetDeflection(pointsP2, Mathf.Abs(refP2.position.x - refP1.position.x), Mathf.Abs(refP3.position.x - refP1.position.x), Mathf.Abs(liveloadS.start.x - refP1.position.x),
+            Mathf.Abs(liveloadS.end.x - refP1.position.x), liveloadS.liveload, deflect2, DeflectionLabel2);
         Defline2.SetPositions(pointsP2);
         Defline2.SetPosition(pointsN, startend2[1]);
 
@@ -92,12 +98,13 @@ public class Bazier_Curve : MonoBehaviour
         {
             pointsP3[i] = new Vector3(startend3[0].x + resx * i, startend3[0].y + resy * i, startend3[0].z);
         }
-        pointsP3 = GetDeflection(pointsP3, Mathf.Abs(refP3.position.x - refP1.position.x), Mathf.Abs(refP4.position.x - refP1.position.x), Mathf.Abs(liveloadS.start.x - refP1.position.x), Mathf.Abs(liveloadS.end.x - refP1.position.x), liveloadS.liveload);
+        pointsP3 = GetDeflection(pointsP3, Mathf.Abs(refP3.position.x - refP1.position.x), Mathf.Abs(refP4.position.x - refP1.position.x), Mathf.Abs(liveloadS.start.x - refP1.position.x), 
+            Mathf.Abs(liveloadS.end.x - refP1.position.x), liveloadS.liveload, deflect3, DeflectionLabel3);
         Defline3.SetPositions(pointsP3);
         Defline3.SetPosition(pointsN, startend3[1]);
     }
 
-    private Vector3[] GetDeflection(Vector3[] vals, float beamStart, float beamEnd, float loadStart, float loadEnd, float totalLoad) {
+    private Vector3[] GetDeflection(Vector3[] vals, float beamStart, float beamEnd, float loadStart, float loadEnd, float totalLoad, float deflect, GameObject DeflectionLabel) {
 
         float L = (beamEnd - beamStart) * ratio;
         float a = Mathf.Max(0, (loadStart - beamStart) * ratio);
@@ -144,13 +151,16 @@ public class Bazier_Curve : MonoBehaviour
             delta += 1.2f * x * (L3 - 2 * L * x2 + x3);
             //delta /= ratio;
             // Scaling factor. Divide by 12 to convert inches to feet
-           
-            delta *= -3.72063E-10f*200/ratio;//-1.04758E-6;
+            
 
+            delta *= -3.72063E-10f*200/ratio;//-1.04758E-6;
+            if (delta*ratio /200 < deflect) {deflect = delta * ratio / 200;}
+            
             vals[i].y = vals[i].y+delta;
 
         }
-
+        print(deflect);
+            DeflectionLabel.GetComponent<TextMesh>().text = (Mathf.Round(deflect * 1000) / 1000).ToString() + " in";
         return vals;
 
     }

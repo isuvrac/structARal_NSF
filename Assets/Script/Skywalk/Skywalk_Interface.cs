@@ -46,7 +46,7 @@ public class Skywalk_Interface : MonoBehaviour
 
     public void toggleonclick() {
         skywalk.Find(LiveLoad.name).gameObject.SetActive(LiveLoad.isOn);
-        LiveloadDD.value = 0;
+        //LiveloadDD.value = 0;
         liveload = skywalk.Find(LiveLoad.name).gameObject.GetComponent<Liveload>();
         skywalk.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         skywalk.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
@@ -100,7 +100,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(true); Skywalk_Normal.SetActive(true);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
-                toggleonclick();
+                toggleonclick(); //Definitiononclick();
                 break;
             case 1:
                 print("Indoor");
@@ -111,7 +111,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(true);
                 ModelTarget.SetActive(false);
-                toggleonclick();
+                toggleonclick(); //Definitiononclick();
                 break;
             case 2:
                 print("Outdoor");
@@ -122,7 +122,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
-                toggleonclick();
+                toggleonclick(); //Definitiononclick();
                 break;
 
         }

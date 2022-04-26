@@ -74,14 +74,14 @@ public class ForceUpdate : MonoBehaviour
         towerR.positionCount = pointsN + 1;
         towerR.material.color = new Color(0f, 0f, 1f);
 
-        R = Mathf.Abs(refL2.transform.localPosition.x - refR4.transform.localPosition.x) /2;
+        R = Mathf.Abs(refL2.transform.localPosition.x - refR4.transform.localPosition.x);
         print(R);
         pointsM = new Vector3[pointsN];
         startendM = new Vector3[2];
         Moment = new GameObject().AddComponent<LineRenderer>();
         Moment.transform.SetParent(this.transform);
-        Moment.startWidth = R / 4;
-        Moment.endWidth = R / 4;
+        Moment.startWidth = R /8;
+        Moment.endWidth = R /8;
         Moment.positionCount = pointsN + 1;
         Moment.material.color = new Color(0f, 1f, 0f, 1f);
     }

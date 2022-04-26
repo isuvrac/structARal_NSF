@@ -144,13 +144,13 @@ public class PointForceLoad : MonoBehaviour
         updatearrow(PS3, (float)sload3, " K");
         updatearrow(PS4, (float)sload4, " K");
         updatearrow(PS5, (float)sload5, " K");
-        A.text = F1.ToString()+" kip";
-        B.text = F2.ToString() + " kip";
-        C.text = F3.ToString() + " kip";
-        D.text = F4.ToString() + " kip";
-        E.text = F5.ToString() + " kip";
-        F.text = F6.ToString() + " kip";
-        G.text = F7.ToString() + " kip";
+        A.text = F1.ToString()+" kip ";
+        B.text = F2.ToString() + " kip ";
+        C.text = F3.ToString() + " kip ";
+        D.text = F4.ToString() + " kip ";
+        E.text = F5.ToString() + " kip ";
+        F.text = F6.ToString() + " kip ";
+        G.text = F7.ToString() + " kip ";
     }
 
     private void updatearrow( GameObject arrow, float input, string unit) {
