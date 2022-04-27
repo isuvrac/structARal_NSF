@@ -11,7 +11,7 @@ public class CamInterfaceManager : MonoBehaviour
     public Transform Min, Max;
    [SerializeField]
     private GameObject Campanile_Normal, Campanile_Scale_i, Campanile_Scale_m, Mainc, ARc, ImageCanvas, ImageTarget, ModelTarget,InterstructureModel, modelT,WindmodeDD,
-        Seismic, Wind,Deflection, Forcescale, sliderLabel, sliderNumberL, animationT, Spectral, plotSec, definition_o, modeDD, uparrow, downarrow;
+        Seismic, Wind,Deflection, Forcescale, sliderLabel, sliderNumberL, animationT, Spectral, plotSec, definition_o, modeDD, uparrow, downarrow, ScreenshotIndicate;
     [SerializeField]
     ForceUpdate forceUpdate;
     [SerializeField]
@@ -25,7 +25,26 @@ public class CamInterfaceManager : MonoBehaviour
     Transform Campanile;
 
     public void ScreenShotonclick()
-    { ScreenCapture.CaptureScreenshot("Skywalk" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); }
+    { ScreenCapture.CaptureScreenshot("Skywalk" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); StartCoroutine(TakeScreenshotAndSave()); }
+
+    private IEnumerator TakeScreenshotAndSave()
+    {
+
+        yield return new WaitForEndOfFrame();
+
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
+        // Save the screenshot to Gallery/Photos
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "structARal", "ScreenShot.png");
+
+        ScreenshotIndicate.SetActive(true);
+        yield return new WaitForSecondsRealtime(2);
+        ScreenshotIndicate.SetActive(false);
+        // To avoid memory leaks
+        Destroy(ss);
+    }
+
     public void Homeonclick()
     { SceneManager.LoadScene("MainMenue"); }
     public void Definitiononclick()

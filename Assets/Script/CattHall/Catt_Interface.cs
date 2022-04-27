@@ -12,7 +12,7 @@ public class Catt_Interface : MonoBehaviour
     [SerializeField]
     Toggle LiveLoad, DeadLoad, ReactionForce, Wind;
     [SerializeField]
-    GameObject ARc, Mainc, Catt_Normal, Catt_Scale_m, Catt_Scale_i, ImageTarget, ModelTarget, ImageCanvas, Distribution, Points, snowtext,windtext;
+    GameObject ARc, Mainc, Catt_Normal, Catt_Scale_m, Catt_Scale_i, ImageTarget, ModelTarget, ImageCanvas, Distribution, Points, snowtext,windtext, ScreenshotIndicate;
     Transform Catt;
     [SerializeField]
     public Slider WindS, SnowS;
@@ -28,8 +28,27 @@ public class Catt_Interface : MonoBehaviour
         modeDD.value = 0;
         switchMode(); switchForceDP();
     }
-    void ScreenShotonclick()
-    { ScreenCapture.CaptureScreenshot("Town Hall" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); }
+    public void ScreenShotonclick()
+    { ScreenCapture.CaptureScreenshot("Town Hall" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); StartCoroutine(TakeScreenshotAndSave()); }
+
+    private IEnumerator TakeScreenshotAndSave()
+    {
+
+        yield return new WaitForEndOfFrame();
+
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
+        // Save the screenshot to Gallery/Photos
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "structARal", "ScreenShot.png");
+
+        ScreenshotIndicate.SetActive(true);
+        yield return new WaitForSecondsRealtime(2);
+        ScreenshotIndicate.SetActive(false);
+        // To avoid memory leaks
+        Destroy(ss);
+    }
+
     public void Homeonclick()
     { SceneManager.LoadScene("MainMenue"); }
 
@@ -42,10 +61,10 @@ public class Catt_Interface : MonoBehaviour
 
     }
     public void onSliderChange() {
-        windtext.GetComponent<Text>().text = (Mathf.Round(WindS.value * 1500) / 10).ToString() + " mph";
+        windtext.GetComponent<Text>().text = (Mathf.Round(WindS.value * 1500) / 10).ToString() +" mph" ;
         cattWindLoad.targetdisx = cattWindLoad.Min.position.x - (WindS.value * cattWindLoad.bound) * Mathf.Tan(Mathf.PI / 6);
         cattWindLoad.targetdis = cattWindLoad.Min.position.y +(WindS.value * cattWindLoad.bound);
-        snowtext.GetComponent<Text>().text = (Mathf.Round(SnowS.value * 250) / 10).ToString() + " mph";
+        snowtext.GetComponent<Text>().text = (Mathf.Round(SnowS.value * 250) / 10).ToString() + " in";
         cattLiveLoad.targetdis = cattLiveLoad.Min.position.y + (SnowS.value * cattLiveLoad.bound);
         pointForceLoad.upadteForce(SnowS.value*25, WindS.value*150);
     }

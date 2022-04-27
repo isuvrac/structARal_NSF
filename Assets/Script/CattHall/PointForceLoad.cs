@@ -19,8 +19,8 @@ public class PointForceLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Snow_depth = 12.5;
-        Wind_speed = 75;
+        Snow_depth = 0;
+        Wind_speed = 0;
         deadload = 325;
         upadteForce(Snow_depth, Wind_speed);
     }
@@ -107,17 +107,17 @@ public class PointForceLoad : MonoBehaviour
         double[,] AC = matrxMultiply(AI, AT);
        
         c = matrxMultiply(AC, b);
-      
-        double F1 = Mathf.Round((float)c[0, 0]*10)/10;
-        double F2 = Mathf.Round((float)c[1,0] * 10) / 10;
-        double F3 = Mathf.Round((float)c[2, 0] * 10) / 10; 
-        double F4 = Mathf.Round((float)c[3, 0] * 10) / 10; 
-        double F5 = Mathf.Round((float)c[4, 0] * 10) / 10; 
-        double F6 = Mathf.Round((float)c[5, 0]* 10) / 10; 
-        double F7 = Mathf.Round((float)c[6, 0] * 10) / 10; 
-        double R1 = Mathf.Round((float)c[7, 0] * 10) / 10; 
-        double R2 = Mathf.Round((float)c[8, 0] * 10) / 10; 
-        double R3 = Mathf.Round((float)c[9, 0] * 10) / 10;
+
+        float F1 = (float)c[0, 0];
+        float F2 = (float)c[1,0];
+        float F3 = (float)c[2, 0];
+        float F4 = (float)c[3, 0];
+        float F5 = (float)c[4, 0];
+        float F6 = (float)c[5, 0];
+        float F7 = (float)c[6, 0];
+        float R1 = (float)c[7, 0];
+        float R2 = (float)c[8, 0];
+        float R3 = (float)c[9, 0];
 
 
         // Update arrows with calculated forces
@@ -144,13 +144,14 @@ public class PointForceLoad : MonoBehaviour
         updatearrow(PS3, (float)sload3, " K");
         updatearrow(PS4, (float)sload4, " K");
         updatearrow(PS5, (float)sload5, " K");
-        A.text = F1.ToString()+" kip ";
-        B.text = F2.ToString() + " kip ";
-        C.text = F3.ToString() + " kip ";
-        D.text = F4.ToString() + " kip ";
-        E.text = F5.ToString() + " kip ";
-        F.text = F6.ToString() + " kip ";
-        G.text = F7.ToString() + " kip ";
+        
+        A.text = (Mathf.Round(F1 * 10) / 10).ToString()+" kip ";
+        B.text = (Mathf.Round(F2 * 10) / 10).ToString() + " kip ";
+        C.text = (Mathf.Round(F3 * 10) / 10).ToString() + " kip ";
+        D.text = (Mathf.Round(F4 * 10) / 10).ToString() + " kip ";
+        E.text = (Mathf.Round(F5 * 10) / 10).ToString() + " kip ";
+        F.text = (Mathf.Round(F6 * 10) / 10).ToString() + " kip ";
+        G.text = (Mathf.Round(F7 * 10) / 10).ToString() + " kip ";
     }
 
     private void updatearrow( GameObject arrow, float input, string unit) {

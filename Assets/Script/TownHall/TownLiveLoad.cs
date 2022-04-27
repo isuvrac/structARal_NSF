@@ -63,8 +63,8 @@ public class TownLiveLoad : MonoBehaviour
         Vector3 draggingpoint = GetMouseWorldPos() + mOffset;
         applypoint = new Vector3(0, Mathf.Clamp(draggingpoint.y, Min.position.y, Max.position.y), 0);
         Vector3 hdraggingpoint = GetMouseWorldPos() + hOffset;
-        if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), start.y, start.z); }
-        else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), end.y, end.z); }
+        if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, liveloadmiddel.transform.position.x), start.y, start.z); }
+        else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, liveloadmiddel.transform.position.x, initialpointE.x), end.y, end.z); }
         town_ReactionForce.updatereactionforce();
        // updateforce();
     }

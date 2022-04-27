@@ -13,7 +13,7 @@ public class TownHall_Interface : MonoBehaviour
     [SerializeField]
     Toggle LiveLoad, DeadLoad, ReactionForce, Model;
     [SerializeField]
-    GameObject ARc, Mainc, Towwn_Normal, Towwn_Scale_m, Towwn_Scale_i, ImageTarget, ModelTarget, ImageCanvas,liveloadl, liveloadw,Deadload,Reactionload,model;
+    GameObject ARc, Mainc, Towwn_Normal, Towwn_Scale_m, Towwn_Scale_i, ImageTarget, ModelTarget, ImageCanvas,liveloadl, liveloadw,Deadload,Reactionload,model, ScreenshotIndicate;
     Transform Towwn;
     // Start is called before the first frame update
     void Start()
@@ -21,14 +21,33 @@ public class TownHall_Interface : MonoBehaviour
         modeDD.value = 0;
         switchMode();
     }
-    void ScreenShotonclick()
-    { ScreenCapture.CaptureScreenshot("Town Hall" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); }
+     public void ScreenShotonclick()
+    { ScreenCapture.CaptureScreenshot("Town Hall" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); StartCoroutine(TakeScreenshotAndSave()); }
+
+    private IEnumerator TakeScreenshotAndSave()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
+        // Save the screenshot to Gallery/Photos
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "structARal", "ScreenShot.png");
+
+        ScreenshotIndicate.SetActive(true);
+        yield return new WaitForSecondsRealtime(2);
+        ScreenshotIndicate.SetActive(false);
+        // To avoid memory leaks
+        Destroy(ss);
+    }
+
     public void Homeonclick()
     { SceneManager.LoadScene("MainMenue"); }
 
     public void toggleonclick()
     {
         Towwn.Find(LiveLoad.name).gameObject.SetActive(LiveLoad.isOn);
+        Towwn.Find("WindForce").gameObject.SetActive(LiveLoad.isOn);
         Towwn.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         Towwn.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
         Towwn.Find(Model.name).gameObject.SetActive(Model.isOn);

@@ -16,7 +16,7 @@ public class Skywalk_Interface : MonoBehaviour
     [SerializeField]
     Toggle LiveLoad, DeadLoad, ReactionForce, Ruler;
     [SerializeField]
-    GameObject ARc,Mainc, Skywalk_Normal, Skywalk_Scale_m, Skywalk_Scale_i, ImageTarget, ModelTarget,ImageCanvas, definition_o, uparrow, downarrow;
+    GameObject ARc,Mainc, Skywalk_Normal, Skywalk_Scale_m, Skywalk_Scale_i, ImageTarget, ModelTarget,ImageCanvas, definition_o, uparrow, downarrow, ScreenshotIndicate;
     [SerializeField]
     Liveload liveload;
     Transform skywalk;
@@ -32,8 +32,29 @@ public class Skywalk_Interface : MonoBehaviour
         switchMode();
     }
 
-    void ScreenShotonclick()
-    { ScreenCapture.CaptureScreenshot("Skywalk"+System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")+".png"); }
+    public void ScreenShotonclick()
+    { ScreenCapture.CaptureScreenshot("Skywalk"+System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")+".png"); StartCoroutine(TakeScreenshotAndSave()); }
+
+    private IEnumerator TakeScreenshotAndSave()
+    {
+
+        yield return new WaitForEndOfFrame();
+
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
+        // Save the screenshot to Gallery/Photos
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "structARal", "ScreenShot.png");
+
+        ScreenshotIndicate.SetActive(true);
+        yield return new WaitForSecondsRealtime(2);
+        ScreenshotIndicate.SetActive(false);
+        // To avoid memory leaks
+        Destroy(ss);
+    }
+
+
+
     void Homeonclick()
     {SceneManager.LoadScene("MainMenue");  }
     void Definitiononclick()
@@ -68,19 +89,19 @@ public class Skywalk_Interface : MonoBehaviour
             case 1:
                 liveload.applypoint.y = liveload.Max.position.y;
                 liveload.start = liveload.startR.position;
-                liveload.end = liveload.endR.position;
+                liveload.end = liveload.endR.position; 
                 liveload.updateforce();
                 break;
             case 2:
                 liveload.applypoint.y = liveload.Max.position.y;
-                liveload.start = liveload.startR.position;
-                liveload.end = liveload.secondR.position;
+                liveload.start = liveload.thirdR.position;
+                liveload.end = liveload.endR.position;
                 liveload.updateforce();
                 break;
             case 3:
                 liveload.applypoint.y = liveload.Max.position.y;
-                liveload.start = liveload.thirdR.position;
-                liveload.end = liveload.endR.position;
+                liveload.start = liveload.startR.position;
+                liveload.end = liveload.secondR.position;
                 liveload.updateforce();
                 break;
         }

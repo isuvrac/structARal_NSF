@@ -60,8 +60,8 @@ public class Liveload : MonoBehaviour
         Vector3 draggingpoint = GetMouseWorldPos() + mOffset;
         applypoint = new Vector3 (0,Mathf.Clamp(draggingpoint.y, Min.position.y, Max.position.y), 0) ;
         Vector3 hdraggingpoint= GetMouseWorldPos() + hOffset;
-        if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), start.y, start.z); }
-        else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, initialpointE.x), end.y, end.z); }
+        if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, liveloadmiddel.transform.position.x), start.y, start.z); }
+        else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, liveloadmiddel.transform.position.x, initialpointE.x), end.y, end.z); }
         updateforce();
     }
 
@@ -78,9 +78,11 @@ public class Liveload : MonoBehaviour
         liveloadLabel.transform.Find("ForceLabel").gameObject.GetComponent<TextMesh>().text = liveload.ToString()+"k/ft";
 
 
-        Liveloadstart.transform.position = new Vector3 (start.x, initialpointS.y, start.z);
-        liveloadend.transform.position = new Vector3(end.x, initialpointE.y, end.z);
-        liveloadmiddel.transform.position = new Vector3((Liveloadstart.transform.position.x+ liveloadend.transform.position.x)/2, initialpointM.y, end.z);
+        Liveloadstart.transform.position = new Vector3 (start.x, initialpointE.y-Mathf.Abs(initialpointE.y - initialpointS.y) *(Mathf.Abs(start.x-initialpointE.x) / Mathf.Abs(initialpointE.x-initialpointS.x)), start.z);
+        liveloadend.transform.position = new Vector3(end.x, initialpointS.y + Mathf.Abs(initialpointE.y - initialpointS.y) * (Mathf.Abs(end.x - initialpointS.x) / Mathf.Abs(initialpointE.x - initialpointS.x)), end.z);
+        float middlex = (Liveloadstart.transform.position.x + liveloadend.transform.position.x) / 2;
+        liveloadmiddel.transform.position = new Vector3(middlex, 
+            initialpointE.y - Mathf.Abs(initialpointM.y - initialpointE.y) * (Mathf.Abs(middlex - initialpointE.x) / Mathf.Abs(initialpointM.x - initialpointE.x)), end.z);
         
         
         liveloadbar.transform.SetPositionAndRotation(new Vector3(liveloadmiddel.transform.position.x, cube.transform.position.y, liveloadmiddel.transform.position.z), liveloadbar.transform.rotation);
@@ -89,7 +91,7 @@ public class Liveload : MonoBehaviour
 
         //Vector3.Distance(cube.transform.localPosition, cube1.transform.localPosition)/2
 
-        float hight = Mathf.Abs(cube.transform.localPosition.y - cube1.transform.localPosition.y);print(hight);
+        float hight = Mathf.Abs(cube.transform.localPosition.y - liveloadmiddel.transform.localPosition.y);print(hight);
         Liveloadstart.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);
         liveloadend.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);
         liveloadmiddel.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);        
