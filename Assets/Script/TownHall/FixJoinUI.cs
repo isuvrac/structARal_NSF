@@ -51,6 +51,12 @@ public class FixJoinUI : MonoBehaviour
         startendCF2 = new Vector3[2]; //startendArrowCF2 = new Vector3[2];
         startendCM1 = new Vector3[2]; //startendArrowCM1 = new Vector3[2];
         startendCM2 = new Vector3[2]; //startendArrowCM2 = new Vector3[2];
+
+        setupFixed();
+       // updateFixedJoin();
+    }
+
+    public void setupFixed() {
         CornerB1 = new GameObject().AddComponent<LineRenderer>();
         CornerB2 = new GameObject().AddComponent<LineRenderer>();
         CornerC1 = new GameObject().AddComponent<LineRenderer>();
@@ -83,8 +89,7 @@ public class FixJoinUI : MonoBehaviour
         initilizeLines(ForceC2.gameObject, ForceC2); //initilizeArrow(ForceC2.gameObject, ArrowCF2);
         initilizeLines(ForceB1.gameObject, ForceB1); //initilizeArrow(ForceB1.gameObject, ArrowBF1);
         initilizeLines(ForceB2.gameObject, ForceB2); //initilizeArrow(ForceB2.gameObject, ArrowBF2);
-        
-       // updateFixedJoin();
+                                                     
     }
 
     void updateFixedJoin()

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,9 +53,6 @@
     <UnityVersion>2020.3.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Script\Campanile\ForceUpdate.cs" />
     <Compile Include="Assets\Script\Skywalk\Deflection.cs" />
     <Compile Include="Assets\Script\CattHall\CattWindLoad.cs" />
@@ -80,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Vuforia\CampanileTower.xml" />
-    <None Include="Assets\StreamingAssets\Vuforia\CattHall2.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\structARal.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\Skywalk32422_3.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\Skywalk2.xml" />
@@ -88,8 +84,10 @@
     <None Include="Assets\StreamingAssets\Vuforia\CattHall.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\Skywalk3.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\CampanileTower3.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\CattHall2.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk_Copy.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\__2022-02-02_Skywalk.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\TownHall2.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\CampanileTower4.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\CampanileTower5.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\TownHall.xml" />
@@ -284,6 +282,9 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="NativeGallery.Editor">
+      <HintPath>Library\ScriptAssemblies\NativeGallery.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -307,9 +308,6 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="NativeGallery.Editor">
-      <HintPath>Library\ScriptAssemblies\NativeGallery.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\AOT\Newtonsoft.Json.dll</HintPath>
@@ -675,6 +673,10 @@
       <Project>{06E7B106-2743-8143-B6E1-F3B6DDA83538}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
+    <ProjectReference Include="NativeGallery.Runtime.csproj">
+      <Project>{F8CEFD06-3C62-420D-DD10-5CA4A5505A8B}</Project>
+      <Name>NativeGallery.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{C383C5F7-341F-6BC1-E07C-725C70D8427B}</Project>
       <Name>UnityEngine.UI</Name>
@@ -682,10 +684,6 @@
     <ProjectReference Include="VuforiaScripts.csproj">
       <Project>{2F894536-C0D6-2286-2E37-9E740E0D7FE4}</Project>
       <Name>VuforiaScripts</Name>
-    </ProjectReference>
-    <ProjectReference Include="NativeGallery.Runtime.csproj">
-      <Project>{F8CEFD06-3C62-420D-DD10-5CA4A5505A8B}</Project>
-      <Name>NativeGallery.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

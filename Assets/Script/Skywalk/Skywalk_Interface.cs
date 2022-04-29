@@ -63,6 +63,7 @@ public class Skywalk_Interface : MonoBehaviour
         definition_o.SetActive(!definition_o.activeSelf);
         uparrow.SetActive(!definition_o.activeSelf);
         downarrow.SetActive(definition_o.activeSelf);
+        switchLiveload();
     }
 
     public void toggleonclick() {

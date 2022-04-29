@@ -16,11 +16,8 @@ public class Catt_Interface : MonoBehaviour
     Transform Catt;
     [SerializeField]
     public Slider WindS, SnowS;
-    [SerializeField]
     CattLiveLoad cattLiveLoad;
-    [SerializeField]
     CattWindLoad cattWindLoad;
-    [SerializeField]
     PointForceLoad pointForceLoad;
     // Start is called before the first frame update
     void Start()
@@ -54,11 +51,17 @@ public class Catt_Interface : MonoBehaviour
 
     public void toggleonclick()
     {
+        cattLiveLoad = Catt.Find("Distribution").Find(LiveLoad.name).gameObject.GetComponent<CattLiveLoad>();
+        cattWindLoad=Catt.Find("Distribution").Find(Wind.name).gameObject.GetComponent<CattWindLoad>();
+        pointForceLoad = Catt.Find(ReactionForce.name).gameObject.GetComponent<PointForceLoad>();
         Catt.Find("Distribution").Find(LiveLoad.name).gameObject.SetActive(LiveLoad.isOn);
         Catt.Find("Distribution").Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
-        Catt.Find("Distribution").Find(Wind.name).gameObject.SetActive(Wind.isOn);
         Catt.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
-
+        Distribution = Catt.Find("Distribution").gameObject;
+        Points = Catt.Find("PointLoad").gameObject;
+        WindS.value = 0;
+        SnowS.value = 0;
+        switchForceDP();
     }
     public void onSliderChange() {
         windtext.GetComponent<Text>().text = (Mathf.Round(WindS.value * 1500) / 10).ToString() +" mph" ;

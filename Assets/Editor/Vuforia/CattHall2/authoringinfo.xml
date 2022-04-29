@@ -10,6 +10,9 @@
 <EntryPoint name="viewpoint_0000" translation="6.51353 6.22351 9.56044" rotation="AD: 1 0.00483739 0.0218201 155.006" image="" trained="no">
 
 </EntryPoint>
+<EntryPoint name="viewpoint_0001" translation="6.51352 7.03307 8.98164" rotation="AD: 1 0.00584667 0.0218201 150.007" image="" trained="no">
+
+</EntryPoint>
 
 </Assembly>
 

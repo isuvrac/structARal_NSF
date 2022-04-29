@@ -13,8 +13,11 @@ public class TownHall_Interface : MonoBehaviour
     [SerializeField]
     Toggle LiveLoad, DeadLoad, ReactionForce, Model;
     [SerializeField]
-    GameObject ARc, Mainc, Towwn_Normal, Towwn_Scale_m, Towwn_Scale_i, ImageTarget, ModelTarget, ImageCanvas,liveloadl, liveloadw,Deadload,Reactionload,model, ScreenshotIndicate;
+    GameObject ARc, Mainc, Towwn_Normal, Towwn_Scale_m, Towwn_Scale_i, ImageTarget, ModelTarget, ImageCanvas, ScreenshotIndicate;
     Transform Towwn;
+    FixJoinUI fixJoin;
+    TownDeflection townDeflection;
+    Town_ReactionForce town_ReactionForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +54,13 @@ public class TownHall_Interface : MonoBehaviour
         Towwn.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         Towwn.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
         Towwn.Find(Model.name).gameObject.SetActive(Model.isOn);
- 
+        townDeflection = Towwn.Find("Deflection").gameObject.GetComponent<TownDeflection>();
+        fixJoin = Towwn.Find("FixedPoint").gameObject.GetComponent<FixJoinUI>();
+        town_ReactionForce = Towwn.Find(ReactionForce.name).gameObject.GetComponent<Town_ReactionForce>();
+        townDeflection.setupline();
+        fixJoin.setupFixed();
+        town_ReactionForce.updatereactionforce();
+
     }
     public void switchMode()
     {

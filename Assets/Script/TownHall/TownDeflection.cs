@@ -38,7 +38,11 @@ public class TownDeflection : MonoBehaviour
         startendCE = new Vector3[2];
         startendCE[0] = refPC.position; startendCE[1] = refPE.position;
 
-        DeflineAB = new GameObject().AddComponent<LineRenderer>();
+        setupline();
+
+    }
+
+    public void setupline() {DeflineAB = new GameObject().AddComponent<LineRenderer>();
         DeflineCD = new GameObject().AddComponent<LineRenderer>();
         DeflineEF = new GameObject().AddComponent<LineRenderer>();
         DeflineBC = new GameObject().AddComponent<LineRenderer>();
@@ -47,9 +51,7 @@ public class TownDeflection : MonoBehaviour
         initilizeLines(DeflineCD);
         initilizeLines(DeflineEF);
         initilizeLines(DeflineBC);
-        initilizeLines(DeflineCE);
-
-    }
+        initilizeLines(DeflineCE); }
     void initilizeLines(LineRenderer Defline)
     {
         //setup line

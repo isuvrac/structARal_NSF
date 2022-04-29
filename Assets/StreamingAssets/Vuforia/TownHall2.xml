@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="TownHall2" motionHint="static" trackingMode="car"/>
+
+</Tracking>
+
+<Assembly name="TownHall2s_assembly" assemblyId="08cdb95fce9e47099a1344c2cb884e4d">
+<Part name="TownHall2" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="14.6065 8.42574 15.7549" rotation="AD: 0.214121 0.997768 4.90419 179.003" trained="no">
+
+</EntryPoint>
+<EntryPoint name="viewpoint_0001" translation="9.99559 8.70495 19.2386" rotation="AD: -0.451315 0.909592 5.15855 181.734" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>
