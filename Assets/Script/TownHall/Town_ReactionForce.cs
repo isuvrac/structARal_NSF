@@ -63,7 +63,7 @@ public class Town_ReactionForce : MonoBehaviour
     float inputx1;
     float inputx2;
     float R;
-    public float reactionforce1, reactionshear1, reactionmoment1, reactionforce2, reactionshear2, reactionmoment2, reactionforce3, reactionshear3, reactionmoment3;
+    public float reactionforce1, reactionshear1, reactionmoment1, reactionforce2, reactionshear2, reactionmoment2, reactionforce3, reactionshear3, reactionmoment3, scale=1;
     [SerializeField]
     TownWindForce townWindForce;
     [SerializeField]
@@ -83,8 +83,13 @@ public class Town_ReactionForce : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+    public void startup() {
+        //scale = 1f;
+        print("Start");
+        R = scale * Mathf.Abs(ReactionF1.localPosition.x - ReactionF2.localPosition.x) / 5;
         reactionForces_s = new ReactionForce[34];
-        R = Mathf.Abs(ReactionF1.localPosition.x - ReactionF2.localPosition.x)/5;
         print(R);
         //set up lines
         pointsP1 = new Vector3[pointsN];
@@ -98,16 +103,13 @@ public class Town_ReactionForce : MonoBehaviour
         Moment3 = new GameObject().AddComponent<LineRenderer>();
         initilizeLines(Moment1);
         initilizeLines(Moment2);
-        initilizeLines(Moment3);
-        updatereactionforce(); 
-        
-        
+        initilizeLines(Moment3); 
     }
 
     void initilizeLines(LineRenderer Moment) {
         //setup line
         Moment.transform.SetParent(this.transform);
-        Moment.startWidth = R/4;
+        Moment.startWidth =  R /4;
         Moment.endWidth = R / 4;
         Moment.positionCount = pointsN + 1;
         Moment.material.color = new Color(0f, 1f, 0f,1f);
@@ -116,6 +118,7 @@ public class Town_ReactionForce : MonoBehaviour
 
     void Drawlines(Vector3[] startend,Transform reactionM, float momentAng,float radius, LineRenderer Moment)
     {
+        print(startend);
         startend[0] = new Vector3(reactionM.position.x + radius, reactionM.position.y, reactionM.position.z);
         startend[1] = new Vector3(reactionM.position.x + radius*Mathf.Sin(-Mathf.PI/2-momentAng), reactionM.position.y + radius * Mathf.Cos(-Mathf.PI / 2 + -momentAng), reactionM.position.z);
         //initiate all points on curve
@@ -129,8 +132,9 @@ public class Town_ReactionForce : MonoBehaviour
     }
 
     public void updatereactionforce() {
+        
         inputD =3;
-        inputF=townWindForce.WindForce*0.985f;
+        inputF =townWindForce.WindForce*0.985f;
         inputL=townLiveLoad.liveload;
         inputx1= (townLiveLoad.start.x - townLiveLoad.startR.position.x) * (30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));
         inputx2 = (townLiveLoad.end.x - townLiveLoad.startR.position.x)*(30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));

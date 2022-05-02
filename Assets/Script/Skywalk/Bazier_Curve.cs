@@ -18,6 +18,7 @@ public class Bazier_Curve : MonoBehaviour
     [SerializeField]
     GameObject DeflectionLabel1, DeflectionLabel2, DeflectionLabel3;
     float deflect1, deflect2, deflect3;
+    public float weidth =0.2f; 
 
     // Start is called before the first frame update
     void Start()
@@ -42,16 +43,16 @@ public class Bazier_Curve : MonoBehaviour
         //setup line
         Defline1 = new GameObject().AddComponent<LineRenderer>();
         Defline1.transform.SetParent(this.transform);
-        Defline1.startWidth = 1f;
-        Defline1.endWidth = 1f;
+        Defline1.startWidth = 1f* weidth;
+        Defline1.endWidth = 1f * weidth;
         Defline1.positionCount = pointsN + 1;
         Defline1.material.color = new Color(0f, 0f, 1f);
 
         //setup line
         Defline2 = new GameObject().AddComponent<LineRenderer>();
         Defline2.transform.SetParent(this.transform);
-        Defline2.startWidth = 1f;
-        Defline2.endWidth = 1f;
+        Defline2.startWidth = 1f * weidth;
+        Defline2.endWidth = 1f * weidth;
         Defline2.positionCount = pointsN + 1;
         Defline2.material.color = new Color(0f, 0f, 1f);
 
@@ -59,8 +60,8 @@ public class Bazier_Curve : MonoBehaviour
         //setup line
         Defline3 = new GameObject().AddComponent<LineRenderer>();
         Defline3.transform.SetParent(this.transform);
-        Defline3.startWidth = 1f;
-        Defline3.endWidth = 1f;
+        Defline3.startWidth = 1f * weidth;
+        Defline3.endWidth = 1f * weidth;
         Defline3.positionCount = pointsN + 1;
         Defline3.material.color = new Color(0f, 0f, 1f);
 

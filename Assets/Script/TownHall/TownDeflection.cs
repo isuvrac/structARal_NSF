@@ -8,9 +8,12 @@ public class TownDeflection : MonoBehaviour
     private Vector3[] startendAB, startendCD, startendEF, startendBC, startendCE;
     private int pointsN = 8;
     float resx;
-    float resy ;
+    float resy;
     [SerializeField]
     Transform refPA, refPB, refPC, refPD, refPE, refPF;
+    public float scale;
+    //[SerializeField]
+    //Town_ReactionForce town_ReactionForce;
 
     float[] array1 = new float[5] { 0, 1.15550E-05f, -1.37282E-04f, -1.59049E-04f, +5.37344E-05f };
     float[] array2 = new float[5] { 0, +2.13136E-05f, -2.45540E-04f, -1.20251E-04f, +1.94406E-05f };
@@ -23,7 +26,7 @@ public class TownDeflection : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+   public void Startup()
     {
         resx = width/ (pointsN-1);
         resy = height/(pointsN - 1);
@@ -37,8 +40,6 @@ public class TownDeflection : MonoBehaviour
         startendBC[0] = refPB.position; startendBC[1] = refPC.position;
         startendCE = new Vector3[2];
         startendCE[0] = refPC.position; startendCE[1] = refPE.position;
-
-        setupline();
 
     }
 
@@ -56,8 +57,8 @@ public class TownDeflection : MonoBehaviour
     {
         //setup line
         Defline.transform.SetParent(this.transform);
-        Defline.startWidth = Mathf.Abs(refPA.localPosition.x - refPD.localPosition.x) / 20;
-        Defline.endWidth = Mathf.Abs(refPA.localPosition.x - refPD.localPosition.x) / 20;
+        Defline.startWidth = scale* Mathf.Abs(refPA.localPosition.x - refPD.localPosition.x) / 20;
+        Defline.endWidth = scale * Mathf.Abs(refPA.localPosition.x - refPD.localPosition.x) / 20;
         Defline.positionCount = pointsN + 1;
         Defline.material.color = new Color(0f, 0f, 1f, 1f);
     }
@@ -72,7 +73,7 @@ public class TownDeflection : MonoBehaviour
     }
     void DrawVlines(LineRenderer Defline, Vector3[] startend,float L, float delta)
     {
-        float def_scale = 200;
+        float def_scale = scale * 200;
         float[] def = new float[pointsN];
         
         for (int i = 0; i < pointsN; i++)
@@ -106,7 +107,7 @@ public class TownDeflection : MonoBehaviour
         for (int i = 0; i < pointsN; i++)
         {
             print(Def[i]);
-            PointP[i] =new Vector3(startend[0].x+Def[i], startend[0].y+ i*((startend[1].y-startend[0].y)/(pointsN-1)), startend[0].z); ;
+            PointP[i] =new Vector3(startend[0].x+Def[i], startend[0].y+ i*((startend[1].y-startend[0].y)/(pointsN-1)), startend[0].z);
         }
         Defline.SetPositions(PointP);
         Defline.SetPosition(pointsN, startend[1]);
@@ -151,12 +152,12 @@ public class TownDeflection : MonoBehaviour
 
         // Beam BC
         float beam1_factor = 1 + 0.5f * L * (A - B) / 3 + 0.2f * F / 5;
-        beam1_factor *= 200;
+        beam1_factor *= scale * 200;
         Def = evalDeflection(0, zero, beam1_factor, array6, def);
 
         // Beam CE
         float beam2_factor = 1 + 0.5f * L * (C - D) / 3 + 0.18f * F / 5;
-        beam2_factor *= 200;
+        beam2_factor *= scale * 200;
         Def = evalDeflection(0, zero, beam2_factor, array7, def);
 
         Vector3[] PointP = new Vector3[pointsN];

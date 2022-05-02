@@ -11,15 +11,16 @@ public class Skywalk_Interface : MonoBehaviour
     [SerializeField]
     Button ScreenShot, Home, Definition;
     [SerializeField]
-    Dropdown modeDD ;
+    Dropdown modeDD;
     public Dropdown LiveloadDD;
     [SerializeField]
     Toggle LiveLoad, DeadLoad, ReactionForce, Ruler;
     [SerializeField]
-    GameObject ARc,Mainc, Skywalk_Normal, Skywalk_Scale_m, Skywalk_Scale_i, ImageTarget, ModelTarget,ImageCanvas, definition_o, uparrow, downarrow, ScreenshotIndicate;
+    GameObject ARc, Mainc, Skywalk_Normal, Skywalk_Scale_m, Skywalk_Scale_i, ImageTarget, ModelTarget, ImageCanvas, definition_o, uparrow, downarrow, ScreenshotIndicate;
     [SerializeField]
     Liveload liveload;
     Transform skywalk;
+    Bazier_Curve bazier_Curve;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +70,7 @@ public class Skywalk_Interface : MonoBehaviour
     public void toggleonclick() {
         skywalk.Find(LiveLoad.name).gameObject.SetActive(LiveLoad.isOn);
         //LiveloadDD.value = 0;
+        bazier_Curve = skywalk.Find("Deflection").gameObject.GetComponent<Bazier_Curve>();
         liveload = skywalk.Find(LiveLoad.name).gameObject.GetComponent<Liveload>();
         skywalk.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         skywalk.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
@@ -82,18 +84,21 @@ public class Skywalk_Interface : MonoBehaviour
         switch (LiveloadDD.value)
         {
             case 0:
+                
                 liveload.applypoint.y = liveload.Min.position.y;
                 liveload.start = liveload.startR.position;
                 liveload.end = liveload.endR.position;
                 liveload.updateforce();
                 break;
             case 1:
+                
                 liveload.applypoint.y = liveload.Max.position.y;
                 liveload.start = liveload.startR.position;
                 liveload.end = liveload.endR.position; 
                 liveload.updateforce();
                 break;
             case 2:
+                
                 liveload.applypoint.y = liveload.Max.position.y;
                 liveload.start = liveload.thirdR.position;
                 liveload.end = liveload.endR.position;
@@ -113,7 +118,7 @@ public class Skywalk_Interface : MonoBehaviour
 
         switch (modeDD.value) {
             case 0:
-                print("Pre-loaded");
+                print("Pre-loaded"); 
                 skywalk = Skywalk_Normal.transform;
                 Mainc.SetActive(true);
                 ARc.SetActive(false);
@@ -122,7 +127,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(true); Skywalk_Normal.SetActive(true);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
-                toggleonclick(); //Definitiononclick();
+                toggleonclick(); bazier_Curve.weidth = 1f;//Definitiononclick();
                 break;
             case 1:
                 print("Indoor");
@@ -133,7 +138,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(true);
                 ModelTarget.SetActive(false);
-                toggleonclick(); //Definitiononclick();
+                toggleonclick(); bazier_Curve.weidth = 0.5f;//Definitiononclick();
                 break;
             case 2:
                 print("Outdoor");
@@ -144,7 +149,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
-                toggleonclick(); //Definitiononclick();
+                toggleonclick();bazier_Curve.weidth = 0.2f; //Definitiononclick();
                 break;
 
         }

@@ -54,22 +54,30 @@ public class TownHall_Interface : MonoBehaviour
         Towwn.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         Towwn.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
         Towwn.Find(Model.name).gameObject.SetActive(Model.isOn);
+        updateforce();
+    }
+    private void changeScript()
+    {
         townDeflection = Towwn.Find("Deflection").gameObject.GetComponent<TownDeflection>();
         fixJoin = Towwn.Find("FixedPoint").gameObject.GetComponent<FixJoinUI>();
         town_ReactionForce = Towwn.Find(ReactionForce.name).gameObject.GetComponent<Town_ReactionForce>();
+        
+    }
+    private void updateforce()
+    {
         townDeflection.setupline();
         fixJoin.setupFixed();
         town_ReactionForce.updatereactionforce();
-
     }
+
     public void switchMode()
     {
 
         switch (modeDD.value)
         {
             case 0:
+                
                 print("Pre-loaded");
-                Towwn = Towwn_Normal.transform;
                 Mainc.SetActive(true);
                 ARc.SetActive(false);
                 ARc.transform.transform.SetPositionAndRotation(Mainc.transform.position, Mainc.transform.rotation);
@@ -77,28 +85,49 @@ public class TownHall_Interface : MonoBehaviour
                 ImageCanvas.SetActive(true); Towwn_Normal.SetActive(true);
                 Towwn_Scale_i.SetActive(false); ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
+                Towwn = Towwn_Normal.transform; changeScript();
+                town_ReactionForce.scale = 1;
+                townDeflection.scale = 1;
+                fixJoin.scale = 1;
+                town_ReactionForce.startup();
+                townDeflection.Startup();
+                fixJoin.startup();
                 toggleonclick();
                 break;
             case 1:
                 print("Indoor");
+               
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
                 ARc.GetComponent<VuforiaBehaviour>().enabled = true;
-                Towwn = Towwn_Scale_i.transform;
                 ImageCanvas.SetActive(false); Towwn_Normal.SetActive(false);
                 Towwn_Scale_i.SetActive(false); ImageTarget.SetActive(true);
-                ModelTarget.SetActive(false);
+                ModelTarget.SetActive(false); 
+                Towwn = Towwn_Scale_i.transform; changeScript(); 
+                town_ReactionForce.scale = 0.5f;
+                townDeflection.scale = 0.5f;
+                fixJoin.scale = 0.5f;
+                town_ReactionForce.startup();
+                townDeflection.Startup();
+                fixJoin.startup();
                 toggleonclick();
                 break;
             case 2:
-                print("Outdoor");
+                print("Outdoor");                
+                
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
                 ARc.GetComponent<VuforiaBehaviour>().enabled = true;
-                Towwn = Towwn_Scale_m.transform;
                 ImageCanvas.SetActive(false); Towwn_Normal.SetActive(false);
                 Towwn_Scale_i.SetActive(false); ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
+                Towwn = Towwn_Scale_m.transform; changeScript();
+                town_ReactionForce.scale = 0.2f;
+                townDeflection.scale = 0.2f;
+                fixJoin.scale = 0.2f;
+                town_ReactionForce.startup();
+                townDeflection.Startup();
+                fixJoin.startup();
                 toggleonclick();
                 break;
 

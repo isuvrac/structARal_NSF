@@ -39,6 +39,8 @@ public class ForceUpdate : MonoBehaviour
     float R;
     private Vector3[] pointsM;
     private Vector3[] startendM;
+    public float width = 1; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,7 @@ public class ForceUpdate : MonoBehaviour
         def = new float[pointsN];
         // Drawlines(WindVelocity);
     }
-    private void Awake()
+    public void StartUp()
     {
         pointsPL = new Vector3[pointsN];
         pointsPR = new Vector3[pointsN];
@@ -60,8 +62,8 @@ public class ForceUpdate : MonoBehaviour
         //setup line
         towerL = new GameObject().AddComponent<LineRenderer>();
         towerL.transform.SetParent(this.transform);
-        towerL.startWidth = 1f;
-        towerL.endWidth = 1f;
+        towerL.startWidth = 1f* width;
+        towerL.endWidth = 1f * width;
         towerL.positionCount = pointsN + 1;
         towerL.material.color = new Color(0f, 0f, 1f);
 
@@ -69,8 +71,8 @@ public class ForceUpdate : MonoBehaviour
         //setup line
         towerR = new GameObject().AddComponent<LineRenderer>();
         towerR.transform.SetParent(this.transform);
-        towerR.startWidth = 1f;
-        towerR.endWidth = 1f;
+        towerR.startWidth = 1f * width;
+        towerR.endWidth = 1f * width;
         towerR.positionCount = pointsN + 1;
         towerR.material.color = new Color(0f, 0f, 1f);
 
@@ -80,8 +82,8 @@ public class ForceUpdate : MonoBehaviour
         startendM = new Vector3[2];
         Moment = new GameObject().AddComponent<LineRenderer>();
         Moment.transform.SetParent(this.transform);
-        Moment.startWidth = R /8;
-        Moment.endWidth = R /8;
+        Moment.startWidth = R /8 * width;
+        Moment.endWidth = R /8 * width;
         Moment.positionCount = pointsN + 1;
         Moment.material.color = new Color(0f, 1f, 0f, 1f);
     }
