@@ -109,7 +109,7 @@ public class ForceUpdate : MonoBehaviour
         towerR.SetPosition(pointsN, startendR[1]);
         DefLabel = Mathf.Round((def[pointsN - 1] * 12 / 10) * 100) / 1000;
         
-        DrawMomentlines(startendM, refM, moment, R, Moment,ratio);
+        DrawMomentlines(startendM, refM, moment, R * width, Moment,ratio);
     }
 
     void DrawMomentlines(Vector3[] startend, Transform reactionM, float moment, float radius, LineRenderer Moment, float ratio)
