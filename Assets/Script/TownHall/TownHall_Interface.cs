@@ -15,14 +15,19 @@ public class TownHall_Interface : MonoBehaviour
     [SerializeField]
     GameObject ARc, Mainc, Towwn_Normal, Towwn_Scale_m, Towwn_Scale_i, ImageTarget, ModelTarget, ImageCanvas, ScreenshotIndicate;
     Transform Towwn;
+    [SerializeField]
     FixJoinUI fixJoin;
+    [SerializeField]
     TownDeflection townDeflection;
+    [SerializeField]
     Town_ReactionForce town_ReactionForce;
+    bool firststart = false;
     // Start is called before the first frame update
     void Start()
     {
         modeDD.value = 0;
         switchMode();
+        firststart = true;
     }
      public void ScreenShotonclick()
     { ScreenCapture.CaptureScreenshot("Town Hall" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); StartCoroutine(TakeScreenshotAndSave()); }
@@ -54,7 +59,7 @@ public class TownHall_Interface : MonoBehaviour
         Towwn.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         Towwn.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
         Towwn.Find(Model.name).gameObject.SetActive(Model.isOn);
-        updateforce();
+        
     }
     private void changeScript()
     {
@@ -72,7 +77,12 @@ public class TownHall_Interface : MonoBehaviour
 
     public void switchMode()
     {
-
+        if (firststart)
+        {
+            town_ReactionForce.DestroyLines();
+            fixJoin.DestroyLines();
+            townDeflection.DestroyLines();
+        }
         switch (modeDD.value)
         {
             case 0:
@@ -92,7 +102,7 @@ public class TownHall_Interface : MonoBehaviour
                 town_ReactionForce.startup();
                 townDeflection.Startup();
                 fixJoin.startup();
-                toggleonclick();
+                toggleonclick();updateforce();
                 break;
             case 1:
                 print("Indoor");
@@ -110,11 +120,10 @@ public class TownHall_Interface : MonoBehaviour
                 town_ReactionForce.startup();
                 townDeflection.Startup();
                 fixJoin.startup();
-                toggleonclick();
+                toggleonclick(); updateforce();
                 break;
             case 2:
-                print("Outdoor");                
-                
+                print("Outdoor");      
                 Mainc.SetActive(false);
                 ARc.SetActive(true);
                 ARc.GetComponent<VuforiaBehaviour>().enabled = true;
@@ -124,11 +133,11 @@ public class TownHall_Interface : MonoBehaviour
                 Towwn = Towwn_Scale_m.transform; changeScript();
                 town_ReactionForce.scale = 0.2f;
                 townDeflection.scale = 0.2f;
-                fixJoin.scale = 0.2f;
+                fixJoin.scale = 0.1f;
                 town_ReactionForce.startup();
                 townDeflection.Startup();
                 fixJoin.startup();
-                toggleonclick();
+                toggleonclick(); updateforce();
                 break;
 
         }

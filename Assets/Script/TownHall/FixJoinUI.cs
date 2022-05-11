@@ -57,6 +57,40 @@ public class FixJoinUI : MonoBehaviour
        // updateFixedJoin();
     }
 
+    public void DestroyLines() {
+        Destroy(CornerB1.gameObject);
+        Destroy(CornerB2.gameObject);
+        Destroy(CornerC1.gameObject); 
+        Destroy(CornerC2.gameObject); 
+        Destroy(ShearB1.gameObject); 
+        Destroy(ShearB2.gameObject); 
+        Destroy(ForceB1.gameObject); 
+        Destroy(ForceB2.gameObject);
+        Destroy(MomentB1.gameObject); 
+        Destroy(MomentB2.gameObject); 
+        Destroy(ShearC1.gameObject); 
+        Destroy(ShearC2.gameObject); 
+        Destroy(ForceC1.gameObject); 
+        Destroy(ForceC2.gameObject); 
+        Destroy(MomentC1.gameObject); 
+        Destroy(MomentC2.gameObject);
+        if (MomentC2.transform.childCount > 0){
+            Destroy(MomentC1.transform.Find("Tip(Clone)").gameObject);
+            Destroy(MomentC2.transform.Find("Tip(Clone)").gameObject);
+            Destroy(ShearB1.transform.Find("Tips(Clone)").gameObject);
+            Destroy(ShearB2.transform.Find("Tips(Clone)").gameObject);
+            Destroy(ForceB1.transform.Find("Tips(Clone)").gameObject);
+            Destroy(ForceB2.transform.Find("Tips(Clone)").gameObject);
+            Destroy(MomentB1.transform.Find("Tip(Clone)").gameObject);
+            Destroy(MomentB2.transform.Find("Tip(Clone)").gameObject);
+            Destroy(ShearC1.transform.Find("Tips(Clone)").gameObject);
+            Destroy(ShearC2.transform.Find("Tips(Clone)").gameObject);
+            Destroy(ForceC1.transform.Find("Tips(Clone)").gameObject);
+            Destroy(ForceC2.transform.Find("Tips(Clone)").gameObject);
+        }
+        
+    }
+
     public void setupFixed() {
         R = scale * 3;
         CornerB1 = new GameObject().AddComponent<LineRenderer>();
@@ -133,7 +167,7 @@ public class FixJoinUI : MonoBehaviour
         Moment.startWidth = R / 3;
         Moment.endWidth = R / 3;
         Moment.positionCount = pointsN + 1;
-        GameObject arrow= Instantiate(Tips, new Vector3 (0,0,0), Quaternion.identity);
+        GameObject arrow = Instantiate(Tips, new Vector3(0, 0, 0), Quaternion.identity);
         arrow.transform.parent = parent.transform;
     }
     void initilizeCurve(GameObject parent, LineRenderer Moment)

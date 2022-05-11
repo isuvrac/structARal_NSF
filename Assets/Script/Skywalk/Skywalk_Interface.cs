@@ -70,15 +70,25 @@ public class Skywalk_Interface : MonoBehaviour
     public void toggleonclick() {
         skywalk.Find(LiveLoad.name).gameObject.SetActive(LiveLoad.isOn);
         //LiveloadDD.value = 0;
-        bazier_Curve = skywalk.Find("Deflection").gameObject.GetComponent<Bazier_Curve>();
-        liveload = skywalk.Find(LiveLoad.name).gameObject.GetComponent<Liveload>();
         skywalk.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         skywalk.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
         skywalk.Find(Ruler.name).gameObject.SetActive(Ruler.isOn);
+       
         //print(toggle.name);
         //GameObject target= skywalk.Find(toggle.name).gameObject;
         // target.SetActive(!target.activeSelf);
     }
+
+    private void reset( float weidth)
+    {
+        bazier_Curve = skywalk.Find("Deflection").gameObject.GetComponent<Bazier_Curve>();
+        liveload = skywalk.Find(LiveLoad.name).gameObject.GetComponent<Liveload>(); 
+        bazier_Curve.weidth = weidth;
+        bazier_Curve.SetupBazier();
+        LiveloadDD.value = 0;
+        switchLiveload();
+    }
+
     public void switchLiveload()
     {
         switch (LiveloadDD.value)
@@ -127,7 +137,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(true); Skywalk_Normal.SetActive(true);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
-                toggleonclick(); bazier_Curve.weidth = 1f;//Definitiononclick();
+                toggleonclick();  reset(1f);//Definitiononclick();
                 break;
             case 1:
                 print("Indoor");
@@ -138,7 +148,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(true);
                 ModelTarget.SetActive(false);
-                toggleonclick(); bazier_Curve.weidth = 0.5f;//Definitiononclick();
+                toggleonclick();  reset( 0.5f);//Definitiononclick();
                 break;
             case 2:
                 print("Outdoor");
@@ -149,7 +159,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
-                toggleonclick();bazier_Curve.weidth = 0.2f; //Definitiononclick();
+                toggleonclick();reset(0.2f);  //Definitiononclick();
                 break;
 
         }

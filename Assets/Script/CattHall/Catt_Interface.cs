@@ -51,17 +51,13 @@ public class Catt_Interface : MonoBehaviour
 
     public void toggleonclick()
     {
-        cattLiveLoad = Catt.Find("Distribution").Find(LiveLoad.name).gameObject.GetComponent<CattLiveLoad>();
-        cattWindLoad=Catt.Find("Distribution").Find(Wind.name).gameObject.GetComponent<CattWindLoad>();
-        pointForceLoad = Catt.Find(ReactionForce.name).gameObject.GetComponent<PointForceLoad>();
+       
         Catt.Find("Distribution").Find(LiveLoad.name).gameObject.SetActive(LiveLoad.isOn);
         Catt.Find("Distribution").Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
+        Catt.Find("Distribution").Find(Wind.name).gameObject.SetActive(Wind.isOn);
         Catt.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
-        Distribution = Catt.Find("Distribution").gameObject;
-        Points = Catt.Find("PointLoad").gameObject;
-        WindS.value = 0;
-        SnowS.value = 0;
-        switchForceDP();
+        
+       
     }
     public void onSliderChange() {
         windtext.GetComponent<Text>().text = (Mathf.Round(WindS.value * 1500) / 10).ToString() +" mph" ;
@@ -72,7 +68,17 @@ public class Catt_Interface : MonoBehaviour
         pointForceLoad.upadteForce(SnowS.value*25, WindS.value*150);
     }
     //print("here"); cattLiveLoad.changecubeposition(); cattWindLoad.changecubeposition();
-
+    private void reset() { 
+        cattLiveLoad = Catt.Find("Distribution").Find(LiveLoad.name).gameObject.GetComponent<CattLiveLoad>();
+        cattWindLoad=Catt.Find("Distribution").Find(Wind.name).gameObject.GetComponent<CattWindLoad>();
+        pointForceLoad = Catt.Find(ReactionForce.name).gameObject.GetComponent<PointForceLoad>(); 
+        Distribution = Catt.Find("Distribution").gameObject;
+        Points = Catt.Find("PointLoad").gameObject;
+        WindS.value = 0;
+        SnowS.value = 0;
+        onSliderChange();
+        switchForceDP(); 
+    }
     public void switchForceDP() {
         switch (forceDPDD.value) {
             case 0:
@@ -111,7 +117,7 @@ public class Catt_Interface : MonoBehaviour
                 ImageCanvas.SetActive(true); Catt_Normal.SetActive(true);
                 Catt_Scale_i.SetActive(false); ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
-                toggleonclick();
+                toggleonclick(); reset();
                 break;
             case 1:
                 print("Indoor");
@@ -122,7 +128,7 @@ public class Catt_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false); Catt_Normal.SetActive(false);
                 Catt_Scale_i.SetActive(false); ImageTarget.SetActive(true);
                 ModelTarget.SetActive(false);
-                toggleonclick();
+                toggleonclick(); reset();
                 break;
             case 2:
                 print("Outdoor");
@@ -133,7 +139,7 @@ public class Catt_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false); Catt_Normal.SetActive(false);
                 Catt_Scale_i.SetActive(false); ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
-                toggleonclick();
+                toggleonclick(); reset();
                 break;
 
         }

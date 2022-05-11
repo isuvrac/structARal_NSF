@@ -42,8 +42,16 @@ public class TownDeflection : MonoBehaviour
         startendCE[0] = refPC.position; startendCE[1] = refPE.position;
 
     }
-
-    public void setupline() {DeflineAB = new GameObject().AddComponent<LineRenderer>();
+    public void DestroyLines()
+    {
+        Destroy(DeflineAB);
+        Destroy(DeflineCD);
+        Destroy(DeflineEF);
+        Destroy(DeflineBC);
+        Destroy(DeflineCE);
+    }
+        public void setupline() {
+        DeflineAB = new GameObject().AddComponent<LineRenderer>();
         DeflineCD = new GameObject().AddComponent<LineRenderer>();
         DeflineEF = new GameObject().AddComponent<LineRenderer>();
         DeflineBC = new GameObject().AddComponent<LineRenderer>();

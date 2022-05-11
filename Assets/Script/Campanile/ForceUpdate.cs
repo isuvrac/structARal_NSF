@@ -87,6 +87,13 @@ public class ForceUpdate : MonoBehaviour
         Moment.positionCount = pointsN + 1;
         Moment.material.color = new Color(0f, 1f, 0f, 1f);
     }
+
+    public void DestryLines() {
+        Destroy(towerL);
+        Destroy(towerR);
+        Destroy(Moment);
+    }
+
     public void Drawlines(float input, float ratio)
     {
         //initiate all points on curve

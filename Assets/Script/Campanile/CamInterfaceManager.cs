@@ -65,7 +65,7 @@ public class CamInterfaceManager : MonoBehaviour
         animationT.GetComponent<Toggle>().isOn = true;
         WindmodeDD.GetComponent<Dropdown>().value = 0;
 
-        onSliderChange();
+        //onSliderChange();
     }
 
     private void changemode()
@@ -101,8 +101,8 @@ public class CamInterfaceManager : MonoBehaviour
 
     public void switchMode()
     {
-       
 
+        forceUpdate.DestryLines();
         switch (modeDD.GetComponent<Dropdown>().value)
         {
             case 0:

@@ -105,8 +105,13 @@ public class Town_ReactionForce : MonoBehaviour
         initilizeLines(Moment2);
         initilizeLines(Moment3); 
     }
-
-    void initilizeLines(LineRenderer Moment) {
+    public void DestroyLines()
+    {
+        Destroy(Moment1);
+        Destroy(Moment2);
+        Destroy(Moment3);
+    }
+        void initilizeLines(LineRenderer Moment) {
         //setup line
         Moment.transform.SetParent(this.transform);
         Moment.startWidth =  R /4;

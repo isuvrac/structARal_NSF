@@ -21,7 +21,7 @@ public class Bazier_Curve : MonoBehaviour
     public float weidth =0.2f; 
 
     // Start is called before the first frame update
-    void Start()
+    public void SetupBazier()
     {
         ratio = 200 / Mathf.Abs(refP1.position.x - refP4.position.x);
 
