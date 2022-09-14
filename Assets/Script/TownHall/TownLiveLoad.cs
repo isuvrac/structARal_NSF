@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class TownLiveLoad : MonoBehaviour
 {
     // Start is called before the first frame update
-
     [SerializeField]
     private GameObject Liveloadstart, liveloadend, liveloadmiddel, liveloadbar, liveloadLabel, cube, cube1;
     [SerializeField]
-    public Transform startR, endR, Min, Max;// secondR, thirdR;
+    public Transform startR, endR, Min, Max;
     [SerializeField]
     private Vector3 initialpointS, initialpointE, initialpointM, mOffset, hOffset;
     [SerializeField]
@@ -19,13 +18,6 @@ public class TownLiveLoad : MonoBehaviour
     public float liveload = 0.0f;
     [SerializeField]
     Town_ReactionForce town_ReactionForce;
-    //[SerializeField]
-    //private ReactionForce reactionForce;
-    //[SerializeField]
-    //private Skywalk_Interface skywalk_Interface;
-    //[SerializeField]
-    //private Bazier_Curve bazier_Curve;
-
     private float gap;
     private bool movestart;
 
@@ -39,7 +31,6 @@ public class TownLiveLoad : MonoBehaviour
         initialpointM = liveloadmiddel.transform.position;
         gap = liveloadmiddel.transform.Find("Base").gameObject.transform.position.y - initialpointM.y;
         applypoint = Min.position;
-        //updateforce();
     }
 
     private void OnMouseDown()
@@ -47,7 +38,6 @@ public class TownLiveLoad : MonoBehaviour
         mOffset = liveloadbar.transform.position - GetMouseWorldPos();
         if (GetMouseWorldPos().x <= liveloadmiddel.transform.position.x) { movestart = true; hOffset = Liveloadstart.transform.position - GetMouseWorldPos(); }
         else { movestart = false; hOffset = liveloadend.transform.position - GetMouseWorldPos(); }
-        //skywalk_Interface.LiveloadDD.value = 4;
     }
 
     Vector3 GetMouseWorldPos()
@@ -66,15 +56,12 @@ public class TownLiveLoad : MonoBehaviour
         if (movestart) { start = new Vector3(Mathf.Clamp(hdraggingpoint.x, initialpointS.x, liveloadmiddel.transform.position.x), start.y, start.z); }
         else { end = new Vector3(Mathf.Clamp(hdraggingpoint.x, liveloadmiddel.transform.position.x, initialpointE.x), end.y, end.z); }
         town_ReactionForce.updatereactionforce();
-       // updateforce();
     }
-
-    //public void updateforce() { reactionForce.updateReactionForce(); bazier_Curve.Drawlines(); }
 
     // Update is called once per frame
     void Update()
     {
-        cube.transform.position = new Vector3(cube.transform.position.x, applypoint.y, cube.transform.position.y); //cube1.transform.position = new Vector3(0, initialpointM.y,0);
+        cube.transform.position = new Vector3(cube.transform.position.x, applypoint.y, cube.transform.position.y); 
 
         float dis = Mathf.Abs(liveloadbar.transform.position.y - Min.position.y);
         float bounad = Mathf.Abs(Max.position.y - Min.position.y);
@@ -90,8 +77,6 @@ public class TownLiveLoad : MonoBehaviour
         liveloadbar.transform.SetPositionAndRotation(new Vector3(liveloadmiddel.transform.position.x, cube.transform.position.y, liveloadmiddel.transform.position.z), liveloadbar.transform.rotation);
         liveloadbar.transform.localScale = new Vector3(2, Vector3.Distance(Liveloadstart.transform.localPosition, liveloadend.transform.localPosition) / 2, 2);//
         liveloadLabel.transform.position = liveloadbar.transform.position;
-
-        //Vector3.Distance(cube.transform.localPosition, cube1.transform.localPosition)/2
 
         float hight = Mathf.Abs(cube.transform.localPosition.y - cube1.transform.localPosition.y); 
         Liveloadstart.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);

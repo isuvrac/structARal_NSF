@@ -7,7 +7,7 @@ public class CattWindLoad : MonoBehaviour
     [SerializeField]
     private GameObject Liveloadstart, liveloadend, liveloadmiddel, liveloadbar, liveloadLabel, cube, cube1;
     [SerializeField]
-    public Transform Min, Max;// secondR, thirdR;
+    public Transform Min, Max;
     [SerializeField]
     private Vector3 mOffset;
     [SerializeField]
@@ -49,22 +49,16 @@ public class CattWindLoad : MonoBehaviour
         catt_Interface.WindS.value = (targetdis - Min.position.y) / bound;
         pointForceLoad.upadteForce(cattLiveLoad.snowliveload, windload); 
     }
-    public void changecubeposition() { }// pointForceLoad.upadteForce(); applypoint = new Vector3( Min.position.x-(catt_Interface.WindS.value * bound) * Mathf.Sin(Mathf.PI / 6), catt_Interface.WindS.value * bound + Min.position.y, 0); }
     // Update is called once per frame
     void Update()
     {
-        cube.transform.position = new Vector3(targetdisx, targetdis, cube.transform.position.z); //cube1.transform.position = new Vector3(0, initialpointM.y,0);
-
+        cube.transform.position = new Vector3(targetdisx, targetdis, cube.transform.position.z);
         float dis = Mathf.Abs(liveloadbar.transform.position.y - Min.position.y);
-        
         windload = Mathf.Round(Mathf.Clamp(dis * 150f / bound, 0, 150) * 10) / 10;
         float windloadlabel = Mathf.Round(windload * 0.02f)/10;
         liveloadLabel.transform.Find("ForceLabel").gameObject.GetComponent<TextMesh>().text = windloadlabel.ToString() + "k/ft";
         liveloadbar.transform.SetPositionAndRotation(new Vector3(cube.transform.position.x, cube.transform.position.y, liveloadmiddel.transform.position.z), liveloadbar.transform.rotation);
         liveloadLabel.transform.position = liveloadbar.transform.position;
-
-        //Vector3.Distance(cube.transform.localPosition, cube1.transform.localPosition)/2
-
         float hight = Mathf.Abs(cube.transform.localPosition.y - cube1.transform.localPosition.y) /(Mathf.Cos(Mathf.PI/6));
         Liveloadstart.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);
         liveloadend.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);

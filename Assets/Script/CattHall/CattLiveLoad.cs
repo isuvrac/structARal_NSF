@@ -9,7 +9,7 @@ public class CattLiveLoad : MonoBehaviour
     [SerializeField]
     private GameObject Liveloadstart, liveloadend,liveloadmiddel, liveloadbar, liveloadLabel, cube, cube1;
     [SerializeField]
-    public Transform  Min, Max;// secondR, thirdR;
+    public Transform  Min, Max;
     [SerializeField]
     private Vector3  mOffset, hOffset;
     [SerializeField]
@@ -33,8 +33,6 @@ public class CattLiveLoad : MonoBehaviour
     private void OnMouseDown()
     {
         mOffset = liveloadbar.transform.position - GetMouseWorldPos();
-       
-        //skywalk_Interface.LiveloadDD.value = 4;
     }
 
     Vector3 GetMouseWorldPos()
@@ -54,16 +52,10 @@ public class CattLiveLoad : MonoBehaviour
         pointForceLoad.upadteForce(snowliveload, CattWindLoad.windload);
     }
 
-   // public void changecubeposition() { pointForceLoad.upadteForce();applypoint = new Vector3(0, catt_Interface.SnowS.value * bound + Min.position.y ,0); }
-    //public void updateforce() { reactionForce.updateReactionForce(); bazier_Curve.Drawlines(); }
-
     // Update is called once per frame
     void Update()
     {
-        cube.transform.position = new Vector3(cube.transform.position.x, targetdis, cube.transform.position.y); //cube1.transform.position = new Vector3(0, initialpointM.y,0);
-
-        
-
+        cube.transform.position = new Vector3(cube.transform.position.x, targetdis, cube.transform.position.y); 
         float dis = Mathf.Abs(liveloadbar.transform.position.y - Min.position.y);
         snowliveload = Mathf.Round(Mathf.Clamp(dis * 25f / bound, 0, 25f) * 10) / 10;
         float livelabel = Mathf.Round(snowliveload * 0.16f)/10;
@@ -71,8 +63,6 @@ public class CattLiveLoad : MonoBehaviour
         liveloadbar.transform.SetPositionAndRotation(new Vector3(liveloadmiddel.transform.position.x, cube.transform.position.y, liveloadmiddel.transform.position.z), liveloadbar.transform.rotation);
         liveloadLabel.transform.position = liveloadbar.transform.position;
 
-        //Vector3.Distance(cube.transform.localPosition, cube1.transform.localPosition)/2
-        
         float hight = Mathf.Abs(cube.transform.localPosition.y - cube1.transform.localPosition.y);
         Liveloadstart.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);
         liveloadend.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);

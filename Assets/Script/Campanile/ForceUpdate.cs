@@ -88,12 +88,12 @@ public class ForceUpdate : MonoBehaviour
         Moment.material.color = new Color(0f, 1f, 0f, 1f);
     }
 
+    //DrawLines
     public void DestryLines() {
         Destroy(towerL);
         Destroy(towerR);
         Destroy(Moment);
     }
-
     public void Drawlines(float input, float ratio)
     {
         //initiate all points on curve
@@ -118,7 +118,6 @@ public class ForceUpdate : MonoBehaviour
         
         DrawMomentlines(startendM, refM, moment, R * width, Moment,ratio);
     }
-
     void DrawMomentlines(Vector3[] startend, Transform reactionM, float moment, float radius, LineRenderer Moment, float ratio)
     {
         float momentAng = moment / ratio;
@@ -137,8 +136,6 @@ public class ForceUpdate : MonoBehaviour
         if (momentAng > -1.6f && momentAng < 0f) { reactionM.transform.Find("Tip").transform.LookAt(reactionM, -Mathf.Sign(momentAng) * reactionM.up); }
         else { reactionM.transform.Find("Tip").transform.LookAt(reactionM, Mathf.Sign(momentAng) * reactionM.up); }
     }
-
-
     public void DrawAnimatedLine()
     {
         float resy = (startendL[1].y - startendL[0].y) / 24;
@@ -175,6 +172,8 @@ public class ForceUpdate : MonoBehaviour
         }
         
     }
+
+    //Calculation
     float[] calculateSeismic(float input)
     {
 
@@ -251,12 +250,6 @@ public class ForceUpdate : MonoBehaviour
             {
                 defl_sum += (3 * x - f4_h) * 1326.11f * F4;
             }
-            //        if (x < 109.54) {
-            //            defl_sum += (328.62 - x) * F5 * x2 / 6;
-            //        }
-            //        else {
-            //            defl_sum += (3*x - 109.54) * 1999.84 * F5;
-            //        }
             float defl_ft = 1000 * defl_sum / (MOD_ELASTICITY * MOM_OF_INERTIA);
             def[i] = defl_ft * 10;
         }
@@ -265,7 +258,6 @@ public class ForceUpdate : MonoBehaviour
 
 
     }
-
     float[] calculateWindForce(float velocity)
     {
 
@@ -323,7 +315,6 @@ public class ForceUpdate : MonoBehaviour
 
         return def;
     }
-
     void calculatePressure(float velocity)
     {
 

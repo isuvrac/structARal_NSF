@@ -7,7 +7,6 @@ using Vuforia;
 
 public class TownHall_Interface : MonoBehaviour
 {
-   
     [SerializeField]
     Dropdown modeDD;
     [SerializeField]
@@ -22,6 +21,7 @@ public class TownHall_Interface : MonoBehaviour
     [SerializeField]
     Town_ReactionForce town_ReactionForce;
     bool firststart = false;
+
     // Start is called before the first frame update
     void Start()
     {

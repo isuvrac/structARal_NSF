@@ -14,10 +14,7 @@ public class FixJoinUI : MonoBehaviour
     public Material transMat;
     Vector3[] startendBS1, startendBS2, startendBF1, startendBF2, startendBM1, startendBM2, startendCS1, startendCS2, startendCF1, startendCF2, startendCM1,
         startendCM2, startendB1,startendB2, startendC1, startendC2;
-    //Vector3[] startendArrowBS1, startendArrowBS2, startendArrowBF1, startendArrowBF2, startendArrowBM1, startendArrowBM2, startendArrowCS1,
-      //  startendArrowCS2, startendArrowCF1, startendArrowCF2, startendArrowCM1, startendArrowCM2;
     LineRenderer ShearB1, ShearB2, ForceB1, ForceB2, MomentB1, MomentB2, ShearC1, ShearC2, ForceC1, ForceC2, MomentC1, MomentC2, CornerB1, CornerB2, CornerC1, CornerC2;
-    //LineRenderer ArrowBS1, ArrowBS2, ArrowBF1, ArrowBF2, ArrowBM1, ArrowBM2, ArrowCS1, ArrowCS2, ArrowCF1, ArrowCF2, ArrowCM1, ArrowCM2;
     float R;
     int pointsN=25;
     [SerializeField]
@@ -35,26 +32,23 @@ public class FixJoinUI : MonoBehaviour
     
     public void startup()
     {
-        //scale = 1f;
         //set up lines
         startendB1 = new Vector3[2];
         startendB2 = new Vector3[2];
         startendC1 = new Vector3[2];
         startendC2 = new Vector3[2];
-        startendBS1 = new Vector3[2]; //startendArrowBS1 = new Vector3[2];
-        startendBS2 = new Vector3[2]; //startendArrowBS2 = new Vector3[2];
-        startendBF1 = new Vector3[2]; //startendArrowBF1 = new Vector3[2];
-        startendBF2 = new Vector3[2]; //startendArrowBF2 = new Vector3[2];
-        startendBM1 = new Vector3[2]; //startendArrowBM1 = new Vector3[2];
-        startendBM2 = new Vector3[2]; //startendArrowBM2 = new Vector3[2];
-        startendCS1 = new Vector3[2]; //startendArrowCS1 = new Vector3[2];
-        startendCS2 = new Vector3[2]; //startendArrowCS2 = new Vector3[2];
-        startendCF1 = new Vector3[2];// startendArrowCF1 = new Vector3[2];
-        startendCF2 = new Vector3[2]; //startendArrowCF2 = new Vector3[2];
-        startendCM1 = new Vector3[2]; //startendArrowCM1 = new Vector3[2];
-        startendCM2 = new Vector3[2]; //startendArrowCM2 = new Vector3[2];
-        //setupFixed();
-       // updateFixedJoin();
+        startendBS1 = new Vector3[2]; 
+        startendBS2 = new Vector3[2];
+        startendBF1 = new Vector3[2]; 
+        startendBF2 = new Vector3[2]; 
+        startendBM1 = new Vector3[2];
+        startendBM2 = new Vector3[2]; 
+        startendCS1 = new Vector3[2];
+        startendCS2 = new Vector3[2]; 
+        startendCF1 = new Vector3[2];
+        startendCF2 = new Vector3[2];
+        startendCM1 = new Vector3[2]; 
+        startendCM2 = new Vector3[2]; 
     }
 
     public void DestroyLines() {
@@ -97,34 +91,34 @@ public class FixJoinUI : MonoBehaviour
         CornerB2 = new GameObject().AddComponent<LineRenderer>();
         CornerC1 = new GameObject().AddComponent<LineRenderer>();
         CornerC2 = new GameObject().AddComponent<LineRenderer>();
-        ShearB1 = new GameObject().AddComponent<LineRenderer>(); //ArrowBS1 = new GameObject().AddComponent<LineRenderer>();
-        ShearB2 = new GameObject().AddComponent<LineRenderer>(); //ArrowBS2 = new GameObject().AddComponent<LineRenderer>();
-        ForceB1 = new GameObject().AddComponent<LineRenderer>(); //ArrowBF1 = new GameObject().AddComponent<LineRenderer>();
-        ForceB2 = new GameObject().AddComponent<LineRenderer>(); //ArrowBF2 = new GameObject().AddComponent<LineRenderer>();
-        MomentB1 = new GameObject().AddComponent<LineRenderer>();// ArrowBM1 = new GameObject().AddComponent<LineRenderer>();
-        MomentB2 = new GameObject().AddComponent<LineRenderer>();// ArrowBM2 = new GameObject().AddComponent<LineRenderer>();
-        ShearC1 = new GameObject().AddComponent<LineRenderer>(); //ArrowCS1 = new GameObject().AddComponent<LineRenderer>();
-        ShearC2 = new GameObject().AddComponent<LineRenderer>(); //ArrowCS2 = new GameObject().AddComponent<LineRenderer>();
-        ForceC1 = new GameObject().AddComponent<LineRenderer>(); //ArrowCF1 = new GameObject().AddComponent<LineRenderer>();
-        ForceC2 = new GameObject().AddComponent<LineRenderer>();// ArrowCF2 = new GameObject().AddComponent<LineRenderer>();
-        MomentC1 = new GameObject().AddComponent<LineRenderer>(); //ArrowCM1 = new GameObject().AddComponent<LineRenderer>();
-        MomentC2 = new GameObject().AddComponent<LineRenderer>(); //ArrowCM2 = new GameObject().AddComponent<LineRenderer>();
+        ShearB1 = new GameObject().AddComponent<LineRenderer>(); 
+        ShearB2 = new GameObject().AddComponent<LineRenderer>(); 
+        ForceB1 = new GameObject().AddComponent<LineRenderer>(); 
+        ForceB2 = new GameObject().AddComponent<LineRenderer>(); 
+        MomentB1 = new GameObject().AddComponent<LineRenderer>();
+        MomentB2 = new GameObject().AddComponent<LineRenderer>();
+        ShearC1 = new GameObject().AddComponent<LineRenderer>(); 
+        ShearC2 = new GameObject().AddComponent<LineRenderer>();
+        ForceC1 = new GameObject().AddComponent<LineRenderer>();
+        ForceC2 = new GameObject().AddComponent<LineRenderer>();
+        MomentC1 = new GameObject().AddComponent<LineRenderer>(); 
+        MomentC2 = new GameObject().AddComponent<LineRenderer>(); 
         initilizeCorner(CornerB1);
         initilizeCorner(CornerB2);
         initilizeCorner(CornerC1);
         initilizeCorner(CornerC2);
-        initilizeCurve(MomentB1.gameObject,MomentB1); //initilizeArrow(MomentB1.gameObject, ArrowBM1);
-        initilizeCurve(MomentB2.gameObject,MomentB2); //initilizeArrow(MomentB2.gameObject, ArrowBM2);
-        initilizeCurve(MomentC1.gameObject, MomentC1); //initilizeArrow(MomentC1.gameObject, ArrowCM1);
-        initilizeCurve(MomentC2.gameObject, MomentC2); //initilizeArrow(MomentC2.gameObject, ArrowCM2);
-        initilizeLines(ShearC1.gameObject, ShearC1); //initilizeArrow(ShearC1.gameObject, ArrowCS1);
-        initilizeLines(ShearC2.gameObject, ShearC2); //initilizeArrow(ShearC2.gameObject, ArrowCS2);
-        initilizeLines(ShearB2.gameObject, ShearB2); //initilizeArrow(ShearB2.gameObject, ArrowBS1);
-        initilizeLines(ShearB1.gameObject, ShearB1); //initilizeArrow(ShearB1.gameObject, ArrowBS2);
-        initilizeLines(ForceC1.gameObject, ForceC1); //initilizeArrow(ForceC1.gameObject, ArrowCF1);
-        initilizeLines(ForceC2.gameObject, ForceC2); //initilizeArrow(ForceC2.gameObject, ArrowCF2);
-        initilizeLines(ForceB1.gameObject, ForceB1); //initilizeArrow(ForceB1.gameObject, ArrowBF1);
-        initilizeLines(ForceB2.gameObject, ForceB2); //initilizeArrow(ForceB2.gameObject, ArrowBF2);
+        initilizeCurve(MomentB1.gameObject,MomentB1); 
+        initilizeCurve(MomentB2.gameObject,MomentB2); 
+        initilizeCurve(MomentC1.gameObject, MomentC1); 
+        initilizeCurve(MomentC2.gameObject, MomentC2); 
+        initilizeLines(ShearC1.gameObject, ShearC1);
+        initilizeLines(ShearC2.gameObject, ShearC2); 
+        initilizeLines(ShearB2.gameObject, ShearB2); 
+        initilizeLines(ShearB1.gameObject, ShearB1);
+        initilizeLines(ForceC1.gameObject, ForceC1); 
+        initilizeLines(ForceC2.gameObject, ForceC2);
+        initilizeLines(ForceB1.gameObject, ForceB1); 
+        initilizeLines(ForceB2.gameObject, ForceB2); 
                                                      
     }
 
@@ -178,21 +172,11 @@ public class FixJoinUI : MonoBehaviour
         Moment.startWidth = R / 3;
         Moment.endWidth = R /3;
         Moment.positionCount = pointsN + 1;
-        //print(Moment.transform.name);
         GameObject arrow = Instantiate(Tip, new Vector3(0, 0, 0), Quaternion.identity);
         arrow.transform.parent = parent.transform;
     }
   
-   /* private void DrawArrow(Vector3[] startend, float Ang, float force , LineRenderer Arrow) {
-        float momentAng = force;
-        startend[0] = new Vector3(Arrow.gameObject.transform.position.x , Arrow.gameObject.transform.position.y , Arrow.gameObject.transform.position.z);
-        startend[1] = new Vector3(Arrow.gameObject.transform.position.x + Mathf.Sign(force) * 3 * Mathf.Sin(-Mathf.PI / 2 - momentAng - Ang), Arrow.gameObject.transform.position.y + Mathf.Sign(force) * 3 * Mathf.Cos(-Mathf.PI / 2 + -momentAng - Ang), Arrow.gameObject.transform.position.z);
-        Vector3[] pointsP = new Vector3[pointsN];
-        for (int i = 0; i < 25; i++)
-        {
-            pointsP[i] = new Vector3(corner.position.x + Mathf.Sign(force) * 3 * Mathf.Sin(-Mathf.PI / 2 + i * -momentAng / 25 - Ang), corner.position.y + Mathf.Sign(force) * radius * Mathf.Cos(-Mathf.PI / 2 + i * -momentAng / 25 - Ang), corner.position.z);
-        }
-    }*/
+
     private void DrawCorner(Vector3[] startend, Transform corner, float Ang, float initAng, float radius, LineRenderer Moment, Transform cornerend)
     {
         float momentAng = initAng + Ang;
@@ -226,9 +210,7 @@ public class FixJoinUI : MonoBehaviour
         Moment.SetPositions(pointsP);
         Moment.SetPosition(pointsN, startend[1]);Moment.material = transMat; Moment.material.color = new Color(0f, 1f, 0f, 1f); 
         Vector3 newVector = new Vector3(0, 0, 0);
-        //if (Mathf.Sign(force) > 0) { newVector = startend[1] - startend[0]; }
-        // else { newVector = startend[0] - startend[1]; }
-        newVector = startend[0] - startend[1];//newVector = new Vector3(0, 0,newVector.z);// newVector = new Vector3(newVector.x, 0, newVector.z);//
+        newVector = startend[0] - startend[1];
         GameObject arrow = Moment.transform.Find("Tips(Clone)").gameObject;
         arrow.transform.localScale = new Vector3(scale, scale, scale);
         arrow.transform.Find("Tip").gameObject.GetComponent<LineRenderer>().SetWidth(3 * scale, 0 * scale);
@@ -246,7 +228,7 @@ public class FixJoinUI : MonoBehaviour
         }
         Moment.SetPositions(pointsP);
         Moment.SetPosition(pointsN, startend[1]); Moment.material = transMat; Moment.material.color = new Color(0f, 1f, 0f, 1f);
-        Vector3 newVector = new Vector3(0, 0, 0);newVector = corner.position - startend[1];//newVector =new Vector3 (1, 1, -(newVector.x + newVector.y) / newVector.z);
+        Vector3 newVector = new Vector3(0, 0, 0);newVector = corner.position - startend[1];
         GameObject arrow = Moment.transform.Find("Tip(Clone)").gameObject;
         arrow.transform.localScale = new Vector3(scale, scale ,scale);
         arrow.transform.Find("Tip").gameObject.GetComponent<LineRenderer>().SetWidth(3 * scale, 0 * scale);

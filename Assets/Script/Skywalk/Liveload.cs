@@ -89,8 +89,6 @@ public class Liveload : MonoBehaviour
         liveloadbar.transform.localScale = new Vector3(2,Vector3.Distance(Liveloadstart.transform.localPosition, liveloadend.transform.localPosition) / 2 ,2);//
         liveloadLabel.transform.position = liveloadbar.transform.position;
 
-        //Vector3.Distance(cube.transform.localPosition, cube1.transform.localPosition)/2
-
         float hight = Mathf.Abs(cube.transform.localPosition.y - liveloadmiddel.transform.localPosition.y);print(hight);
         Liveloadstart.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);
         liveloadend.transform.Find("Base").gameObject.transform.localScale = new Vector3(10, hight, 10);

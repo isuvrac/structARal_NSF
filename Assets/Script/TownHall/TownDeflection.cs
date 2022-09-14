@@ -12,9 +12,6 @@ public class TownDeflection : MonoBehaviour
     [SerializeField]
     Transform refPA, refPB, refPC, refPD, refPE, refPF;
     public float scale;
-    //[SerializeField]
-    //Town_ReactionForce town_ReactionForce;
-
     float[] array1 = new float[5] { 0, 1.15550E-05f, -1.37282E-04f, -1.59049E-04f, +5.37344E-05f };
     float[] array2 = new float[5] { 0, +2.13136E-05f, -2.45540E-04f, -1.20251E-04f, +1.94406E-05f };
     float[] array3 = new float[5] { 0, -6.30189E-06f, +7.84770E-05f, +1.09172E-04f, -4.33148E-05f };
@@ -23,7 +20,6 @@ public class TownDeflection : MonoBehaviour
     float[] array6 = new float[5] { -0.00000111121f, +0.0000290842f, -0.0000383479f, -0.00230318f, -0.0000111888f };
     float[] array7 = new float[5] { -0.00000107914f, +0.0000437637f, -0.000420113f, -0.000158754f, -0.0000118881f };
     float width = 16.67f;float height = 12;
-
 
     // Start is called before the first frame update
    public void Startup()
@@ -88,7 +84,6 @@ public class TownDeflection : MonoBehaviour
         {
             def[i] = resy * i;
         }
-        //def= updateDef(def, x1,  x2,  L, F, delta, 200);
         float[] zero = new float[5] { 0, 0, 0, 0, 0 };
         float[] Def = new float[pointsN];
         //beam AB
@@ -142,7 +137,7 @@ public class TownDeflection : MonoBehaviour
                 D = (width - x1) / width;
             }
             else
-            { // x2 <= width
+            {
               // Case 2
                 A = (x2 - x1) / width;
                 B = 0;
@@ -151,7 +146,7 @@ public class TownDeflection : MonoBehaviour
             }
         }
         else
-        { // x1 > width && x2 > width
+        {
             A = 0;
             B = (x2 - x1) / width;
             C = (x2 - x1) / width;
@@ -219,7 +214,7 @@ public class TownDeflection : MonoBehaviour
                 D = (width - x1) / width;
             }
             else
-            { // x2 <= width
+            { 
               // Case 2
                 A = (x2 - x1) / width;
                 B = 0;
@@ -228,7 +223,7 @@ public class TownDeflection : MonoBehaviour
             }
         }
         else
-        { // x1 > width && x2 > width
+        { 
             A = 0;
             B = (x2 - x1) / width;
             C = (x2 - x1) / width;

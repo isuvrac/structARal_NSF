@@ -86,7 +86,6 @@ public class Town_ReactionForce : MonoBehaviour
         
     }
     public void startup() {
-        //scale = 1f;
         print("Start");
         R = scale * Mathf.Abs(ReactionF1.localPosition.x - ReactionF2.localPosition.x) / 5;
         reactionForces_s = new ReactionForce[34];
@@ -144,7 +143,6 @@ public class Town_ReactionForce : MonoBehaviour
         inputx1= (townLiveLoad.start.x - townLiveLoad.startR.position.x) * (30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));
         inputx2 = (townLiveLoad.end.x - townLiveLoad.startR.position.x)*(30/(townLiveLoad.endR.position.x-townLiveLoad.startR.position.x));
         calculateForces(inputL, inputD, inputF, inputx1, inputx2);
-        //calculateForces(2.5f, 3, 0, 0, 30);
         reactionforce1 = Mathf.Round(reactionForces.F_AB*10)/10;
         reactionforce2 = Mathf.Round(reactionForces.F_DC * 10) / 10;
         reactionforce3 = Mathf.Round(reactionForces.F_FE * 10) / 10;
@@ -275,8 +273,7 @@ public class Town_ReactionForce : MonoBehaviour
         b[2, 0] = -MF_EC;
         b[3, 0] = F;
         Matrix4x4 x = (A.transpose*A).inverse*A.transpose * b;
-         //bool has_solution = cv::solve(A, b, x);
-         //assert(has_solution);
+       
          float theta_B = x[0,0];
          float theta_C = x[1,0];
          float theta_E = x[2,0];

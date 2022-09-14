@@ -28,7 +28,6 @@ public class Skywalk_Interface : MonoBehaviour
         ScreenShot.onClick.AddListener(ScreenShotonclick);
         Home.onClick.AddListener(Homeonclick);
         Definition.onClick.AddListener(Definitiononclick);
-        //skywalk = Skywalk_Normal.transform;
         modeDD.value = 0;
         switchMode();
     }
@@ -40,7 +39,6 @@ public class Skywalk_Interface : MonoBehaviour
     {
 
         yield return new WaitForEndOfFrame();
-
         Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         ss.Apply();
@@ -69,14 +67,9 @@ public class Skywalk_Interface : MonoBehaviour
 
     public void toggleonclick() {
         skywalk.Find(LiveLoad.name).gameObject.SetActive(LiveLoad.isOn);
-        //LiveloadDD.value = 0;
         skywalk.Find(DeadLoad.name).gameObject.SetActive(DeadLoad.isOn);
         skywalk.Find(ReactionForce.name).gameObject.SetActive(ReactionForce.isOn);
         skywalk.Find(Ruler.name).gameObject.SetActive(Ruler.isOn);
-       
-        //print(toggle.name);
-        //GameObject target= skywalk.Find(toggle.name).gameObject;
-        // target.SetActive(!target.activeSelf);
     }
 
     private void reset( float weidth)
@@ -137,7 +130,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(true); Skywalk_Normal.SetActive(true);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(false);
-                toggleonclick();  reset(1f);//Definitiononclick();
+                toggleonclick();  reset(1f);
                 break;
             case 1:
                 print("Indoor");
@@ -148,7 +141,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(true);
                 ModelTarget.SetActive(false);
-                toggleonclick();  reset( 0.5f);//Definitiononclick();
+                toggleonclick();  reset( 0.5f);
                 break;
             case 2:
                 print("Outdoor");
@@ -159,7 +152,7 @@ public class Skywalk_Interface : MonoBehaviour
                 ImageCanvas.SetActive(false);Skywalk_Normal.SetActive(false);
                 Skywalk_Scale_i.SetActive(false);ImageTarget.SetActive(false);
                 ModelTarget.SetActive(true);
-                toggleonclick();reset(0.2f);  //Definitiononclick();
+                toggleonclick();reset(0.2f);  
                 break;
 
         }

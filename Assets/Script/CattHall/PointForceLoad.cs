@@ -27,10 +27,6 @@ public class PointForceLoad : MonoBehaviour
 
 
     public void upadteForce(double snow_depth, double wind_speed) {
-        //float snow_depth = cattLiveLoad.snowliveload;
-        //float wind_speed = cattWindLoad.windload;
-
-
         double snow_load = snow_depth *200/12;
         double load_p1s = 12.375 * snow_load;
         double load_p2s = 9.167 * snow_load;
@@ -44,7 +40,6 @@ public class PointForceLoad : MonoBehaviour
         double load_p01d = 7.792 * deadload;
         double load_p02d = 7.792 * deadload;
         // vertical laods
-        // TODO: Should there be parentheses around the summations?
         double load_p1 = (load_p1s + load_p1d) / 1000;
         double load_p2 = (load_p2s + load_p2d) / 1000;
         double load_p3 = (load_p3s + load_p3d) / 1000;
@@ -95,15 +90,7 @@ public class PointForceLoad : MonoBehaviour
 { -1.956685396  ,  -0.7072135785 ,  2.757588727e-15, -0.6100995839 ,  0.2796724813  ,  0.4750444998 ,   -1 , 2.266753151, -1.13027298, 0.2332468494 },
 { -1.827515735 ,   0.7072135785,    -0.7028925179 ,  -4.126377228 ,   5.808936701, 4.307531631, -6.69910528, -1.13027298, 4.96503409,  1.12110801 },
 { -1.966837593 ,   4.989922459e-15,-0.7072135785 ,  -3.313423406,   2.775317335, 2.579945317, -4.047861507 ,   0.2332468494  ,  1.12110801 , 2.266753151 },};
-        /*for (int i = 0; i < AC.GetLength(0); i++)
-        {
-            for (int j = 0; j < AC.GetLength(1); j++)
-            {
-                print(AC[i,j]);
-            }
-        };
-      */
-
+    
         double[,] AC = matrxMultiply(AI, AT);
        
         c = matrxMultiply(AC, b);
@@ -157,10 +144,6 @@ public class PointForceLoad : MonoBehaviour
     private void updatearrow( GameObject arrow, float input, string unit) {
         arrow.transform.Find("Arrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, input, 10);
         arrow.transform.Find("ForceLabel").gameObject.GetComponent<TextMesh>().text = (Mathf.Round(Mathf.Abs(input) *10)/10).ToString() + unit;
-       /* Force1.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, -(float)Rload1, 10);
-        Force1.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Mathf.Round(Mathf.Abs((float)Rload1)*10)/10).ToString() + "k";
-        Force2.transform.Find("SupportArrow").transform.Find("Base").gameObject.transform.localScale = new Vector3(10, -(float)Rload3, 10);
-        Force2.transform.Find("ReactionForceLabel").gameObject.GetComponent<TextMesh>().text = (Mathf.Round(Mathf.Abs((float)Rload3)*10)/10).ToString() + "k"; */
     }
 
     private double[,] matrxMultiply(double[,] matA, double[,] matB) {
@@ -198,7 +181,6 @@ public class PointForceLoad : MonoBehaviour
                 res[j, i] = mat[i, j];
             }
         }
-
         return res; 
     }
 

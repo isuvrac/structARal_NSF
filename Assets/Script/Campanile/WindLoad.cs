@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WindLoad : MonoBehaviour
 {
     [SerializeField]
-    public Transform Min, Max, WindLoadBar, arrowbase, ShearArrow, MomentArrow;//,cube
+    public Transform Min, Max, WindLoadBar, arrowbase, ShearArrow, MomentArrow;
     [SerializeField]
     public Vector3 applypoint, mOffset;
     [SerializeField]
@@ -21,8 +21,6 @@ public class WindLoad : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //applypoint = Max.position;
-        //targetdis = Max.position.x;
         foreach (Transform a in this.transform) {
             if (a.tag == "WindForceArrow") {
 
@@ -62,10 +60,7 @@ public class WindLoad : MonoBehaviour
         Max_P.GetComponent<TextMesh>().text = forceUpdate.Max_P.ToString() + " psf";
         Min_P.GetComponent<TextMesh>().text = forceUpdate.Min_P.ToString() + " psf";
         ShearArrow.transform.Find("Base").gameObject.transform.localScale = new Vector3(1, forceUpdate.shear / 10, 1);
-        //float rotate =  Mathf.Clamp((360-Mathf.Abs(forceUpdate.moment / 34)),271,359);
-        //Vector3 to = new Vector3(rotate, MomentArrow.rotation.eulerAngles.y, MomentArrow.rotation.eulerAngles.z);
-        //MomentArrow.eulerAngles = to;
-        
+      
     }
 
     // Update is called once per frame

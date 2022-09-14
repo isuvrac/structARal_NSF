@@ -48,7 +48,6 @@ public class Catt_Interface : MonoBehaviour
 
     public void Homeonclick()
     { SceneManager.LoadScene("MainMenue"); }
-
     public void toggleonclick()
     {
        
@@ -67,7 +66,6 @@ public class Catt_Interface : MonoBehaviour
         cattLiveLoad.targetdis = cattLiveLoad.Min.position.y + (SnowS.value * cattLiveLoad.bound);
         pointForceLoad.upadteForce(SnowS.value*25, WindS.value*150);
     }
-    //print("here"); cattLiveLoad.changecubeposition(); cattWindLoad.changecubeposition();
     private void reset() { 
         cattLiveLoad = Catt.Find("Distribution").Find(LiveLoad.name).gameObject.GetComponent<CattLiveLoad>();
         cattWindLoad=Catt.Find("Distribution").Find(Wind.name).gameObject.GetComponent<CattWindLoad>();
@@ -101,7 +99,6 @@ public class Catt_Interface : MonoBehaviour
     
     
     }
-
     public void switchMode()
     {
 

@@ -150,11 +150,7 @@ public class Bazier_Curve : MonoBehaviour
             }
 
             delta += 1.2f * x * (L3 - 2 * L * x2 + x3);
-            //delta /= ratio;
-            // Scaling factor. Divide by 12 to convert inches to feet
-            
-
-            delta *= -3.72063E-10f*200/ratio;//-1.04758E-6;
+            delta *= -3.72063E-10f*200/ratio;
             if (delta*ratio /200 < deflect) {deflect = delta * ratio / 200;}
             
             vals[i].y = vals[i].y+delta;

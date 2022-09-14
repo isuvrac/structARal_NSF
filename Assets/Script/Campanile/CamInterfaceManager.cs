@@ -9,7 +9,7 @@ public class CamInterfaceManager : MonoBehaviour
 {
     [SerializeField]
     public Transform Min, Max;
-   [SerializeField]
+    [SerializeField]
     private GameObject Campanile_Normal, Campanile_Scale_i, Campanile_Scale_m, Mainc, ARc, ImageCanvas, ImageTarget, ModelTarget,InterstructureModel, modelT,WindmodeDD,
         Seismic, Wind,Deflection, Forcescale, sliderLabel, sliderNumberL, animationT, Spectral, plotSec, definition_o, modeDD, uparrow, downarrow, ScreenshotIndicate;
     [SerializeField]
@@ -25,9 +25,31 @@ public class CamInterfaceManager : MonoBehaviour
     [SerializeField]
     Transform Campanile;
 
+    //When Home, screenshot, and definition buttons clicked
     public void ScreenShotonclick()
     { ScreenCapture.CaptureScreenshot("Skywalk" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png"); StartCoroutine(TakeScreenshotAndSave()); }
 
+    public void Homeonclick()
+    { SceneManager.LoadScene("MainMenue"); }
+
+    public void Definitiononclick()
+    {
+        definition_o.GetComponentInParent<VerticalLayoutGroup>().childControlHeight = !definition_o.activeSelf;
+        definition_o.SetActive(!definition_o.activeSelf);
+        uparrow.SetActive(!definition_o.activeSelf);
+        downarrow.SetActive(definition_o.activeSelf);
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        //reset scene to pre-load
+        modeDD.GetComponent<Dropdown>().value = 0;
+        switchMode();
+        animationT.GetComponent<Toggle>().interactable = false;
+        animationT.GetComponent<Toggle>().isOn = true;
+        WindmodeDD.GetComponent<Dropdown>().value = 0;
+    }
+    //screenshot function
     private IEnumerator TakeScreenshotAndSave()
     {
 
@@ -46,31 +68,9 @@ public class CamInterfaceManager : MonoBehaviour
         Destroy(ss);
     }
 
-    public void Homeonclick()
-    { SceneManager.LoadScene("MainMenue"); }
-    public void Definitiononclick()
-    {
-        definition_o.GetComponentInParent<VerticalLayoutGroup>().childControlHeight = !definition_o.activeSelf;
-        definition_o.SetActive(!definition_o.activeSelf);
-        uparrow.SetActive(!definition_o.activeSelf);
-        downarrow.SetActive(definition_o.activeSelf);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        //skywalk = Skywalk_Normal.transform;
-        modeDD.GetComponent<Dropdown>().value = 0;
-        switchMode();
-        animationT.GetComponent<Toggle>().interactable = false;
-        animationT.GetComponent<Toggle>().isOn = true;
-        WindmodeDD.GetComponent<Dropdown>().value = 0;
-
-        //onSliderChange();
-    }
-
+    //change between modes
     private void changemode()
     {
-
         if (Seismic.activeSelf) { WindmodeDD.GetComponent<Dropdown>().value = 0; }
         Seismic = Campanile.GetChild(2).gameObject;
         seismicLoad = Seismic.GetComponent<SeismicLoad>();
@@ -95,10 +95,7 @@ public class CamInterfaceManager : MonoBehaviour
         seismicSlider.GetComponent<Slider>().value = 0;
         print(Seismic.activeSelf);
         
-        
-        //onSliderChange();
     }
-
     public void switchMode()
     {
 
@@ -142,8 +139,6 @@ public class CamInterfaceManager : MonoBehaviour
                 break;
         }
     }
-
-
     public void onModechange() {
         Seismic.SetActive(!Seismic.activeSelf);
         Wind.SetActive(!Wind.activeSelf);
@@ -164,7 +159,8 @@ public class CamInterfaceManager : MonoBehaviour
         }
         onSliderChange();
     }
-
+    public void onModeltoggelchange() { InterstructureModel.SetActive(modelT.GetComponent<Toggle>().isOn); }
+    //slider function
     public void onSliderChange()
     {
         if (Seismic.activeSelf)
@@ -203,12 +199,10 @@ public class CamInterfaceManager : MonoBehaviour
 
 
     }
-
-    public void onModeltoggelchange() { InterstructureModel.SetActive(modelT.GetComponent<Toggle>().isOn); }
-
     public void onanimationchange() {
         if (!animationT.GetComponent<Toggle>().isOn) { onSliderChange(); }
     }
+   
 
     // Update is called once per frame
     void Update()
