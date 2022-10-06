@@ -2,10 +2,15 @@
 #This project is supported by the National Science Foundation, and the code is available (open-source) for any educational and academic purposes.
 
 #Project info: 
+
 	#Developed by Kexin Wang, kexinw@iastate.edu
+
 	#Unity Version: 2020.3.3
+
 	#Credit: Mathmaticale calculation formula in this project is credited to David Wehr from previous version of the app
+
 	#Source code: https://github.com/kate-Kexin-Wang/structARal_NSF.git
+
 	#Packages used in the application: Vuforia Engine AR, Native Gallery for Android & iOS
 
 #Project Content
